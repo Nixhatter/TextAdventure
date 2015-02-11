@@ -158,7 +158,8 @@ void buildFire() {
   	1.Dry leaves and sticks\n\t2.Driftwood and magazines\n", 1, 2);
   if (choice == 1) {
     printf("\n\nYou have managed to get a fire started with the flint, sticks and dry leaves.\
-    	You warm yourself up around the fire and pack the extra materials you gathered in your backpack so that you can make a fire again if you need to. Achievement unlocked: Fire building\n");
+    	You warm yourself up around the fire and pack the extra materials you gathered in your \
+    	backpack so that you can make a fire again if you need to. Achievement unlocked: Fire building\n");
     fire = 1;
     stayPut();
   }
@@ -196,7 +197,13 @@ void fixCellphone() {
 
   else if (choice == 2) {
     printf("\n\nYou eagerly push the power button on your phone and wait to see what happens. \
-    	Nothing comes up on the screen but you feel the phone getting warm in your hands. You think that this must be a good sign, and wait as the phone gets warmer and warmer. Suddenly, you realize that you must have connected the wrong wires to the wrong terminals and that the battery must be short-circuiting! Unfortunately, you are not able to disconnect the wires in time and the phone blows up in your hands. A sharp piece of metal flies from the phone and into your temple, and you feel the blood starting to trickle down your face as everything fades to black...\n\t\t\tGAME OVER\n");
+    	Nothing comes up on the screen but you feel the phone getting warm in your hands. \
+    	You think that this must be a good sign, and wait as the phone gets warmer and warmer. \
+    	Suddenly, you realize that you must have connected the wrong wires to the wrong terminals\
+    	and that the battery must be short-circuiting! Unfortunately, you are not able to \
+    	disconnect the wires in time and the phone blows up in your hands. A sharp piece of metal \
+    	flies from the phone and into your temple, and you feel the blood starting to trickle down \
+    	your face as everything fades to black...\n\t\t\tGAME OVER\n");
   }
 }
 
