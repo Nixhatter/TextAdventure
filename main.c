@@ -6,6 +6,18 @@ int health = 100;
 int fire = 0;
 int cellphone = 0;
 int finished = 0;
+int shotgun = 0;
+int ammo = 0;
+int luckItem1 = 0;
+int luckItem2 = 0;
+int luckItem3 = 0;
+int braveItem1 = 0;
+int braveItem2 = 0;
+int braveItem3 = 0;
+int survivalItem1 = 0;
+int survivalItem2 = 0;
+int survivalItem3 = 0;
+
 
 void runGame();
 void stayPut();
@@ -252,3 +264,179 @@ void climbTree() {
     finished = 1;
 }
 
+
+//torreys part
+int main(){
+  if(luckItem1==1 && luckItem2==1 && luckItem3==1){
+    finished=1;
+    printf ("You've won the Lucky way!\n");
+  }else if(braveItem1==1 && braveItem2==1 && braveItem3==1){
+    finished=1;
+    printf ("You've won the Brave way!\n");
+  }else if(survivalItem1==1 && survivalItem2==1 && survivalItem3==1){
+    finished=1;
+    printf ("You've won the Survival way!\n");
+  }else if (health<=0){
+    finished=1;
+    printf ("You have Died!\n");
+  }
+
+   void ComeToPath(){
+    int choice;
+    printf ("You come across a Path, you don't know where it leads but you can also see what looks to be an opening i bit deeper into the woods.\n");
+    printf ("Would you like to:\n");
+    printf ("1. See whats down the path.\n");
+    printf ("2. Push your way to the clearing.\n");
+    printf ("3. Head back to the Start\n");
+    scanf("%d",&choice);
+    if (choice==1){
+      printf ("You make your way down the path!\n");
+      location = "newLocation";
+    }else if (choice==2){
+      printf ("You start pushing your way through the brush towards the clearing\n");
+      location = "newLocation";
+    }else if (choice==3){
+      printf ("You head back to where You Started\n");
+      location = "newLocation";
+    }
+  }
+
+  void OutsideHouse(){
+    int choice;
+    printf ("You come across a broken down house, you cant tell if anyone is living there or not. Theres also a shed behind the house which may have useful supplies.\n");
+    printf ("Would you like to:\n");
+    printf ("1. Throw a stone at the window to see if anyone is home.\n");
+    printf ("2. Go in the house.\n");
+    printf ("3. Walk to the shed in the back.\n");
+    printf ("4. Head back to the Path\n");
+    scanf("%d",&choice);
+    if (choice==1){
+      printf ("You throw a rock through the window, you then hear a loud bang and a pain in your chest! Guess someone was home!\n");
+      health=0;
+    }else if (choice==2){
+      printf ("You make your way to the door.\n");
+      location = "newLocation";
+    }else if (choice==3){
+      printf ("You make your way to the shed in the back.\n");
+      location = "newLocation"
+    }else if (choice==4){
+      printf ("You head back to the path.\n");
+      location = "newLocation";
+    }
+  }
+
+  void House(){
+    int choice;
+    printf ("As you get to the door a man greets you and invites you inside. Its very simple, just a kitchen, table, bed and you see a shotgun leaning against the wall.\n");
+    printf ("Would you like to:\n");
+    printf ("1. Demand he gives you the shotgun.\n");
+    printf ("2. Open cupboard\n");
+    printf ("3. Ask for the shotgun.\n");
+    printf ("4. Take ths shotgun.\n");
+    printf ("5. leave the house\n");
+    scanf("%d",&choice);
+    if (choice==1){
+      printf ("Oh he gives you the shotgun alright... right in the chest.\n");
+      health=0;
+    }else if (choice==2){
+      printf ("You find shotgun ammo and take some\n");
+      ammo=1;
+      location = "newLocation";
+    }else if (choice==3){
+      printf ("No.... Did you honestly think that would work???\n");
+      location = "newLocation";
+    }else if (choice==4){
+      printf ("You take the shotgun\n");
+      shotgun=1;
+      location = "newLocation";
+    }else if (choice==5){
+      printf ("You head back outside.\n");
+      location = "newLocation";
+    }
+  }
+  
+  void Shed(){
+    int choice;
+    printf ("You walk up to what looks like a completely normal shed with a small window on the side.\n");
+    printf ("Would you like to:\n");
+    printf ("1. Look in the window.\n");
+    printf ("2. Go inside.\n");
+    printf ("3. Go back out front of the house.\n");
+    scanf("%d",&choice);
+    if (choice==1){
+      printf ("It looks completely normal, a shovel, some gardening equipment and some random odds and ends.\n");
+      location = "newLocation";
+    }else if (choice==2){
+      printf ("As you walk in something hits you in the back of the head and you black out....\n"); 
+      location = "newLocation";
+    }else if (choice==3){
+      printf ("You walk back around front.\n");
+      location = "newLocation";
+    }
+  }
+
+  void WoodsClearing(){
+    int choice;
+    printf ("You come across an opening in the woods. There are some raspberry bushes, and apple tree and some strange markings on the ground faintly glowing.\n");
+    printf ("Would you like to:\n");
+    printf ("1. Go over to the berry bush.\n");
+    printf ("2. Head to the apple tree.\n");
+    printf ("3. Check out the strange markings.\n");
+    printf ("4. Head back to the Path\n");
+    scanf("%d",&choice);
+    if (choice==1){
+      printf ("You grab some berries from the bush and eat a few\n");
+	  printf ("You feel your stomach rumble then your heart stop, guess those weren't raspberries....oh well, you really shouldn't trust the everything the narrator tells you!\n");
+      health=0;
+    }else if (choice==2){
+      printf ("You make your way to the apple tree.\n");
+      location = "newLocation";
+    }else if (choice==3){
+      printf ("You head towards the strange markings.\n");
+      location = "newLocation";
+    }else if (choice==4){
+      printf ("You head back to the path.\n");
+      location = "newLocation";
+    }
+  }
+
+  void Tree(){
+    int choice;
+    printf ("You stand before a large apple tree, many apples have fallen to the grown but the best ones are still on the branches.\n");
+    printf ("Would you like to:\n");
+    printf ("1. Take an apple from the ground.\n");
+    printf ("2. Try and knock an apples from the tree .\n");
+    printf ("3. Go back to the opening.\n");
+    scanf("%d",&choice);
+    if (choice==1){
+      printf ("You pick up an apple off the ground and inspect it, looks good so you take a big bite, turns out it was rotten to the core! your vision fades as you hit the ground. WHO EATS FOOD OFF THE FOREST FLOOOR!?!??!?\n");
+      health=0;
+    }else if (choice==2){
+      printf ("You grab a small rock and throw it straight up at the apple above you as hard as you can. Your Athletics lvl isn't high enough so you miss the apple entirely and it comes down and hits you on the head. You really should have thought to maybe, you know... move?\n"); 
+      health=0;
+	  location = "newLocation";
+    }else if (choice==3){
+      printf ("You walk back to the clearing.\n");
+      location = "newLocation";
+    }
+  }
+  
+  void markingsExit(){ //where someone else can come in
+    int choice;
+    printf ("The markings below your feet glow with an eerie faint purple light\n");
+    printf ("Would you like to:\n");
+    printf ("1. Stand on the markings.\n");
+    printf ("2. Go back to the opening.\n");
+    scanf("%d",&choice);
+    if (choice==1){
+      printf ("You fall over as a voice startles you saying \"Welcome to standing up school!\" \"and you fail...\" \n");
+	  printf ("ACHIVEMENT GET: asdf movie refrence");
+	  location = "newLocation";
+    }else if (choice==2){
+      printf ("You walk back to the clearing.\n");
+      location = "newLocation";
+    }
+  }
+	     
+return 0;
+}
