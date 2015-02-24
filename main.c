@@ -30,6 +30,11 @@ void valley();
 void mountain();
 void cave();
 void cliff();
+void river();
+void fish();
+void bear();
+void beaver();
+void waterfall();
 
 char c;
 
