@@ -10,14 +10,12 @@ int ammo = 0;
 int potion = 0;
 int key = 0;
 int luckItem3 = 0;
-int braveItem1 = 0;
+int hasSword = 0;
 int braveItem2 = 0;
 int braveItem3 = 0;
 int survivalItem1 = 0;
 int survivalItem2 = 0;
 int survivalItem3 = 0;
-int brokenArm = 0;
-int hasFish = 0;
 
 
 void runGame();
@@ -27,11 +25,11 @@ void fixCellphone();
 void climbTree();
 void chooseNewLocation();
 void whiteRabbit();
-void river();
-void fish();
-void bear();
-void waterfall();
-void beaver();
+void hill();
+void valley();
+void mountain();
+void cave();
+void cliff();
 
 char c;
 
@@ -42,7 +40,7 @@ void flush(){
 	fflush(stdin);
 }
 
-int main() {
+void start() {
 	printf("You Find yourself in the middle of nothing\n");
 	printf("Please select an option using\n");
 	printf("the integers on the left.\n\n");
@@ -54,7 +52,7 @@ int main() {
 	"(2)follow the rabbit \n"
 	"(3)up the hill \n"
 	"(4) \n"
-	"(5)follow the sound of running water\n ");
+	"(5) \n ");
 	printf("\n\n");
 	scanf("%c", &c);
 	switch(c){
@@ -64,14 +62,10 @@ int main() {
 				   torrey();
 		case '3' : printf(" following the white rabbit\n");
 				   whiteRabbit();
-		case '4' : printf("going ______\n");
-				   jon();
-		case '5' : printf("following the sound of running water\n");
-				   river("\nYou have followed the sound of running water and come across"
-        				" a large river; almost\n30 meters across. There are large rocks and the"
-        				" current seems moderately strong.\nSelect your next move:\n1. Attempt"
-					" to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
-        				" the river\n5. Go back\n\n");
+		case '4' : printf("1)Try and find some higher ground /n");
+				   hill();
+		case '5' : printf("going ______\n");
+				   matt();
 		default  : goto beginning;
 	}
 }
@@ -468,12 +462,54 @@ return 0;
 /*
 -----------------------------------------------------------------------------
 MATT's CODE
-*/
+
+
+
+#include <stdio.h>
 
 //GLOBAL VARIABLES
-//int hasSword = 0;
-//int hasShotgun = 0;
+int hasFish = 0;
+int hasSword = 0;
+int hasShotgun = 0;
+int brokenArm = 0;
+int health = 100;
 
+void main(){
+
+  river("\nYou have followed the sound of running water and come across"
+        " a large river; almost\n30 meters across. There are large rocks and the"
+        " current seems moderately strong.\nSelect your next move:\n1. Attempt"
+        " to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
+        " the river\n5. Go back\n\n");
+
+}
+
+int getUserInput(char* message, int low, int high){
+
+  int userInput;
+  int inputOK = 0;
+  int result;
+
+  while(! inputOK){
+    printf("%s",message);
+    printf("Enter the number of the option you would like: \n");
+    result = scanf("%d", &userInput);
+
+    if (result == 1){
+      if (userInput >= low && userInput <= high){
+        inputOK = 1;
+      }
+      else{
+        printf("Input is outside legal bounds.\n");
+      }
+    }
+    else{
+      printf("Must enter an integer. Exiting program. \n");
+      exit(1);
+    }
+  }
+  return userInput;
+}
 
 void river(char* message){
 
@@ -486,17 +522,19 @@ void river(char* message){
   }
   else if (input == 2){
     beaver();
+
   }
   else if (input == 3){
     bear("\nYou're walking along the river when you hear a rustling in the"
          " trees to your right.\nIt's a bear! You've been spotted! What do"
          " you wish to do?\n1. Climb a tree\n2. Fight\n3. Retreat\n\n");
+
   }
   else if (input == 4){
     waterfall();
   }
   else { //input == 5
-    start();
+    //Go back to start
   }
 }
 
@@ -620,6 +658,164 @@ void beaver(char* message){
         " Select your next move:\n1. Attempt to catch a fish\n2. Travel upstream\n"
         "3. Travel downstream\n4. Cross the river\n5. Go back\n\n");
 }
+//jon's stuff
 
+void hill(){
+int i;
+printf("You climb a small hill and that hopes that it might provide a better view are shattered, there is a valley and a mountain in the distance and forest all around. No sign of civilization to be found./n ")
+printf("Current health: %d /n",&health); 
+printf("1)Is that the sounds of bees?Lets try and get some honey! /n");
+printf("2)Rest on the hill. Maybe you're tired, mabe you're lazy. Either way rest a while. /n");
+printf("3)Explore into the valley and towards the mountain./n");
+//printf("4)/n");
+scanf("%d", &i);
+if(i==1){
+	printf("The bee's swarm you you and string angrily, really you should have seen this coming./n  -10 health /n");
+	health= health-10;
+	hill();	
+}
+if(i==2){
+	printf("The Sun light comforts you like an old friends and you quickly fall sleep. When you awake you find you have an unbearable sun burn and cant help but think what a bad idea this was./n -10 health /n");
+	health=health-10;
+	hill();
+}
+if(i==3){
+	printf("The walk down into the valley is an uneasy one. There are many stones along the path and you nearly trip several times./n");
+	valley();	
+}
+if(i==4){
+}
+else{
+	printf("invalid input");
+	hill();
+}
+}
+void valley(){
+int i;
+printf("The valley is beautiful and fully of vibrant flowers. The foot of the mountain is close by and the shadow it casts provides slight respite. /n")
+printf("Current health: %d /n",&health); 
+printf("1)Stay a while and pick flowers, what could go wrong? /n");
+printf("2)Trying to prove that you're tough, lets climb that mountain and show them who's boss./( who are you talking to?/) /n");
+printf("3)This valley looks full of life perhaps there is food near by, lets take a look./n");
+//printf("4)/n");
+scanf("%d", &i);
+if(i==1){
+}
+if(i==2){
+	printf("You put all your energy into the climb berfore you, you are lucky not to fall, but the effort alone just might kill you./n -10 health /n");
+	health=health-10;
+	mountain();
+}
+if(i==3){
+}
+if(i==4){
+}
+else{
+	printf("invalid input");
+	valley();
+}
+}
+void mountain(){
+int i;
+printf("You reach a flat point in the mountain, an old camp site? You can't be sure. In front of you there is a dark cave, as well as a winding path that skirts the edge of the mountain. /n ")
+printf("Current health: %d /n",&health); 
+printf("1)The path along the edge of the cliff doesn't look safe, are you still trying to prove you're tough, if so why not give it a shot. /n");
+printf("2)Adventure calls and every good adventure needs a cave! You rush forward into the mount of the cave seeking fortune or whatever./n");
+printf("3)Up this high you hear the rude bleating of a mountain goat, you think he'd make a fine coat to keep you warm. After him!/n");
+printf("4)Your on a mountain, how could you pass up the chance to yodel?/n");
+scanf("%d", &i);
+if(i==1){
+	printf(" you slowly ease yourself along the thin path, hugging close to the rock wall in front of you./n");
+	cliff();
+}
+if(i==2){
+	printf("As you heroically sruge into the cave you realise just how idiot of an idea this was./n");
+	cave();
+}
+if(i==3){
+	printf("You are fast, but the mountain goat is.. well a goat and much more suit to this kind of thing, you take a nasty fall down the mountain, what ever were you thinking?/n -40 health /n"); 
+	health=health-40;
+	valley();
+}
+if(i==4){
+	printf("There are few moments in ones life where they feel truly free, when you saw the small rock slide your caterwauling created, it was not one of them./n -30 health /n");
+		health=health-30;
+		mountain();
+}
+else{
+	printf("invalid input");
+	mountain();
+	}
+}
+void cave(){
+int i;
+printf("The cave is dark and you can barely make out your surroundings. There are rocks more rocks and some rocks you think might actually be bones, but most likely still just rocks, you hope /n")
+printf("1)You've come this far, why not go a little farther, deeper into the cave! /n");
+printf("2)You really hope that those rocks aren't bones, but lets check just to be sure./n");
+printf("3)Your laziness knows no bounds.Lets have a nap, at least you won't be rained on. /n");
+printf("4)Mysterious cave mushrooms, what a great idea! /n");
+printf("5)Leave the cave, it's too dark in here anyhow./n" );
+scanf("%d", &i);
+if(i==1){
+}
+if(i==2){
+	if(hasSword!=1){
+		printf("Of course its a dead body your luck isn't good enough for it not to be, but hey he's got a sword that you can take!/n");
+		hasSword=1;
+		cave();
+	}
+	else{
+		printf("You've already gotten the sword why not let the dead rest./n");
+		cave();
+	}
+}
+if(i==3){
+}
+if(i==4){
+}
+if(i==5){
+	printf("You leave the cave seeking the light of day once again./n");
+	mountain();
+}
+else{
+	printf("invalid input");
+	cave();
+	}
+}
+void cliff(){
+int i;
+printf("The narrow ledge you stand upon is making unnerving cracking sounds. You're pretty sure this is the end, but seeing as you went out onto the cliff in the first place I wouldn't trust your judgement./n ")
+printf("1)Hey you saw this in a video game once, its called the leap of faith, why not try it you've already proven you're stupid enough./n");
+printf("2)Forward is the only option, continue along the already falling apart cliff edge, I'm sure you'll be just fine./n");
+printf("3)Hmm lets pick another direction, why not try climbing up higher, that seems like a good idea./n");
+printf("4)Go back the way you came. See this wasn't a good idea./n"); 
+//printf("4)/n");
+scanf("%d", &i);
+if(i==1){
+	printf("You leap from the cliff edge and assume you are going to die as you free fall./n"); 
+	waterfall();
+}
+if(i==2){
+	printf("The ledge buckles under your weight and you tumble down the sheer mountain face towards the valley below./n -30 health /n");
+	health=health-30;
+	valley();
+}
+if(i==3){
+	printf("The climb not only wastes tons of time but you end up back by the cave, well done you achieved nothing. Other then getting a nasty gash in your hand./n" -10 health /n);
+	health=health-10;
+	mountain();
+}
+if(i==4){
+	printf("Well you didnt waste any time so i guess this wasn't a total loss./n");
+	mountain();	
+}
+else{
+	printf("invalid input");
+	cliff();
+	}
+}	
+
+---------------------------------------------------------------------------------------------
+*/
 
 
