@@ -1,15 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int health = 100;
 int fire = 0;
 int cellphone = 0;
 int finished = 0;
 int shotgun = 0;
 int ammo = 0;
-int luckItem1 = 0;
-int luckItem2 = 0;
+int potion = 0;
+int key = 0;
 int luckItem3 = 0;
 int braveItem1 = 0;
 int braveItem2 = 0;
@@ -25,6 +24,7 @@ void buildFire();
 void fixCellphone();
 void climbTree();
 void chooseNewLocation();
+void whiteRabbit();
 
 char c;
 
@@ -36,45 +36,59 @@ void flush(){
 }
 
 int main() {
-	printf("HELLO\n");
-	printf("PLEASE HELP ME\n");
-	printf("I HATE C\n\n");
-	
-	int item1=0;
-	int item2=0;
+	printf("You Find yourself in the middle of nothing\n");
+	printf("Please select an option using\n");
+	printf("the integers on the left.\n\n");
 
-	printf("Welcome to the world\n");
-	area1:
+	printf("Where do you want to go?\n");
+	beginning:
 	flush();
-	printf("(n)do nothing, (a)go to area 2");
+	printf("(1)the woods \n"
+	"(2)follow the rabbit \n"
+	"(3)up the hill \n"
+	"(4) \n"
+	"(5) \n ");
+	printf("\n\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("going into the woods\n");
+				   stayPut();
+		case '2' : printf("going uphill\n");
+				   torrey();
+		case '3' : printf(" following the white rabbit\n");
+				   whiteRabbit();
+		case '4' : printf("going ______\n");
+				   jon();
+		case '5' : printf("going ______\n");
+				   matt();
+		default  : goto beginning;
+	}
+}
+	void whiteRabbit() {
+	flush();
+	printf("You fall into a rabbit hole!\n");
+	printf("There is a potion and a key on a table, and a really small door. The door is only big enough to fit a mouse.");
+	start:
+	printf("(1)Drink the potion \n");
+	printf("(2)Grab the key \n");
+	printf("(3)Squeeze through the door \n");
+	//if(item1) printf(", (a)go to final area");
 	printf("\n");
 	scanf("%c", &c);
 	switch(c){
-		case 'a' : printf("going to area 2\n");
-				   printf("Grabbed item 1\n"); 
-				   item1=1;
-				   goto area2;
-		case 'n' : printf("doing nothing\n");
-				   printf("really...\n"); break;
-		default  : goto area1;
+		case '1' : printf("You drink the potion\n");
+				   potion=1; goto start;
+		case '2' : printf("The key is now in your pocket\n");
+					key=1; goto start;
+		case '3' : if(potion & key) printf("You go through the door!");
+					else printf("you cant go through the door");
+		default  : goto start;
 	}
-	
-	area2:
-	flush();
-	printf("(n)do nothing");
-	if(item1) printf(", (a)go to final area");
-	printf("\n");
-	scanf("%c", &c);
-	switch(c){
-		case 'a' : printf("going to final area, grabbed item2\n");
-				   item2=1; goto final;
-		case 'n' : printf("do nothing\n");
-		default  : goto area2;
-	}
-	
+}
+	void final() {
 	final:
 	flush();
-	printf("(e) end this adventure (n) do nothing");
+	printf("(1) end this adventure (2) do nothing");
 	printf("\n");
 	scanf("%c", &c);
 	switch(c){
@@ -85,13 +99,13 @@ int main() {
 		default  : goto final;
 	}
 	
-	if(item1 && item2){
+	if(potion && key){
 		printf("Congratulations!");
 		return end();
 	} else {
 		printf("You failed to get the items");
-		if(!item1 && !item2) printf("You didnt get either");
-		else if(!item1) printf("you forgot item1");
+		if(!potion && !key) printf("You didn't get either");
+		else if(!potion) printf("you forgot item1");
 		else printf("you forgot item2");
 		return end();
 	}
@@ -110,7 +124,6 @@ int end(){
 	scanf("%c",&c);
 	return 0;
 }
-
 
 int getUserInput (char* message, int low, int high) {
   int userInput;
