@@ -27,6 +27,11 @@ void fixCellphone();
 void climbTree();
 void chooseNewLocation();
 void whiteRabbit();
+void river();
+void fish();
+void bear();
+void waterfall();
+void beaver();
 
 char c;
 
