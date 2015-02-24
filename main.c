@@ -59,7 +59,7 @@ void start() {
 	"(2)follow the rabbit \n"
 	"(3)up the hill \n"
 	"(4) \n"
-	"(5) \n ");
+	"(5)follow the sound of running water\n ");
 	printf("\n\n");
 	scanf("%c", &c);
 	switch(c){
