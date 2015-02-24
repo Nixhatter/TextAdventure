@@ -40,7 +40,7 @@ void flush(){
 	fflush(stdin);
 }
 
-int main() {
+void start() {
 	printf("You Find yourself in the middle of nothing\n");
 	printf("Please select an option using\n");
 	printf("the integers on the left.\n\n");
