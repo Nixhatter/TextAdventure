@@ -16,6 +16,8 @@ int braveItem3 = 0;
 int survivalItem1 = 0;
 int survivalItem2 = 0;
 int survivalItem3 = 0;
+int brokenArm = 0;
+int hasFish = 0;
 
 
 void runGame();
@@ -150,6 +152,18 @@ int getUserInput (char* message, int low, int high) {
     }
   }
   return userInput;
+}
+
+/*
+int main() {
+  printf("You decide to stay where you are for now.\n");
+  runGame();
+  return 0;
+}
+*/
+
+void runGame() {
+  stayPut();
 }
 
 void stayPut() {
@@ -451,15 +465,9 @@ return 0;
 MATT's CODE
 */
 
-
-#include <stdio.h>
-
 //GLOBAL VARIABLES
-//int hasFish = 0;
 //int hasSword = 0;
 //int hasShotgun = 0;
-//int brokenArm = 0;
-//int health = 100;
 
 
 void river(char* message){
@@ -473,7 +481,6 @@ void river(char* message){
   }
   else if (input == 2){
     beaver();
-
   }
   else if (input == 3){
     bear("\nYou're walking along the river when you hear a rustling in the"
@@ -484,7 +491,7 @@ void river(char* message){
     waterfall();
   }
   else { //input == 5
-    //Go back to start
+    start();
   }
 }
 
