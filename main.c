@@ -16,6 +16,8 @@ int braveItem3 = 0;
 int survivalItem1 = 0;
 int survivalItem2 = 0;
 int survivalItem3 = 0;
+int hasFish = 0;
+int brokenArm = 0;
 
 
 void runGame();
@@ -69,8 +71,12 @@ void start() {
 				   whiteRabbit();
 		case '4' : printf("1)Try and find some higher ground /n");
 				   hill();
-		case '5' : printf("going ______\n");
-				   matt();
+		case '5' : printf("following the sound of running water.\n");
+				   river("\nYou have followed the sound of running water and come across"
+        			" a large river; almost\n30 meters across. There are large rocks and the"
+				" current seems moderately strong.\nSelect your next move:\n1. Attempt"
+        			" to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
+        			" the river\n5. Go back\n\n");
 		default  : goto beginning;
 	}
 }
@@ -465,56 +471,12 @@ return 0;
 }
 
 /*
------------------------------------------------------------------------------
 MATT's CODE
-
-
-
-#include <stdio.h>
+*/
 
 //GLOBAL VARIABLES
-int hasFish = 0;
-int hasSword = 0;
-int hasShotgun = 0;
-int brokenArm = 0;
-int health = 100;
-
-void main(){
-
-  river("\nYou have followed the sound of running water and come across"
-        " a large river; almost\n30 meters across. There are large rocks and the"
-        " current seems moderately strong.\nSelect your next move:\n1. Attempt"
-        " to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
-        " the river\n5. Go back\n\n");
-
-}
-
-int getUserInput(char* message, int low, int high){
-
-  int userInput;
-  int inputOK = 0;
-  int result;
-
-  while(! inputOK){
-    printf("%s",message);
-    printf("Enter the number of the option you would like: \n");
-    result = scanf("%d", &userInput);
-
-    if (result == 1){
-      if (userInput >= low && userInput <= high){
-        inputOK = 1;
-      }
-      else{
-        printf("Input is outside legal bounds.\n");
-      }
-    }
-    else{
-      printf("Must enter an integer. Exiting program. \n");
-      exit(1);
-    }
-  }
-  return userInput;
-}
+//int hasSword = 0;
+//int hasShotgun = 0;
 
 void river(char* message){
 
@@ -539,7 +501,7 @@ void river(char* message){
     waterfall();
   }
   else { //input == 5
-    //Go back to start
+    start();
   }
 }
 
