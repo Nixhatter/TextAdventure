@@ -152,18 +152,6 @@ int getUserInput (char* message, int low, int high) {
   return userInput;
 }
 
-/*
-int main() {
-  printf("You decide to stay where you are for now.\n");
-  runGame();
-  return 0;
-}
-*/
-
-void runGame() {
-  stayPut();
-}
-
 void stayPut() {
   int choice = getUserInput("What will you do next?\n\t1. Look around for materials to build a\
   	fire from\n\t2. Try to call for help on your cellphone\n\t3. Climb a tree to get a good look around.\n", 1, 3);
