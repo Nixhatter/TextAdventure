@@ -440,3 +440,208 @@ int main(){
 	     
 return 0;
 }
+
+/*
+-----------------------------------------------------------------------------
+MATT's CODE
+
+
+
+#include <stdio.h>
+
+//GLOBAL VARIABLES
+int hasFish = 0;
+int hasSword = 0;
+int hasShotgun = 0;
+int brokenArm = 0;
+int health = 100;
+
+void main(){
+
+  river("\nYou have followed the sound of running water and come across"
+        " a large river; almost\n30 meters across. There are large rocks and the"
+        " current seems moderately strong.\nSelect your next move:\n1. Attempt"
+        " to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
+        " the river\n5. Go back\n\n");
+
+}
+
+int getUserInput(char* message, int low, int high){
+
+  int userInput;
+  int inputOK = 0;
+  int result;
+
+  while(! inputOK){
+    printf("%s",message);
+    printf("Enter the number of the option you would like: \n");
+    result = scanf("%d", &userInput);
+
+    if (result == 1){
+      if (userInput >= low && userInput <= high){
+        inputOK = 1;
+      }
+      else{
+        printf("Input is outside legal bounds.\n");
+      }
+    }
+    else{
+      printf("Must enter an integer. Exiting program. \n");
+      exit(1);
+    }
+  }
+  return userInput;
+}
+
+void river(char* message){
+
+  int input = getUserInput(message,1,5);
+
+  if (input == 1){
+    fish("\nYou take off your shoes and walk into a shallow area of the river; fish"
+         "swimming beneath you.\nYou put your hands into the water and wait for the"
+         "right moment");
+  }
+  else if (input == 2){
+    beaver();
+
+  }
+  else if (input == 3){
+    bear("\nYou're walking along the river when you hear a rustling in the"
+         " trees to your right.\nIt's a bear! You've been spotted! What do"
+         " you wish to do?\n1. Climb a tree\n2. Fight\n3. Retreat\n\n");
+
+  }
+  else if (input == 4){
+    waterfall();
+  }
+  else { //input == 5
+    //Go back to start
+  }
+}
+
+void fish(char* message){
+
+  if (brokenArm == 1){
+    printf("You broke your arm falling out of a tree. How do you expect to catch a fish."
+           " Back you go.\n");
+    river("Select a different route this time:\n1. Attempt to catch a fish\n"
+          "2. Travel upstream\n3. Travel downstream\n4. Cross the river\n5. Go back\n\n");
+  }
+  else if (hasFish == 1){
+    printf("\nOh wait! You already have a fish. You can only hold one at a time!\n");
+    river("Select a different route this time:\n1. Attempt to catch a fish\n"
+          "2. Travel upstream\n3. Travel downstream\n4. Cross the river\n5. Go back\n\n");
+  }
+  else{
+    int input = getUserInput("\nYou manage to catch a single fish. It's a salmon"
+            " weighing about 10 lbs.\nDo you want to keep it?\n1. Yes\n2. No\n\n",1,2);
+
+    if (input == 1){
+      printf("\nGreat! You have a fish, maybe you can make a fire later and eat it!\n");
+      hasFish = 1;
+      river("Where would you like to go now?\n1. Attempt to catch a fish\n2. Travel upstream"
+            "\n3. Travel downstream\n4. Cross the river\n5. Go back\n\n");
+    }
+    else{ // input == 2
+      printf("\nYou place the fish back into the water.\n");
+      river("Where would you like to go now?\n1. Attempt to catch a fish\n2. Travel"
+            " upstream\n3. Travel downstream\n4. Cross the river\n5. Go back\n\n");
+    }
+  }
+}
+
+void bear(char* message){
+
+  int input = getUserInput(message,1,3);
+
+  if (input == 1){ //Climb tree
+    printf("\nYou climb the nearest tree. You idiot... bears can climb trees\n");
+    if (hasFish == 1){
+      int input2 = getUserInput("You still have that fish in you back pocket. It may be"
+                            " your only hope to survive.\nDo you want to use the fish?\n1."
+                            " Yes\n2. No\n\n",1,2);
+
+      if (input2 == 1){
+        hasFish = 0;
+        printf("/nYou throw the fish and divert the bear. You're safe... for now. Try and\n"
+               "find some weapons for next time.");
+        river("/nYou travel back upstream. What do you want to do now?\n1. Attempt to"
+              " catch another fish\n2. Travel upstream\n3. Travel downstream\n4."
+              " Cross the river\n5. Go back\n\n");
+      }
+      else{ //input2 == 2
+        printf("\nThe bear attacks you viciously... he clearly wants that fish. You put"
+               " up a good fight\n and walk away with your fish still in hand, but not"
+               " without a few scratches\n");
+        health -= 15;
+        printf("You lose 15 health. Current health: %d. Try and find some weapons"
+               "to protect yourself.\n", health);
+        river("You travel back upstream. What do you want to do now?\n2. Travel"
+              " upstream\n4. Cross the river\n5. Go back\n\n");
+      }
+    }
+    else{ //hasFish == 0
+      printf("\nThe bear knocks you out of the tree. You fall to the ground and injure"
+             " your arm, but are able to run away back to safety\n");
+      brokenArm = 1;
+      health -= 10;
+      printf("You lose 10 health. Current health: %d\n", health);
+      river("Select your next move:\n1. Attempt to catch a fish\n2. Travel upstream\n"
+            "4. Cross the river\n5. Go back\n\n");
+    }
+  }
+  else if (input == 2){ //Fight
+    if (hasSword == 1){ //Use sword to figh bear
+      //VICTORY
+      printf("\nYou draw your sword. The bear lets out a roar and begins to charge at you."
+             "In an epic battle to the death\n you come out victorious. The bear is dead."
+             "You skin it and make an awesome coat, like a boss.");
+    }
+    else if (hasShotgun == 1){ //Use shotgun to fight bear
+       //VICTORY
+      printf("\nThe bear begins to approach you, and begins to charge. You pull out your"
+             "shotgun and fire on the bear.\nfrom 30 feet out. He's wounded but still"
+             "coming. You fire two more shots on him and he falls to the ground.\n"
+             "The bear is dead");
+    }
+    else{ //No weapons available
+      printf("\n1v1 against a bear with no weapons... good choice\n");
+      health -= 30;
+      printf("You lose 30 health. Current health: %d\n", health);
+      river("How are you even alive right now?! Select your next move:\n1.Attempt to"
+            "catch a fish\n2. Travel upstream\n4. Cross the river\n5. Go back\n\n");
+    }
+  }
+  else{ // (input == 3) -> Retreat
+    printf("\nGood idea, that bear looks angry. Some weaponry might come in handy.");
+    river("\nClose call but you've retreated safely. Select your next move:\n"
+          "1. Attempt to catch a fish\n2. Travel upstream\n3. Travel downstream\n"
+          "4. Cross the river\n5. Go back\n\n");
+  }
+}
+
+void waterfall(){
+  printf("\nYou slipped on a wet rock crossing the river and the current was to strong"
+         " for you to escape. \nUnfortunatley there was a waterfall up ahead and you"
+         " plumeted to the bottom of the falls\n");
+  health -= 10;
+  printf("You lose 10 health. Current health: %d\n", health);
+  //GO TO SOMEONE ELSES GAME
+}
+
+void beaver(char* message){
+  printf("\nYou start the trek upstream and see a beaver dam up ahead. You're curious"
+         " so you get as close as possible.\nA beaver sneaks up behind you and bites you"
+         " in the ankle! Ouch!\n");
+  health -= 5;
+  printf("You lose 5 health. Current health: %d\n", health);
+  river("Looks like upstream was a bad idea. You hobble back to th main river."
+        " Select your next move:\n1. Attempt to catch a fish\n2. Travel upstream\n"
+        "3. Travel downstream\n4. Cross the river\n5. Go back\n\n");
+}
+
+---------------------------------------------------------------------------------------------
+*/
+
+
