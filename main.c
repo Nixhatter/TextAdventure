@@ -147,6 +147,7 @@ int end(){
 	return 0;
 }
 
+// Laura's part
 int getUserInput (char* message, int low, int high) {
   int userInput;
   int inputOK = 0;
