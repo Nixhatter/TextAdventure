@@ -43,7 +43,6 @@ void beaver();
 void waterfall();
 void final();
 int ending();
-void torrey();
 void ComeToPath();
 void OutsideHouse();
 void House();
@@ -89,7 +88,7 @@ void startFunc() {
 		case '1' : printf("going into the woods\n");
 				   stayPut();
 		case '2' : printf("going uphill\n");
-				   torrey();
+				   ComeToPath();
 		case '3' : printf(" following the white rabbit\n");
 				   whiteRabbit();
 		case '4' : printf("1)Try and find some higher ground /n");
