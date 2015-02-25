@@ -213,7 +213,7 @@ void buildFire() {
     	didn't finish reading that book on how to survive in the woods that you got last Christmas. \
     	Everything fades to black... \n\t\t\tGAME OVER\n");
   	finished = 1;
-  	final();
+  	//final();
   }
 }
 
