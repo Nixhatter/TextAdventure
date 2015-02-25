@@ -280,18 +280,10 @@ void climbTree() {
     choice = getUserInput("", 1, 2);
 
   if (choice == 1)
-    printf("Branch to beach path\n");
-    //beach();
+    cliff();
   else if (choice == 2)
-    printf("Branch to cliff path\n");
-    //cliff();
+    OutsideHouse();
   else if (choice == 3)
-    printf("Branch to cabin path\n");
-    //cabin();
-  else if (choice == 4)
-    printf("Branch to Alice In Wonderland path\n");
-    //aliceInWonderland();
-  else if (choice == 5)
     printf("\n\nYou open up the cellphone and to your surprise, there is cell service! \
     You call 911 and get through to an operator.\nThey are able to find your location and they \
     send a helicopter to save you.\n\t\t\tVICTORY!!\nCongratulations, you've won!\n");
