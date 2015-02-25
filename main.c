@@ -645,7 +645,7 @@ void beaver(char* message){
 void hill(){
 int i;
 printf("You climb a small hill and that hopes that it might provide a better view are shattered, there is a valley and a mountain in the distance and forest all around. No sign of civilization to be found./n ");
-printf("Current health: %d /n",&health); 
+printf("Current health: %d /n",health); 
 printf("1)Is that the sounds of bees?Lets try and get some honey! /n");
 printf("2)Rest on the hill. Maybe you're tired, mabe you're lazy. Either way rest a while. /n");
 printf("3)Explore into the valley and towards the mountain./n");
@@ -675,7 +675,7 @@ else{
 void valley(){
 int i;
 printf("The valley is beautiful and fully of vibrant flowers. The foot of the mountain is close by and the shadow it casts provides slight respite. /n");
-printf("Current health: %d /n",health); 
+printf("Current health: %d /n", health); 
 printf("1)Stay a while and pick flowers, what could go wrong? /n");
 printf("2)Trying to prove that you're tough, lets climb that mountain and show them who's boss./( who are you talking to?/) /n");
 printf("3)This valley looks full of life perhaps there is food near by, lets take a look./n");
