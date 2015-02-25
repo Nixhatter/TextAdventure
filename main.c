@@ -19,7 +19,7 @@ int survivalItem3 = 0;
 int hasFish = 0;
 int brokenArm = 0;
 
-
+void startFunc();
 void runGame();
 void stayPut();
 void buildFire();
@@ -39,6 +39,7 @@ void beaver();
 void waterfall();
 void final();
 int ending();
+void torrey();
 void ComeToPath();
 void OutsideHouse();
 void House();
@@ -61,11 +62,11 @@ void flush(){
 
 
 int main() {
-	start();
+	startFunc();
 	return 0;
 }
 
-void start() {
+void startFunc() {
 	printf("You Find yourself in the middle of nothing\n");
 	printf("Please select an option using\n");
 	printf("the integers on the left.\n\n");
@@ -274,7 +275,7 @@ void chooseNewLocation() {
     climbTree();
   else if (choice == 2)
   // return to the original five choices
-    start();
+    startFunc();
     
 }
 
@@ -511,7 +512,7 @@ void river(char* message){
     waterfall();
   }
   else { //input == 5
-    start();
+    startFunc();
   }
 }
 
