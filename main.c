@@ -212,7 +212,8 @@ void buildFire() {
     	the magazine are giving off a toxic smoke as they burn. Your last thoughts are of regret that you \
     	didn't finish reading that book on how to survive in the woods that you got last Christmas. \
     	Everything fades to black... \n\t\t\tGAME OVER\n");
-  finished = 1;
+  	finished = 1;
+  	final();
   }
 }
 
@@ -245,6 +246,8 @@ void fixCellphone() {
     	disconnect the wires in time and the phone blows up in your hands. A sharp piece of metal \
     	flies from the phone and into your temple, and you feel the blood starting to trickle down \
     	your face as everything fades to black...\n\t\t\tGAME OVER\n");
+   	finished = 1;
+   	
   }
 }
 
