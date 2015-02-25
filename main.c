@@ -19,6 +19,7 @@ int survivalItem3 = 0;
 int hasFish = 0;
 int brokenArm = 0;
 
+int end();
 void startFunc();
 void runGame();
 void stayPut();
@@ -136,13 +137,13 @@ void startFunc() {
 	
 	if(potion && key){
 		printf("Congratulations!");
-		return end();
+		end();
 	} else {
 		printf("You failed to get the items");
 		if(!potion && !key) printf("You didn't get either");
 		else if(!potion) printf("you forgot item1");
 		else printf("you forgot item2");
-		return end();
+		end();
 	}
 }
 
