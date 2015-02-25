@@ -361,7 +361,7 @@ int ending(){
       location = "newLocation";
     }else if (choice==3){
       printf ("You make your way to the shed in the back.\n");
-      location = "newLocation"
+      location = "newLocation";
     }else if (choice==4){
       printf ("You head back to the path.\n");
       location = "newLocation";
