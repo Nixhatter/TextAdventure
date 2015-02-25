@@ -594,7 +594,7 @@ void bear(char* message){
              "In an epic battle to the death\n you come out victorious. The bear is dead."
              "You skin it and make an awesome coat, like a boss.");
     }
-    else if (hasShotgun == 1){ //Use shotgun to fight bear
+    else if (shotgun == 1){ //Use shotgun to fight bear
        //VICTORY
       printf("\nThe bear begins to approach you, and begins to charge. You pull out your"
              "shotgun and fire on the bear.\nfrom 30 feet out. He's wounded but still"
