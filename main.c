@@ -267,18 +267,17 @@ void chooseNewLocation() {
 }
 
 void climbTree() {
-  printf("\n\nYou decide to climb a tall tree.You see a beach, a cliff, a cabin and SOMETHING FROM ALICE IN WONDERLAND.\n");
-  char choices[] = "What will you do?\n\t1. Go to the beach\n\t2. Go to the cliff\n\t\
-  	3. Go to the cabin\n\t4. Go to the THING FROM ALICE IN WONDERLAND\n";
-  char specialChoice[] = "\t5. Try your phone and see if there is cell service up here\n";
+  printf("\n\nYou decide to climb a tall tree.You see a cliff and a cabin.\n");
+  char choices[] = "What will you do?\n\t1. Go to the cliff\n\t2. Go to the cabin\n";
+  char specialChoice[] = "\t3. Try your phone and see if there is cell service up here\n";
   printf("%s", choices);
   int choice;
   if (cellphone == 1) {
     printf("%s", specialChoice);
-    choice = getUserInput("", 1, 5);
+    choice = getUserInput("", 1, 3);
   }
   else
-    choice = getUserInput("", 1, 4);
+    choice = getUserInput("", 1, 2);
 
   if (choice == 1)
     printf("Branch to beach path\n");
