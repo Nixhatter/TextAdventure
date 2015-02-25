@@ -50,6 +50,7 @@ void Shed();
 void WoodsClearing();
 void Tree();
 void markingsExit();
+void check();
 
 
  
@@ -799,6 +800,11 @@ if(i==3){
 if(i==4){
 	printf("Well you didnt waste any time so i guess this wasn't a total loss./n");
 	mountain();	
+}
+void check(){
+	if (health<=0){
+	finished();
+	}
 }
 else{
 	printf("invalid input");
