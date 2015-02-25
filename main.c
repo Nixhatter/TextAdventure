@@ -640,7 +640,7 @@ void beaver(char* message){
 
 void hill(){
 int i;
-printf("You climb a small hill and that hopes that it might provide a better view are shattered, there is a valley and a mountain in the distance and forest all around. No sign of civilization to be found./n ")
+printf("You climb a small hill and that hopes that it might provide a better view are shattered, there is a valley and a mountain in the distance and forest all around. No sign of civilization to be found./n ");
 printf("Current health: %d /n",&health); 
 printf("1)Is that the sounds of bees?Lets try and get some honey! /n");
 printf("2)Rest on the hill. Maybe you're tired, mabe you're lazy. Either way rest a while. /n");
@@ -670,7 +670,7 @@ else{
 }
 void valley(){
 int i;
-printf("The valley is beautiful and fully of vibrant flowers. The foot of the mountain is close by and the shadow it casts provides slight respite. /n")
+printf("The valley is beautiful and fully of vibrant flowers. The foot of the mountain is close by and the shadow it casts provides slight respite. /n");
 printf("Current health: %d /n",&health); 
 printf("1)Stay a while and pick flowers, what could go wrong? /n");
 printf("2)Trying to prove that you're tough, lets climb that mountain and show them who's boss./( who are you talking to?/) /n");
@@ -695,7 +695,7 @@ else{
 }
 void mountain(){
 int i;
-printf("You reach a flat point in the mountain, an old camp site? You can't be sure. In front of you there is a dark cave, as well as a winding path that skirts the edge of the mountain. /n ")
+printf("You reach a flat point in the mountain, an old camp site? You can't be sure. In front of you there is a dark cave, as well as a winding path that skirts the edge of the mountain. /n ");
 printf("Current health: %d /n",&health); 
 printf("1)The path along the edge of the cliff doesn't look safe, are you still trying to prove you're tough, if so why not give it a shot. /n");
 printf("2)Adventure calls and every good adventure needs a cave! You rush forward into the mount of the cave seeking fortune or whatever./n");
@@ -727,7 +727,7 @@ else{
 }
 void cave(){
 int i;
-printf("The cave is dark and you can barely make out your surroundings. There are rocks more rocks and some rocks you think might actually be bones, but most likely still just rocks, you hope /n")
+printf("The cave is dark and you can barely make out your surroundings. There are rocks more rocks and some rocks you think might actually be bones, but most likely still just rocks, you hope /n");
 printf("1)You've come this far, why not go a little farther, deeper into the cave! /n");
 printf("2)You really hope that those rocks aren't bones, but lets check just to be sure./n");
 printf("3)Your laziness knows no bounds.Lets have a nap, at least you won't be rained on. /n");
@@ -762,7 +762,7 @@ else{
 }
 void cliff(){
 int i;
-printf("The narrow ledge you stand upon is making unnerving cracking sounds. You're pretty sure this is the end, but seeing as you went out onto the cliff in the first place I wouldn't trust your judgement./n ")
+printf("The narrow ledge you stand upon is making unnerving cracking sounds. You're pretty sure this is the end, but seeing as you went out onto the cliff in the first place I wouldn't trust your judgement./n ");
 printf("1)Hey you saw this in a video game once, its called the leap of faith, why not try it you've already proven you're stupid enough./n");
 printf("2)Forward is the only option, continue along the already falling apart cliff edge, I'm sure you'll be just fine./n");
 printf("3)Hmm lets pick another direction, why not try climbing up higher, that seems like a good idea./n");
@@ -779,7 +779,7 @@ if(i==2){
 	valley();
 }
 if(i==3){
-	printf("The climb not only wastes tons of time but you end up back by the cave, well done you achieved nothing. Other then getting a nasty gash in your hand./n" -10 health /n);
+	printf("The climb not only wastes tons of time but you end up back by the cave, well done you achieved nothing. Other then getting a nasty gash in your hand./n -10 health /n");
 	health=health-10;
 	mountain();
 }
