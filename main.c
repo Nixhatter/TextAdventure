@@ -296,7 +296,7 @@ void climbTree() {
 
 
 //torreys part
-int main(){
+int ending(){
   if(luckItem1==1 && luckItem2==1 && luckItem3==1){
     finished=1;
     printf ("You've won the Lucky way!\n");
