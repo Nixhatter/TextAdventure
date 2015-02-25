@@ -212,7 +212,8 @@ void buildFire() {
     	didn't finish reading that book on how to survive in the woods that you got last Christmas. \
     	Everything fades to black... \n\t\t\tGAME OVER\n");
   	finished = 1;
-  	//final();
+  	health = 0;
+  	ending();
   }
 }
 
@@ -246,6 +247,8 @@ void fixCellphone() {
     	flies from the phone and into your temple, and you feel the blood starting to trickle down \
     	your face as everything fades to black...\n\t\t\tGAME OVER\n");
    	finished = 1;
+   	health = 0;
+   	ending();
    	
   }
 }
@@ -258,8 +261,9 @@ void chooseNewLocation() {
   if (choice == 1)
     climbTree();
   else if (choice == 2)
-    //startGame();
-    printf("\nThis is where you would return to the original 5 choices!\n");
+  // return to the original five choices
+    start();
+    
 }
 
 void climbTree() {
@@ -293,6 +297,7 @@ void climbTree() {
     You call 911 and get through to an operator.\nThey are able to find your location and they \
     send a helicopter to save you.\n\t\t\tVICTORY!!\nCongratulations, you've won!\n");
     finished = 1;
+    ending();
 }
 
 
