@@ -170,14 +170,6 @@ int getUserInput (char* message, int low, int high) {
   return userInput;
 }
 
-/*
-int main() {
-  printf("You decide to stay where you are for now.\n");
-  runGame();
-  return 0;
-}
-*/
-
 void runGame() {
   stayPut();
 }
