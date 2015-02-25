@@ -574,9 +574,9 @@ void bear(char* message){
 
       if (input2 == 1){
         hasFish = 0;
-        printf("/nYou throw the fish and divert the bear. You're safe... for now. Try and\n"
+        printf("\nYou throw the fish and divert the bear. You're safe... for now. Try and\n"
                "find some weapons for next time.");
-        river("/nYou travel back upstream. What do you want to do now?\n1. Attempt to"
+        river("\nYou travel back upstream. What do you want to do now?\n1. Attempt to"
               " catch another fish\n2. Travel upstream\n3. Travel downstream\n4."
               " Cross the river\n5. Go back\n\n");
       }
