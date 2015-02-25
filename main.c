@@ -37,6 +37,18 @@ void fish();
 void bear();
 void beaver();
 void waterfall();
+void final();
+int ending();
+void ComeToPath();
+void OutsideHouse();
+void House();
+void Shed();
+void WoodsClearing();
+void Tree();
+void markingsExit();
+
+
+ 
 
 char c;
 
