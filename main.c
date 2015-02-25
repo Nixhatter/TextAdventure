@@ -452,7 +452,7 @@ int ending(){
     printf ("3. Go back to the opening.\n");
     scanf("%d",&choice);
     if (choice==1){
-      printf ("You pick up an apple off the ground and inspect it, looks good so you take a big bite, turns out it was rotten to the core! your vision fades as you hit the ground. WHO EATS FOOD OFF THE FOREST FLOOOR!?!??!?\n");
+      printf ("You pick up an apple off the ground and inspect it, looks good so you take a big bite, turns out it was rotten to the core! your vision fades as you hit the ground. WHO EATS FOOD OFF THE FOREST FLOOOR!?\n");
       health=0;
     }else if (choice==2){
       printf ("You grab a small rock and throw it straight up at the apple above you as hard as you can. Your Athletics lvl isn't high enough so you miss the apple entirely and it comes down and hits you on the head. You really should have thought to maybe, you know... move?\n"); 
