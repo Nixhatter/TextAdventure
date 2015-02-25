@@ -664,11 +664,13 @@ scanf("%d", &i);
 if(i==1){
 	printf("The bee's swarm you you and string angrily, really you should have seen this coming./n  -10 health /n");
 	health= health-10;
+	check();
 	hill();	
 }
 if(i==2){
 	printf("The Sun light comforts you like an old friends and you quickly fall sleep. When you awake you find you have an unbearable sun burn and cant help but think what a bad idea this was./n -10 health /n");
 	health=health-10;
+	check();
 	hill();
 }
 if(i==3){
@@ -696,6 +698,7 @@ if(i==1){
 if(i==2){
 	printf("You put all your energy into the climb berfore you, you are lucky not to fall, but the effort alone just might kill you./n -10 health /n");
 	health=health-10;
+	check();
 	mountain();
 }
 if(i==3){
@@ -727,6 +730,7 @@ if(i==2){
 if(i==3){
 	printf("You are fast, but the mountain goat is.. well a goat and much more suit to this kind of thing, you take a nasty fall down the mountain, what ever were you thinking?/n -40 health /n"); 
 	health=health-40;
+	check();
 	valley();
 }
 if(i==4){
@@ -790,11 +794,13 @@ if(i==1){
 if(i==2){
 	printf("The ledge buckles under your weight and you tumble down the sheer mountain face towards the valley below./n -30 health /n");
 	health=health-30;
+	check();
 	valley();
 }
 if(i==3){
 	printf("The climb not only wastes tons of time but you end up back by the cave, well done you achieved nothing. Other then getting a nasty gash in your hand./n -10 health /n");
 	health=health-10;
+	check();
 	mountain();
 }
 if(i==4){
