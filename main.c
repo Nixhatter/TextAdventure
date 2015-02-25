@@ -47,6 +47,12 @@ void flush(){
 	fflush(stdin);
 }
 
+
+int main() {
+	start();
+	return 0;
+}
+
 void start() {
 	printf("You Find yourself in the middle of nothing\n");
 	printf("Please select an option using\n");
