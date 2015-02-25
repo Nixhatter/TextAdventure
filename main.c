@@ -675,7 +675,7 @@ else{
 void valley(){
 int i;
 printf("The valley is beautiful and fully of vibrant flowers. The foot of the mountain is close by and the shadow it casts provides slight respite. /n");
-printf("Current health: %d /n",&health); 
+printf("Current health: %d /n",health); 
 printf("1)Stay a while and pick flowers, what could go wrong? /n");
 printf("2)Trying to prove that you're tough, lets climb that mountain and show them who's boss./( who are you talking to?/) /n");
 printf("3)This valley looks full of life perhaps there is food near by, lets take a look./n");
@@ -700,7 +700,7 @@ else{
 void mountain(){
 int i;
 printf("You reach a flat point in the mountain, an old camp site? You can't be sure. In front of you there is a dark cave, as well as a winding path that skirts the edge of the mountain. /n ");
-printf("Current health: %d /n",&health); 
+printf("Current health: %d /n",health); 
 printf("1)The path along the edge of the cliff doesn't look safe, are you still trying to prove you're tough, if so why not give it a shot. /n");
 printf("2)Adventure calls and every good adventure needs a cave! You rush forward into the mount of the cave seeking fortune or whatever./n");
 printf("3)Up this high you hear the rude bleating of a mountain goat, you think he'd make a fine coat to keep you warm. After him!/n");
