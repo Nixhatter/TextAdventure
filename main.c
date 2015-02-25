@@ -753,6 +753,10 @@ printf("4)Mysterious cave mushrooms, what a great idea! /n");
 printf("5)Leave the cave, it's too dark in here anyhow./n" );
 scanf("%d", &i);
 if(i==1){
+	printf("As you venture deeper into the cave a large rock from the ceiling crashes into you. Oddly enoug at the time this happened your only thought was 'is it called stalactite or stalagmite?'/n -30 health /n");
+	health=health-30;
+	check();
+	cave();
 }
 if(i==2){
 	if(hasSword!=1){
@@ -766,8 +770,16 @@ if(i==2){
 	}
 }
 if(i==3){
+	printf("The cold hard cave floor puts your back out, now on top off being slightly injured you feel old, congrats. /n -10 health /n");
+	health= health-10;
+	check();
+	cave();
 }
 if(i==4){
+	printf("The mushrooms taste purple. A haze engulfs you and when you awake you're wearing a tie-dye shirt, and have no idea where it came from. You think yourself until you violentily vomit./n -10 health /n");
+	health= health-10;
+	check();
+	start();
 }
 if(i==5){
 	printf("You leave the cave seeking the light of day once again./n");
