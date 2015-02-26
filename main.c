@@ -783,7 +783,7 @@ printf("\n \n");
 if(i==1){
 	if(RED_FLOWERS!=1){
 		printf("You skip throughout the valley and pick a bunch of red flowers. Congrats you now have red flowers./n");
-		RED_FLOWERS();
+		RED_FLOWERS=1;
 		valley();
 	}
 	else{
