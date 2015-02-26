@@ -213,7 +213,7 @@ void stayPut() {
 
 void buildFire() {
   printf("\n\nYou look around and find some driftwood, sticks, dry leaves, flint and some old magazines.\n");
-  int choice = getUserInput("\nWhat will you build your fire out of?\n\t\ 1.Dry leaves and sticks\n\t 2.Driftwood and magazines\n", 1, 2);
+  int choice = getUserInput("\nWhat will you build your fire out of?\n\t\ 1. Dry leaves and sticks\n\t 2. Driftwood and magazines\n", 1, 2);
   if (choice == 1) {
     printf("\n\nYou have managed to get a fire started with the flint, sticks and dry leaves.\n\
     	You warm yourself up around the fire and pack the extra materials you gathered in your \n\
@@ -245,7 +245,7 @@ void fixCellphone() {
   You manage to MacGyver a battery that you think will work, now you just have to decide how to connect the wires\n\
   to your phone's battery. ");
   int choice = getUserInput("\nWhat will you do? \n\t\ 1. Take the battery out of your phone and try to attach the wires to it\n\
-  \t 2.Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
+  \t 2. Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
   if (choice == 1) {
     cellphone = 1;
     printf("\n\nYou are able to get a charge on your cellphone! \n\
@@ -273,7 +273,7 @@ void fixCellphone() {
 
 void chooseNewLocation() {
   // Choose between climbing a tree or going back to the original 5 options
-  int choice = getUserInput("\nWhat will you choose?\n\t1. Climb the tallest tree you see near you\n\t\2. Choose one of the original 5 choices\n", 1, 2);
+  int choice = getUserInput("\nWhat will you choose?\n\t 1. Climb the tallest tree you see near you\n\t\ 2. Choose one of the original 5 choices\n", 1, 2);
   if (choice == 1)
     climbTree();
   else if (choice == 2)
@@ -284,8 +284,8 @@ void chooseNewLocation() {
 
 void climbTree() {
   printf("\n\nYou decide to climb a tall tree.You see a cliff and a cabin.\n");
-  char choices[] = "What will you do?\n\t1. Go to the cliff\n\t2. Go to the cabin\n";
-  char specialChoice[] = "\t3. Try your phone and see if there is cell service up here\n";
+  char choices[] = "What will you do?\n\t 1. Go to the cliff\n\t 2. Go to the cabin\n";
+  char specialChoice[] = "\t 3. Try your phone and see if there is cell service up here\n";
   printf("%s", choices);
   int choice;
   if (cellphone == 1) {
