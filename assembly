@@ -1,0 +1,3356 @@
+	.arch armv6
+	.eabi_attribute 27, 3
+	.eabi_attribute 28, 1
+	.fpu vfp
+	.eabi_attribute 20, 1
+	.eabi_attribute 21, 1
+	.eabi_attribute 23, 3
+	.eabi_attribute 24, 1
+	.eabi_attribute 25, 1
+	.eabi_attribute 26, 2
+	.eabi_attribute 30, 6
+	.eabi_attribute 18, 4
+	.file	"main.c"
+	.global	health
+	.data
+	.align	2
+	.type	health, %object
+	.size	health, 4
+health:
+	.word	100
+	.global	fire
+	.bss
+	.align	2
+	.type	fire, %object
+	.size	fire, 4
+fire:
+	.space	4
+	.global	cellphone
+	.align	2
+	.type	cellphone, %object
+	.size	cellphone, 4
+cellphone:
+	.space	4
+	.global	finished
+	.align	2
+	.type	finished, %object
+	.size	finished, 4
+finished:
+	.space	4
+	.global	shotgun
+	.align	2
+	.type	shotgun, %object
+	.size	shotgun, 4
+shotgun:
+	.space	4
+	.global	ammo
+	.align	2
+	.type	ammo, %object
+	.size	ammo, 4
+ammo:
+	.space	4
+	.global	POTION
+	.align	2
+	.type	POTION, %object
+	.size	POTION, 4
+POTION:
+	.space	4
+	.global	KEY
+	.align	2
+	.type	KEY, %object
+	.size	KEY, 4
+KEY:
+	.space	4
+	.global	SWORD
+	.align	2
+	.type	SWORD, %object
+	.size	SWORD, 4
+SWORD:
+	.space	4
+	.global	hasFish
+	.align	2
+	.type	hasFish, %object
+	.size	hasFish, 4
+hasFish:
+	.space	4
+	.global	brokenArm
+	.align	2
+	.type	brokenArm, %object
+	.size	brokenArm, 4
+brokenArm:
+	.space	4
+	.global	fruit
+	.align	2
+	.type	fruit, %object
+	.size	fruit, 4
+fruit:
+	.space	4
+	.global	RED_FLOWERS
+	.align	2
+	.type	RED_FLOWERS, %object
+	.size	RED_FLOWERS, 4
+RED_FLOWERS:
+	.space	4
+	.comm	c,1,1
+	.section	.rodata
+	.align	2
+.LC0:
+	.ascii	"\012\000"
+	.text
+	.align	2
+	.global	flush
+	.type	flush, %function
+flush:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	ldr	r3, .L2
+	ldr	r3, [r3, #0]
+	mov	r0, r3
+	bl	fflush
+	ldr	r3, .L2+4
+	ldr	r3, [r3, #0]
+	mov	r0, r3
+	bl	fflush
+	ldr	r0, .L2+8
+	bl	puts
+	ldmfd	sp!, {fp, pc}
+.L3:
+	.align	2
+.L2:
+	.word	stdout
+	.word	stdin
+	.word	.LC0
+	.size	flush, .-flush
+	.align	2
+	.global	main
+	.type	main, %function
+main:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	bl	startFunc
+	mov	r3, #0
+	mov	r0, r3
+	ldmfd	sp!, {fp, pc}
+	.size	main, .-main
+	.section	.rodata
+	.align	2
+.LC1:
+	.ascii	"You have died, better luck next time. \000"
+	.text
+	.align	2
+	.global	check
+	.type	check, %function
+check:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	ldr	r3, .L7
+	ldr	r3, [r3, #0]
+	cmp	r3, #0
+	bgt	.L5
+	ldr	r0, .L7+4
+	bl	puts
+	mov	r0, #0
+	bl	exit
+.L5:
+	ldmfd	sp!, {fp, pc}
+.L8:
+	.align	2
+.L7:
+	.word	health
+	.word	.LC1
+	.size	check, .-check
+	.section	.rodata
+	.align	2
+.LC2:
+	.ascii	"%s\000"
+	.align	2
+.LC3:
+	.ascii	"Please enter the number of the option you would lik"
+	.ascii	"e: \000"
+	.align	2
+.LC4:
+	.ascii	"%d\000"
+	.align	2
+.LC5:
+	.ascii	"Input is outside legal bounds.\000"
+	.align	2
+.LC6:
+	.ascii	"Must enter an integer. Exiting program.\000"
+	.text
+	.align	2
+	.global	getUserInput
+	.type	getUserInput, %function
+getUserInput:
+	@ args = 0, pretend = 0, frame = 32
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #32
+	str	r0, [fp, #-24]
+	str	r1, [fp, #-28]
+	str	r2, [fp, #-32]
+	mov	r3, #0
+	str	r3, [fp, #-8]
+	b	.L10
+.L14:
+	ldr	r3, .L15
+	mov	r0, r3
+	ldr	r1, [fp, #-24]
+	bl	printf
+	ldr	r3, .L15+4
+	mov	r0, r3
+	bl	printf
+	ldr	r2, .L15+8
+	sub	r3, fp, #16
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	str	r0, [fp, #-12]
+	ldr	r3, [fp, #-12]
+	cmp	r3, #1
+	bne	.L11
+	ldr	r2, [fp, #-16]
+	ldr	r3, [fp, #-28]
+	cmp	r2, r3
+	blt	.L12
+	ldr	r2, [fp, #-16]
+	ldr	r3, [fp, #-32]
+	cmp	r2, r3
+	bgt	.L12
+	mov	r3, #1
+	str	r3, [fp, #-8]
+	b	.L10
+.L12:
+	ldr	r0, .L15+12
+	bl	puts
+	b	.L10
+.L11:
+	ldr	r0, .L15+16
+	bl	puts
+	mov	r0, #1
+	bl	exit
+.L10:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #0
+	beq	.L14
+	ldr	r3, [fp, #-16]
+	mov	r0, r3
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L16:
+	.align	2
+.L15:
+	.word	.LC2
+	.word	.LC3
+	.word	.LC4
+	.word	.LC5
+	.word	.LC6
+	.size	getUserInput, .-getUserInput
+	.section	.rodata
+	.align	2
+.LC7:
+	.ascii	"\012+-----------------------------------------+\000"
+	.align	2
+.LC8:
+	.ascii	"You awake lost in the woods. You are all alone and "
+	.ascii	"need to find your way home. \012 \000"
+	.align	2
+.LC9:
+	.ascii	"Please select an option using\000"
+	.align	2
+.LC10:
+	.ascii	"the integers on the left.\012\000"
+	.align	2
+.LC11:
+	.ascii	"Where do you want to go?\000"
+	.align	2
+.LC12:
+	.ascii	"(1) Stay in the woods \012(2) Follow the beat down "
+	.ascii	"path \012(3) Follow the white rabbit \012(4) Go up "
+	.ascii	"the hill\012(5) Follow the sound of running water\012"
+	.ascii	" \000"
+	.align	2
+.LC13:
+	.ascii	"%c\000"
+	.align	2
+.LC14:
+	.ascii	"\012You have followed the sound of running water an"
+	.ascii	"d come across a large river; almost\01230 meters ac"
+	.ascii	"ross. There are large rocks and the current seems m"
+	.ascii	"oderately strong.\012Select your next move:\0121. A"
+	.ascii	"ttempt to catch a fish\0122. Travel upstream\0123. "
+	.ascii	"Travel downstream\0124. Cross the river\0125. Go ba"
+	.ascii	"ck\012\012\000"
+	.text
+	.align	2
+	.global	startFunc
+	.type	startFunc, %function
+startFunc:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	ldr	r0, .L27
+	bl	puts
+	ldr	r0, .L27
+	bl	puts
+	ldr	r0, .L27+4
+	bl	puts
+	ldr	r0, .L27+8
+	bl	puts
+	ldr	r0, .L27+12
+	bl	puts
+	ldr	r0, .L27+16
+	bl	puts
+	b	.L18
+.L26:
+	mov	r0, r0	@ nop
+.L18:
+	bl	flush
+	ldr	r3, .L27+20
+	mov	r0, r3
+	bl	printf
+	ldr	r0, .L27+24
+	bl	puts
+	ldr	r3, .L27+28
+	mov	r0, r3
+	ldr	r1, .L27+32
+	bl	__isoc99_scanf
+	ldr	r3, .L27+32
+	ldrb	r3, [r3, #0]	@ zero_extendqisi2
+	sub	r3, r3, #49
+	cmp	r3, #4
+	ldrls	pc, [pc, r3, asl #2]
+	b	.L26
+.L25:
+	.word	.L20
+	.word	.L21
+	.word	.L22
+	.word	.L23
+	.word	.L24
+.L20:
+	bl	stayPut
+.L21:
+	bl	comeToPath
+.L22:
+	bl	whiteRabbit
+.L23:
+	bl	hill
+.L24:
+	ldr	r0, .L27+36
+	bl	river
+	b	.L26
+.L28:
+	.align	2
+.L27:
+	.word	.LC7
+	.word	.LC8
+	.word	.LC9
+	.word	.LC10
+	.word	.LC11
+	.word	.LC12
+	.word	.LC0
+	.word	.LC13
+	.word	c
+	.word	.LC14
+	.size	startFunc, .-startFunc
+	.section	.rodata
+	.align	2
+.LC15:
+	.ascii	"You fall into a rabbit hole!\000"
+	.align	2
+.LC16:
+	.ascii	"There is a POTION and a KEY on a table, and a reall"
+	.ascii	"y small door. The door is only big enough to fit a "
+	.ascii	"mouse.\000"
+	.align	2
+.LC17:
+	.ascii	"(1)Drink the POTION \000"
+	.align	2
+.LC18:
+	.ascii	"(2)Grab the KEY \000"
+	.align	2
+.LC19:
+	.ascii	"(3)Attempt to go through the door\000"
+	.align	2
+.LC20:
+	.ascii	"You drink the POTION\000"
+	.align	2
+.LC21:
+	.ascii	"The KEY is now in your pocket\000"
+	.align	2
+.LC22:
+	.ascii	"You go through the door!\000"
+	.align	2
+.LC23:
+	.ascii	"The door is far too small and seems to be locked.\000"
+	.text
+	.align	2
+	.global	whiteRabbit
+	.type	whiteRabbit, %function
+whiteRabbit:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar
+	ldr	r0, .L37
+	bl	puts
+	ldr	r3, .L37+4
+	mov	r0, r3
+	bl	printf
+	mov	r0, #10
+	bl	putchar
+.L30:
+	bl	flush
+	ldr	r0, .L37+8
+	bl	puts
+	ldr	r0, .L37+12
+	bl	puts
+	ldr	r0, .L37+16
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L37+20
+	mov	r0, r3
+	ldr	r1, .L37+24
+	bl	__isoc99_scanf
+	ldr	r3, .L37+24
+	ldrb	r3, [r3, #0]	@ zero_extendqisi2
+	cmp	r3, #50
+	beq	.L33
+	cmp	r3, #51
+	beq	.L34
+	cmp	r3, #49
+	bne	.L36
+.L32:
+	ldr	r0, .L37+28
+	bl	puts
+	ldr	r3, .L37+32
+	mov	r2, #1
+	str	r2, [r3, #0]
+	b	.L30
+.L33:
+	ldr	r0, .L37+36
+	bl	puts
+	ldr	r3, .L37+40
+	mov	r2, #1
+	str	r2, [r3, #0]
+	b	.L30
+.L34:
+	ldr	r3, .L37+32
+	ldr	r2, [r3, #0]
+	ldr	r3, .L37+40
+	ldr	r3, [r3, #0]
+	and	r3, r2, r3
+	cmp	r3, #0
+	beq	.L35
+	ldr	r0, .L37+44
+	bl	puts
+	bl	caterpillar
+	b	.L30
+.L35:
+	ldr	r0, .L37+48
+	bl	puts
+	b	.L30
+.L36:
+	b	.L30
+.L38:
+	.align	2
+.L37:
+	.word	.LC15
+	.word	.LC16
+	.word	.LC17
+	.word	.LC18
+	.word	.LC19
+	.word	.LC13
+	.word	c
+	.word	.LC20
+	.word	POTION
+	.word	.LC21
+	.word	KEY
+	.word	.LC22
+	.word	.LC23
+	.size	whiteRabbit, .-whiteRabbit
+	.section	.rodata
+	.align	2
+.LC24:
+	.ascii	"You meet a caterpillar smoking a hookah!\000"
+	.align	2
+.LC25:
+	.ascii	"He tells you to be weary of the queen and sends you"
+	.ascii	" on your way\000"
+	.align	2
+.LC26:
+	.ascii	"(1)Go to the garden \000"
+	.align	2
+.LC27:
+	.ascii	"(2)Go to the tea party \000"
+	.text
+	.align	2
+	.global	caterpillar
+	.type	caterpillar, %function
+caterpillar:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar
+	ldr	r0, .L45
+	bl	puts
+	ldr	r0, .L45+4
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+.L40:
+	bl	flush
+	ldr	r0, .L45+8
+	bl	puts
+	ldr	r0, .L45+12
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L45+16
+	mov	r0, r3
+	ldr	r1, .L45+20
+	bl	__isoc99_scanf
+	ldr	r3, .L45+20
+	ldrb	r3, [r3, #0]	@ zero_extendqisi2
+	cmp	r3, #49
+	beq	.L42
+	cmp	r3, #50
+	beq	.L43
+	b	.L44
+.L42:
+	bl	garden
+.L43:
+	bl	teaParty
+	b	.L40
+.L44:
+	b	.L40
+.L46:
+	.align	2
+.L45:
+	.word	.LC24
+	.word	.LC25
+	.word	.LC26
+	.word	.LC27
+	.word	.LC13
+	.word	c
+	.size	caterpillar, .-caterpillar
+	.section	.rodata
+	.align	2
+.LC28:
+	.ascii	"You approach a house in the woods..\000"
+	.align	2
+.LC29:
+	.ascii	"There's a rabbit and a man with a rather large toph"
+	.ascii	"at on. \000"
+	.align	2
+.LC30:
+	.ascii	"The man asks Why is a raven like a writing desk? \000"
+	.align	2
+.LC31:
+	.ascii	"(1) I don't have the faintest idea \000"
+	.align	2
+.LC32:
+	.ascii	"(2) because they both produce flat notes! \000"
+	.align	2
+.LC33:
+	.ascii	"(3) Edgar Allen Poe wrote on both \000"
+	.align	2
+.LC34:
+	.ascii	"Try again! \000"
+	.align	2
+.LC35:
+	.ascii	"Correct! he exclaims, as he pushes you down a rando"
+	.ascii	"m path \000"
+	.align	2
+.LC36:
+	.ascii	"I don't think that's correct. - the hare says. But "
+	.ascii	"you should follow me.\000"
+	.text
+	.align	2
+	.global	teaParty
+	.type	teaParty, %function
+teaParty:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar
+	ldr	r0, .L54
+	bl	puts
+	ldr	r0, .L54+4
+	bl	puts
+	ldr	r0, .L54+8
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+.L48:
+	bl	flush
+	ldr	r0, .L54+12
+	bl	puts
+	ldr	r0, .L54+16
+	bl	puts
+	ldr	r0, .L54+20
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L54+24
+	mov	r0, r3
+	ldr	r1, .L54+28
+	bl	__isoc99_scanf
+	ldr	r3, .L54+28
+	ldrb	r3, [r3, #0]	@ zero_extendqisi2
+	cmp	r3, #50
+	beq	.L51
+	cmp	r3, #51
+	beq	.L52
+	cmp	r3, #49
+	bne	.L53
+.L50:
+	ldr	r0, .L54+32
+	bl	puts
+	b	.L48
+.L51:
+	ldr	r0, .L54+36
+	bl	puts
+	bl	garden
+.L52:
+	ldr	r3, .L54+40
+	mov	r0, r3
+	bl	printf
+	bl	markingsExit
+	b	.L48
+.L53:
+	b	.L48
+.L55:
+	.align	2
+.L54:
+	.word	.LC28
+	.word	.LC29
+	.word	.LC30
+	.word	.LC31
+	.word	.LC32
+	.word	.LC33
+	.word	.LC13
+	.word	c
+	.word	.LC34
+	.word	.LC35
+	.word	.LC36
+	.size	teaParty, .-teaParty
+	.section	.rodata
+	.align	2
+.LC37:
+	.ascii	" You approach a garden with red roses dripping of p"
+	.ascii	"aint.\000"
+	.align	2
+.LC38:
+	.ascii	" The Red Queen approaches and asks if you want to p"
+	.ascii	"lay croquet with her \000"
+	.align	2
+.LC39:
+	.ascii	"(1) Accept the invitation \000"
+	.align	2
+.LC40:
+	.ascii	"(2) Refuse politely \000"
+	.align	2
+.LC41:
+	.ascii	"(3) Refuse aggressively \000"
+	.align	2
+.LC42:
+	.ascii	"Let's play\000"
+	.align	2
+.LC43:
+	.ascii	"OFF WITH HER HEAD she exclaims \000"
+	.align	2
+.LC44:
+	.ascii	"You have been beheaded\000"
+	.align	2
+.LC45:
+	.ascii	"You should have accepted the invitation.\000"
+	.text
+	.align	2
+	.global	garden
+	.type	garden, %function
+garden:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar
+	ldr	r0, .L62
+	bl	puts
+	ldr	r0, .L62+4
+	bl	puts
+.L57:
+	bl	flush
+	ldr	r0, .L62+8
+	bl	puts
+	ldr	r0, .L62+12
+	bl	puts
+	ldr	r0, .L62+16
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L62+20
+	mov	r0, r3
+	ldr	r1, .L62+24
+	bl	__isoc99_scanf
+	ldr	r3, .L62+24
+	ldrb	r3, [r3, #0]	@ zero_extendqisi2
+	cmp	r3, #50
+	beq	.L60
+	cmp	r3, #51
+	beq	.L61
+	cmp	r3, #49
+	bne	.L58
+.L59:
+	ldr	r3, .L62+28
+	mov	r0, r3
+	bl	printf
+	bl	croquet
+.L60:
+	ldr	r0, .L62+32
+	bl	puts
+	ldr	r3, .L62+36
+	mov	r2, #0
+	str	r2, [r3, #0]
+	ldr	r3, .L62+40
+	mov	r0, r3
+	bl	printf
+	bl	check
+.L61:
+	ldr	r0, .L62+32
+	bl	puts
+	ldr	r3, .L62+36
+	mov	r2, #0
+	str	r2, [r3, #0]
+	ldr	r3, .L62+40
+	mov	r0, r3
+	bl	printf
+	bl	check
+.L58:
+	ldr	r3, .L62+44
+	mov	r0, r3
+	bl	printf
+	ldr	r3, .L62+36
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+	ldmfd	sp!, {fp, pc}
+.L63:
+	.align	2
+.L62:
+	.word	.LC37
+	.word	.LC38
+	.word	.LC39
+	.word	.LC40
+	.word	.LC41
+	.word	.LC13
+	.word	c
+	.word	.LC42
+	.word	.LC43
+	.word	health
+	.word	.LC44
+	.word	.LC45
+	.size	garden, .-garden
+	.section	.rodata
+	.align	2
+.LC46:
+	.ascii	" You grab your flamingo and play your game. To your"
+	.ascii	" surprise, you're awfully good and beat the Queen!."
+	.ascii	"\000"
+	.align	2
+.LC47:
+	.ascii	" Sadly, she accuses you of cheating! \000"
+	.align	2
+.LC48:
+	.ascii	" You find yourself in a courthouse, packed with peo"
+	.ascii	"ple. \000"
+	.align	2
+.LC49:
+	.ascii	"(1) Plead innocent \000"
+	.align	2
+.LC50:
+	.ascii	"(2) Plead guilty \000"
+	.align	2
+.LC51:
+	.ascii	"(3) Attempt to grab a weapon (50 percent chance of "
+	.ascii	"success) \000"
+	.align	2
+.LC52:
+	.ascii	"The judge believes you, but the Queen demands you d"
+	.ascii	"ie! \000"
+	.align	2
+.LC53:
+	.ascii	"You have been found guilty and sentenced to death\000"
+	.align	2
+.LC54:
+	.ascii	"Suit yourself \000"
+	.align	2
+.LC55:
+	.ascii	"You've been sentenced to death by beheading\000"
+	.align	2
+.LC56:
+	.ascii	"You manage to grab a sword and go directly for the "
+	.ascii	"Queen! \000"
+	.align	2
+.LC57:
+	.ascii	"Then you wake up... \000"
+	.text
+	.align	2
+	.global	croquet
+	.type	croquet, %function
+croquet:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar
+	ldr	r0, .L71
+	bl	puts
+	ldr	r0, .L71+4
+	bl	puts
+	ldr	r0, .L71+8
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+.L65:
+	bl	flush
+	ldr	r0, .L71+12
+	bl	puts
+	ldr	r0, .L71+16
+	bl	puts
+	ldr	r0, .L71+20
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L71+24
+	mov	r0, r3
+	ldr	r1, .L71+28
+	bl	__isoc99_scanf
+	ldr	r3, .L71+28
+	ldrb	r3, [r3, #0]	@ zero_extendqisi2
+	cmp	r3, #50
+	beq	.L68
+	cmp	r3, #51
+	beq	.L69
+	cmp	r3, #49
+	bne	.L70
+.L67:
+	ldr	r0, .L71+32
+	bl	puts
+	ldr	r3, .L71+36
+	mov	r0, r3
+	bl	printf
+	ldr	r3, .L71+40
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+.L68:
+	ldr	r0, .L71+44
+	bl	puts
+	ldr	r3, .L71+48
+	mov	r0, r3
+	bl	printf
+	ldr	r3, .L71+40
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+.L69:
+	ldr	r3, .L71+52
+	mov	r2, #1
+	str	r2, [r3, #0]
+	ldr	r0, .L71+56
+	bl	puts
+	ldr	r0, .L71+60
+	bl	puts
+	mov	r0, #0
+	bl	exit
+.L70:
+	b	.L65
+.L72:
+	.align	2
+.L71:
+	.word	.LC46
+	.word	.LC47
+	.word	.LC48
+	.word	.LC49
+	.word	.LC50
+	.word	.LC51
+	.word	.LC13
+	.word	c
+	.word	.LC52
+	.word	.LC53
+	.word	health
+	.word	.LC54
+	.word	.LC55
+	.word	SWORD
+	.word	.LC56
+	.word	.LC57
+	.size	croquet, .-croquet
+	.section	.rodata
+	.align	2
+.LC58:
+	.ascii	"What will you do next?\012\0111. Look around for ma"
+	.ascii	"terials to build a  \011fire from\012\0112. Try to "
+	.ascii	"call for help on your cellphone\012\0113. Climb a t"
+	.ascii	"ree to get a good look around.\012\000"
+	.align	2
+.LC59:
+	.ascii	"\012You remember that you have already tried this. "
+	.ascii	"You choose another option.\000"
+	.text
+	.align	2
+	.global	stayPut
+	.type	stayPut, %function
+stayPut:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L78
+	mov	r1, #1
+	mov	r2, #3
+	bl	getUserInput
+	str	r0, [fp, #-8]
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L74
+	ldr	r3, .L78+4
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	beq	.L75
+	bl	buildFire
+	b	.L73
+.L75:
+	ldr	r0, .L78+8
+	bl	puts
+	bl	stayPut
+	b	.L73
+.L74:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L77
+	bl	fixCellphone
+	b	.L73
+.L77:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L73
+	bl	climbTree
+.L73:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L79:
+	.align	2
+.L78:
+	.word	.LC58
+	.word	fire
+	.word	.LC59
+	.size	stayPut, .-stayPut
+	.section	.rodata
+	.align	2
+.LC60:
+	.ascii	"\012\012You look around and find some driftwood, st"
+	.ascii	"icks, dry leaves, flint and some old magazines.\000"
+	.align	2
+.LC61:
+	.ascii	"\012What will you build your fire out of?\012\011 1"
+	.ascii	". Dry leaves and sticks\012\011 2. Driftwood and ma"
+	.ascii	"gazines\012\000"
+	.align	2
+.LC62:
+	.ascii	"\012\012You have managed to get a fire started with"
+	.ascii	" the flint, sticks and dry leaves.\012    \011You w"
+	.ascii	"arm yourself up around the fire and pack the extra "
+	.ascii	"materials you gathered in your \012    \011backpack"
+	.ascii	" so that you can make a fire again if you need to. "
+	.ascii	"Achievement unlocked: Fire building\000"
+	.align	2
+.LC63:
+	.ascii	"\012\012You use the flint and are able to start a f"
+	.ascii	"ire! \012    \011You watch as the colours of the ma"
+	.ascii	"gazine cover begin to melt and the fire gives off a"
+	.ascii	" dark smoke.\012    \011You lean in to warm yoursel"
+	.ascii	"f closer to the fire, and begin to feel dizzy. Litt"
+	.ascii	"le did you know, \012    \011but the salt from the "
+	.ascii	"seawater in the driftwood and the paints and chemic"
+	.ascii	"als used in the ink of \012    \011the magazine are"
+	.ascii	" giving off a toxic smoke as they burn. Your last t"
+	.ascii	"houghts are of regret that you \012    \011didn't f"
+	.ascii	"inish reading that book on how to survive in the wo"
+	.ascii	"ods that you got last Christmas. \012    \011Everyt"
+	.ascii	"hing fades to black... \012\012\012GAME OVER\000"
+	.text
+	.align	2
+	.global	buildFire
+	.type	buildFire, %function
+buildFire:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L83
+	bl	puts
+	ldr	r0, .L83+4
+	mov	r1, #1
+	mov	r2, #2
+	bl	getUserInput
+	str	r0, [fp, #-8]
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L81
+	ldr	r0, .L83+8
+	bl	puts
+	ldr	r3, .L83+12
+	mov	r2, #1
+	str	r2, [r3, #0]
+	bl	stayPut
+	b	.L80
+.L81:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L80
+	ldr	r0, .L83+16
+	bl	puts
+	ldr	r3, .L83+20
+	mov	r2, #1
+	str	r2, [r3, #0]
+	ldr	r3, .L83+24
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+.L80:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L84:
+	.align	2
+.L83:
+	.word	.LC60
+	.word	.LC61
+	.word	.LC62
+	.word	fire
+	.word	.LC63
+	.word	finished
+	.word	health
+	.size	buildFire, .-buildFire
+	.section	.rodata
+	.align	2
+.LC64:
+	.ascii	"\012\012You open up your cellphone and see that it "
+	.ascii	"is completely out of battery. \012You vaguely remem"
+	.ascii	"ber reading an article on how to build your own bat"
+	.ascii	"tery powered charger. \012It seemed difficult, and "
+	.ascii	"you are without a soldering iron, but you think it "
+	.ascii	"might be worth a shot. \012You search around the ar"
+	.ascii	"ea and miraculously find some copper wires on the g"
+	.ascii	"round. \012You dig out some batteries from the bott"
+	.ascii	"om of your backpack and try to remember the steps t"
+	.ascii	"o build the charger.\012You manage to MacGyver a ba"
+	.ascii	"ttery that you think will work, now you just have t"
+	.ascii	"o decide how to connect the wires\012to your phone'"
+	.ascii	"s battery. \000"
+	.align	2
+.LC65:
+	.ascii	"\012What will you do? \012\011 1. Take the battery "
+	.ascii	"out of your phone and try to attach the wires to it"
+	.ascii	"\012\011 2. Leave the battery in your phone and roo"
+	.ascii	"t around through the power socket with the wires\012"
+	.ascii	"\000"
+	.align	2
+.LC66:
+	.ascii	"\012\012You are able to get a charge on your cellph"
+	.ascii	"one! \012    \011Achievement unlocked: Charged cell"
+	.ascii	"phone\012Unfortunately, there is no service where y"
+	.ascii	"ou are.\012    \011You need to move to a new locati"
+	.ascii	"on in order to get cell service and call for help.\000"
+	.align	2
+.LC67:
+	.ascii	"\012\012You eagerly push the power button on your p"
+	.ascii	"hone and wait to see what happens. \012    \011Noth"
+	.ascii	"ing comes up on the screen but you feel the phone g"
+	.ascii	"etting warm in your hands. \012    \011You think th"
+	.ascii	"at this must be a good sign, and wait as the phone "
+	.ascii	"gets warmer and warmer. \012    \011Suddenly, you r"
+	.ascii	"ealize that you must have connected the wrong wires"
+	.ascii	" to the wrong terminals\012    \011and that the bat"
+	.ascii	"tery must be short-circuiting! Unfortunately, you a"
+	.ascii	"re not able to \012    \011disconnect the wires in "
+	.ascii	"time and the phone blows up in your hands. A sharp "
+	.ascii	"piece of metal \012    \011flies from the phone and"
+	.ascii	" into your temple, and you feel the blood starting "
+	.ascii	"to trickle down \012    \011your face as everything"
+	.ascii	" fades to black...\012\012\012GAME OVER\000"
+	.text
+	.align	2
+	.global	fixCellphone
+	.type	fixCellphone, %function
+fixCellphone:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r3, .L88
+	mov	r0, r3
+	bl	printf
+	ldr	r0, .L88+4
+	mov	r1, #1
+	mov	r2, #2
+	bl	getUserInput
+	str	r0, [fp, #-8]
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L86
+	ldr	r3, .L88+8
+	mov	r2, #1
+	str	r2, [r3, #0]
+	ldr	r0, .L88+12
+	bl	puts
+	bl	chooseNewLocation
+	b	.L85
+.L86:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L85
+	ldr	r0, .L88+16
+	bl	puts
+	ldr	r3, .L88+20
+	mov	r2, #1
+	str	r2, [r3, #0]
+	ldr	r3, .L88+24
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+.L85:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L89:
+	.align	2
+.L88:
+	.word	.LC64
+	.word	.LC65
+	.word	cellphone
+	.word	.LC66
+	.word	.LC67
+	.word	finished
+	.word	health
+	.size	fixCellphone, .-fixCellphone
+	.section	.rodata
+	.align	2
+.LC68:
+	.ascii	"\012What will you choose?\012\011 1. Climb the tall"
+	.ascii	"est tree you see near you\012\011 2. Choose one of "
+	.ascii	"the original 5 choices\012\000"
+	.text
+	.align	2
+	.global	chooseNewLocation
+	.type	chooseNewLocation, %function
+chooseNewLocation:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L93
+	mov	r1, #1
+	mov	r2, #2
+	bl	getUserInput
+	str	r0, [fp, #-8]
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L91
+	bl	climbTree
+	b	.L90
+.L91:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L90
+	bl	startFunc
+.L90:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L94:
+	.align	2
+.L93:
+	.word	.LC68
+	.size	chooseNewLocation, .-chooseNewLocation
+	.section	.rodata
+	.align	2
+.LC69:
+	.ascii	"\012\012You decide to climb a tall tree.You see a c"
+	.ascii	"liff and a cabin.\000"
+	.align	2
+.LC72:
+	.ascii	"\000"
+	.align	2
+.LC73:
+	.ascii	"\012\012You open up the cellphone and to your surpr"
+	.ascii	"ise, there is cell service! \012    You call 911 an"
+	.ascii	"d get through to an operator.\012They are able to f"
+	.ascii	"ind your location and they \012    send a helicopte"
+	.ascii	"r to save you.\012\012\012VICTORY!!\012Congratulati"
+	.ascii	"ons, you've won!\000"
+	.align	2
+.LC70:
+	.ascii	"What will you do?\012\011 1. Go to the cliff\012\011"
+	.ascii	" 2. Go to the cabin\012\000"
+	.align	2
+.LC71:
+	.ascii	"\011 3. Try your phone and see if there is cell ser"
+	.ascii	"vice up here\012\000"
+	.text
+	.align	2
+	.global	climbTree
+	.type	climbTree, %function
+climbTree:
+	@ args = 0, pretend = 0, frame = 136
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #136
+	ldr	r0, .L101
+	bl	puts
+	ldr	r3, .L101+4
+	sub	ip, fp, #72
+	mov	lr, r3
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2}
+	strb	r3, [ip, #0]
+	ldr	r3, .L101+8
+	sub	ip, fp, #136
+	mov	lr, r3
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr!, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2, r3}
+	ldmia	lr, {r0, r1, r2, r3}
+	stmia	ip!, {r0, r1, r2}
+	strh	r3, [ip, #0]	@ movhi
+	ldr	r2, .L101+12
+	sub	r3, fp, #72
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r3, .L101+16
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	bne	.L96
+	ldr	r2, .L101+12
+	sub	r3, fp, #136
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L101+20
+	mov	r1, #1
+	mov	r2, #3
+	bl	getUserInput
+	str	r0, [fp, #-8]
+	b	.L97
+.L96:
+	ldr	r0, .L101+20
+	mov	r1, #1
+	mov	r2, #2
+	bl	getUserInput
+	str	r0, [fp, #-8]
+.L97:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L98
+	bl	cliff
+	b	.L99
+.L98:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L100
+	bl	outsideHouse
+	b	.L99
+.L100:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L99
+	ldr	r0, .L101+24
+	bl	puts
+.L99:
+	ldr	r3, .L101+28
+	mov	r2, #1
+	str	r2, [r3, #0]
+	mov	r0, #0
+	bl	exit
+.L102:
+	.align	2
+.L101:
+	.word	.LC69
+	.word	.LC70
+	.word	.LC71
+	.word	.LC2
+	.word	cellphone
+	.word	.LC72
+	.word	.LC73
+	.word	finished
+	.size	climbTree, .-climbTree
+	.section	.rodata
+	.align	2
+.LC74:
+	.ascii	"You come across a Path, you don't know where it lea"
+	.ascii	"ds but you can also see what looks to be an opening"
+	.ascii	" a bit deeper into the woods.\000"
+	.align	2
+.LC75:
+	.ascii	"Would you like to:\000"
+	.align	2
+.LC76:
+	.ascii	"1. See what's down the path.\000"
+	.align	2
+.LC77:
+	.ascii	"2. Push your way to the clearing.\000"
+	.align	2
+.LC78:
+	.ascii	"3. Head back to the Start\000"
+	.align	2
+.LC79:
+	.ascii	"You make your way down the path!\000"
+	.align	2
+.LC80:
+	.ascii	"You start pushing your way through the brush toward"
+	.ascii	"s the clearing\000"
+	.align	2
+.LC81:
+	.ascii	"You head back to where You Started\000"
+	.text
+	.align	2
+	.global	comeToPath
+	.type	comeToPath, %function
+comeToPath:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L108
+	bl	puts
+	ldr	r0, .L108+4
+	bl	puts
+	ldr	r0, .L108+8
+	bl	puts
+	ldr	r0, .L108+12
+	bl	puts
+	ldr	r0, .L108+16
+	bl	puts
+	bl	flush
+	ldr	r2, .L108+20
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L104
+	ldr	r0, .L108+24
+	bl	puts
+	bl	outsideHouse
+	b	.L103
+.L104:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L106
+	ldr	r0, .L108+28
+	bl	puts
+	bl	woodsClearing
+	b	.L103
+.L106:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L107
+	ldr	r0, .L108+32
+	bl	puts
+	bl	startFunc
+	b	.L103
+.L107:
+	bl	comeToPath
+.L103:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L109:
+	.align	2
+.L108:
+	.word	.LC74
+	.word	.LC75
+	.word	.LC76
+	.word	.LC77
+	.word	.LC78
+	.word	.LC4
+	.word	.LC79
+	.word	.LC80
+	.word	.LC81
+	.size	comeToPath, .-comeToPath
+	.section	.rodata
+	.align	2
+.LC82:
+	.ascii	"You come across a broken down house, you cant tell "
+	.ascii	"if anyone is living there or not. There's also a sh"
+	.ascii	"ed behind the house which may have useful supplies."
+	.ascii	"\000"
+	.align	2
+.LC83:
+	.ascii	"1. Throw a stone at the window to see if anyone is "
+	.ascii	"home.\000"
+	.align	2
+.LC84:
+	.ascii	"2. Go in the house.\000"
+	.align	2
+.LC85:
+	.ascii	"3. Walk to the shed in the back.\000"
+	.align	2
+.LC86:
+	.ascii	"4. Head back to the Path\000"
+	.align	2
+.LC87:
+	.ascii	"You throw a rock through the window, you then hear "
+	.ascii	"a loud bang and a pain in your chest! Guess someone"
+	.ascii	" was home!\000"
+	.align	2
+.LC88:
+	.ascii	"You make your way to the door.\000"
+	.align	2
+.LC89:
+	.ascii	"You make your way to the shed in the back.\000"
+	.align	2
+.LC90:
+	.ascii	"You head back to the path.\000"
+	.text
+	.align	2
+	.global	outsideHouse
+	.type	outsideHouse, %function
+outsideHouse:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L116
+	bl	puts
+	ldr	r0, .L116+4
+	bl	puts
+	ldr	r0, .L116+8
+	bl	puts
+	ldr	r0, .L116+12
+	bl	puts
+	ldr	r0, .L116+16
+	bl	puts
+	ldr	r0, .L116+20
+	bl	puts
+	bl	flush
+	ldr	r2, .L116+24
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L111
+	ldr	r0, .L116+28
+	bl	puts
+	ldr	r3, .L116+32
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+	b	.L110
+.L111:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L113
+	ldr	r0, .L116+36
+	bl	puts
+	bl	house
+	b	.L110
+.L113:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L114
+	ldr	r0, .L116+40
+	bl	puts
+	bl	shed
+	b	.L110
+.L114:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	bne	.L115
+	ldr	r0, .L116+44
+	bl	puts
+	bl	comeToPath
+	b	.L110
+.L115:
+	bl	outsideHouse
+.L110:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L117:
+	.align	2
+.L116:
+	.word	.LC82
+	.word	.LC75
+	.word	.LC83
+	.word	.LC84
+	.word	.LC85
+	.word	.LC86
+	.word	.LC4
+	.word	.LC87
+	.word	health
+	.word	.LC88
+	.word	.LC89
+	.word	.LC90
+	.size	outsideHouse, .-outsideHouse
+	.section	.rodata
+	.align	2
+.LC91:
+	.ascii	"As you get to the door a man greets you and invites"
+	.ascii	" you inside. Its very simple, just a kitchen, table"
+	.ascii	", bed and you see a shotgun leaning against the wal"
+	.ascii	"l.\000"
+	.align	2
+.LC92:
+	.ascii	"1. Demand he gives you the shotgun.\000"
+	.align	2
+.LC93:
+	.ascii	"2. Open cupboard\000"
+	.align	2
+.LC94:
+	.ascii	"3. Ask for the shotgun.\000"
+	.align	2
+.LC95:
+	.ascii	"4. Take the shotgun.\000"
+	.align	2
+.LC96:
+	.ascii	"5. Leave the house\000"
+	.align	2
+.LC97:
+	.ascii	"Oh he gives you the shotgun alright... right in the"
+	.ascii	" chest.\000"
+	.align	2
+.LC98:
+	.ascii	"You find shotgun ammo and take some\000"
+	.align	2
+.LC99:
+	.ascii	"Just....No.... Did you honestly think that would wo"
+	.ascii	"rk???\000"
+	.align	2
+.LC100:
+	.ascii	"You take the shotgun\000"
+	.align	2
+.LC101:
+	.ascii	"You head back outside.\000"
+	.text
+	.align	2
+	.global	house
+	.type	house, %function
+house:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L125
+	bl	puts
+	ldr	r0, .L125+4
+	bl	puts
+	ldr	r0, .L125+8
+	bl	puts
+	ldr	r0, .L125+12
+	bl	puts
+	ldr	r0, .L125+16
+	bl	puts
+	ldr	r0, .L125+20
+	bl	puts
+	ldr	r0, .L125+24
+	bl	puts
+	bl	flush
+	ldr	r2, .L125+28
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L119
+	ldr	r0, .L125+32
+	bl	puts
+	ldr	r3, .L125+36
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+	b	.L118
+.L119:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L121
+	ldr	r0, .L125+40
+	bl	puts
+	ldr	r3, .L125+44
+	mov	r2, #1
+	str	r2, [r3, #0]
+	bl	house
+	b	.L118
+.L121:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L122
+	ldr	r0, .L125+48
+	bl	puts
+	bl	house
+	b	.L118
+.L122:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	bne	.L123
+	ldr	r0, .L125+52
+	bl	puts
+	ldr	r3, .L125+56
+	mov	r2, #1
+	str	r2, [r3, #0]
+	bl	house
+	b	.L118
+.L123:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #5
+	bne	.L124
+	ldr	r0, .L125+60
+	bl	puts
+	bl	outsideHouse
+	b	.L118
+.L124:
+	bl	house
+.L118:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L126:
+	.align	2
+.L125:
+	.word	.LC91
+	.word	.LC75
+	.word	.LC92
+	.word	.LC93
+	.word	.LC94
+	.word	.LC95
+	.word	.LC96
+	.word	.LC4
+	.word	.LC97
+	.word	health
+	.word	.LC98
+	.word	ammo
+	.word	.LC99
+	.word	.LC100
+	.word	shotgun
+	.word	.LC101
+	.size	house, .-house
+	.section	.rodata
+	.align	2
+.LC102:
+	.ascii	"You walk up to what looks like a completely normal "
+	.ascii	"shed with a small window on the side.\000"
+	.align	2
+.LC103:
+	.ascii	"1. Look in the window.\000"
+	.align	2
+.LC104:
+	.ascii	"2. Go inside.\000"
+	.align	2
+.LC105:
+	.ascii	"3. Go back out front of the house.\000"
+	.align	2
+.LC106:
+	.ascii	"It looks completely normal, a shovel, some gardenin"
+	.ascii	"g equipment and some random odds and ends.\000"
+	.align	2
+.LC107:
+	.ascii	"As you walk in something hits you in the back of th"
+	.ascii	"e head and you black out....\000"
+	.align	2
+.LC108:
+	.ascii	"You walk back around front.\000"
+	.text
+	.align	2
+	.global	shed
+	.type	shed, %function
+shed:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L132
+	bl	puts
+	ldr	r0, .L132+4
+	bl	puts
+	ldr	r0, .L132+8
+	bl	puts
+	ldr	r0, .L132+12
+	bl	puts
+	ldr	r0, .L132+16
+	bl	puts
+	bl	flush
+	ldr	r2, .L132+20
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L128
+	ldr	r0, .L132+24
+	bl	puts
+	bl	shed
+	b	.L127
+.L128:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L130
+	ldr	r0, .L132+28
+	bl	puts
+	bl	teaParty
+	b	.L127
+.L130:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L131
+	ldr	r0, .L132+32
+	bl	puts
+	bl	outsideHouse
+	b	.L127
+.L131:
+	bl	shed
+.L127:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L133:
+	.align	2
+.L132:
+	.word	.LC102
+	.word	.LC75
+	.word	.LC103
+	.word	.LC104
+	.word	.LC105
+	.word	.LC4
+	.word	.LC106
+	.word	.LC107
+	.word	.LC108
+	.size	shed, .-shed
+	.section	.rodata
+	.align	2
+.LC109:
+	.ascii	"You come across an opening in the woods. There are "
+	.ascii	"some raspberry bushes, and apple tree and some stra"
+	.ascii	"nge markings on the ground faintly glowing.\000"
+	.align	2
+.LC110:
+	.ascii	"1. Go over to the berry bush.\000"
+	.align	2
+.LC111:
+	.ascii	"2. Head to the apple tree.\000"
+	.align	2
+.LC112:
+	.ascii	"3. Check out the strange markings.\000"
+	.align	2
+.LC113:
+	.ascii	"You grab some berries from the bush and eat a few\000"
+	.align	2
+.LC114:
+	.ascii	"You feel your stomach rumble then your heart stop, "
+	.ascii	"guess those weren't raspberries....oh well, you rea"
+	.ascii	"lly shouldn't trust the everything the narrator tel"
+	.ascii	"ls you!\000"
+	.align	2
+.LC115:
+	.ascii	"You make your way to the apple tree.\000"
+	.align	2
+.LC116:
+	.ascii	"You head towards the strange markings.\000"
+	.text
+	.align	2
+	.global	woodsClearing
+	.type	woodsClearing, %function
+woodsClearing:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L140
+	bl	puts
+	ldr	r0, .L140+4
+	bl	puts
+	ldr	r0, .L140+8
+	bl	puts
+	ldr	r0, .L140+12
+	bl	puts
+	ldr	r0, .L140+16
+	bl	puts
+	ldr	r0, .L140+20
+	bl	puts
+	bl	flush
+	ldr	r2, .L140+24
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L135
+	ldr	r0, .L140+28
+	bl	puts
+	ldr	r0, .L140+32
+	bl	puts
+	ldr	r3, .L140+36
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+	b	.L134
+.L135:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L137
+	ldr	r0, .L140+40
+	bl	puts
+	bl	tree
+	b	.L134
+.L137:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L138
+	ldr	r0, .L140+44
+	bl	puts
+	bl	markingsExit
+	b	.L134
+.L138:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	bne	.L139
+	ldr	r0, .L140+48
+	bl	puts
+	bl	comeToPath
+	b	.L134
+.L139:
+	bl	woodsClearing
+.L134:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L141:
+	.align	2
+.L140:
+	.word	.LC109
+	.word	.LC75
+	.word	.LC110
+	.word	.LC111
+	.word	.LC112
+	.word	.LC86
+	.word	.LC4
+	.word	.LC113
+	.word	.LC114
+	.word	health
+	.word	.LC115
+	.word	.LC116
+	.word	.LC90
+	.size	woodsClearing, .-woodsClearing
+	.section	.rodata
+	.align	2
+.LC117:
+	.ascii	"You stand before a large apple tree, many apples ha"
+	.ascii	"ve fallen to the grown but the best ones are still "
+	.ascii	"on the branches.\000"
+	.align	2
+.LC118:
+	.ascii	"1. Take an apple from the ground.\000"
+	.align	2
+.LC119:
+	.ascii	"2. Try and knock an apples from the tree .\000"
+	.align	2
+.LC120:
+	.ascii	"3. Go back to the opening.\000"
+	.align	2
+.LC121:
+	.ascii	"You pick up an apple off the ground and inspect it,"
+	.ascii	" looks good so you take a big bite, turns out it wa"
+	.ascii	"s rotten to the core! your vision fades as you hit "
+	.ascii	"the ground. WHO EATS FOOD OFF THE FOREST FLOOOR!?!?"
+	.ascii	"\000"
+	.align	2
+.LC122:
+	.ascii	"You grab a small rock and throw it straight up at t"
+	.ascii	"he apple above you as hard as you can. Your Athleti"
+	.ascii	"cs lvl isn't high enough so you miss the apple enti"
+	.ascii	"rely and it comes down and hits you on the head. Yo"
+	.ascii	"u really should have thought to maybe, you know... "
+	.ascii	"move?\000"
+	.align	2
+.LC123:
+	.ascii	"You walk back to the clearing.\000"
+	.text
+	.align	2
+	.global	tree
+	.type	tree, %function
+tree:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L147
+	bl	puts
+	ldr	r0, .L147+4
+	bl	puts
+	ldr	r0, .L147+8
+	bl	puts
+	ldr	r0, .L147+12
+	bl	puts
+	ldr	r0, .L147+16
+	bl	puts
+	bl	flush
+	ldr	r2, .L147+20
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L143
+	ldr	r0, .L147+24
+	bl	puts
+	ldr	r3, .L147+28
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+	b	.L142
+.L143:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L145
+	ldr	r0, .L147+32
+	bl	puts
+	ldr	r3, .L147+28
+	mov	r2, #0
+	str	r2, [r3, #0]
+	bl	check
+	b	.L142
+.L145:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L146
+	ldr	r0, .L147+36
+	bl	puts
+	bl	woodsClearing
+	b	.L142
+.L146:
+	bl	tree
+.L142:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L148:
+	.align	2
+.L147:
+	.word	.LC117
+	.word	.LC75
+	.word	.LC118
+	.word	.LC119
+	.word	.LC120
+	.word	.LC4
+	.word	.LC121
+	.word	health
+	.word	.LC122
+	.word	.LC123
+	.size	tree, .-tree
+	.section	.rodata
+	.align	2
+.LC124:
+	.ascii	"The markings below your feet glow with an eerie fai"
+	.ascii	"nt purple light\000"
+	.align	2
+.LC125:
+	.ascii	"1. Stand on the markings.\000"
+	.align	2
+.LC126:
+	.ascii	"2. Go back to the opening.\000"
+	.align	2
+.LC127:
+	.ascii	"You fall over as a voice startles you saying \"Welc"
+	.ascii	"ome to standing up school!\" \"and you fail...\" \000"
+	.align	2
+.LC128:
+	.ascii	"ACHIVEMENT GET: asdf movie refrence\000"
+	.text
+	.align	2
+	.global	markingsExit
+	.type	markingsExit, %function
+markingsExit:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L153
+	bl	puts
+	ldr	r0, .L153+4
+	bl	puts
+	ldr	r0, .L153+8
+	bl	puts
+	ldr	r0, .L153+12
+	bl	puts
+	bl	flush
+	ldr	r2, .L153+16
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L150
+	ldr	r0, .L153+20
+	bl	puts
+	ldr	r0, .L153+24
+	bl	puts
+	bl	markingsExit
+	b	.L149
+.L150:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L152
+	ldr	r0, .L153+28
+	bl	puts
+	bl	woodsClearing
+	b	.L149
+.L152:
+	bl	markingsExit
+.L149:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L154:
+	.align	2
+.L153:
+	.word	.LC124
+	.word	.LC75
+	.word	.LC125
+	.word	.LC126
+	.word	.LC4
+	.word	.LC127
+	.word	.LC128
+	.word	.LC123
+	.size	markingsExit, .-markingsExit
+	.section	.rodata
+	.align	2
+.LC129:
+	.ascii	"\012You take off your shoes and walk into a shallow"
+	.ascii	" area of the river; fishswimming beneath you.\012Yo"
+	.ascii	"u put your hands into the water and wait for therig"
+	.ascii	"ht moment\000"
+	.align	2
+.LC130:
+	.ascii	"\012You're walking along the river when you hear a "
+	.ascii	"rustling in the trees to your right.\012It's a bear"
+	.ascii	"! You've been spotted! What do you wish to do?\0121"
+	.ascii	". Climb a tree\0122. Fight\0123. Retreat\012\012\000"
+	.text
+	.align	2
+	.global	river
+	.type	river, %function
+river:
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #16
+	str	r0, [fp, #-16]
+	ldr	r0, [fp, #-16]
+	mov	r1, #1
+	mov	r2, #5
+	bl	getUserInput
+	str	r0, [fp, #-8]
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L156
+	ldr	r0, .L161
+	bl	fish
+	b	.L155
+.L156:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L158
+	bl	beaver
+	b	.L155
+.L158:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L159
+	ldr	r0, .L161+4
+	bl	bear
+	b	.L155
+.L159:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	bne	.L160
+	bl	waterfall
+	b	.L155
+.L160:
+	bl	startFunc
+.L155:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L162:
+	.align	2
+.L161:
+	.word	.LC129
+	.word	.LC130
+	.size	river, .-river
+	.section	.rodata
+	.align	2
+.LC131:
+	.ascii	"You broke your arm falling out of a tree. How do yo"
+	.ascii	"u expect to catch a fish. Back you go.\000"
+	.align	2
+.LC132:
+	.ascii	"Select a different route this time:\0121. Attempt t"
+	.ascii	"o catch a fish\0122. Travel upstream\0123. Travel d"
+	.ascii	"ownstream\0124. Cross the river\0125. Go back\012\012"
+	.ascii	"\000"
+	.align	2
+.LC133:
+	.ascii	"\012Oh wait! You already have a fish. You can only "
+	.ascii	"hold one at a time!\000"
+	.align	2
+.LC134:
+	.ascii	"\012You manage to catch a single fish. It's a salmo"
+	.ascii	"n weighing about 10 lbs.\012Do you want to keep it?"
+	.ascii	"\0121. Yes\0122. No\012\012\000"
+	.align	2
+.LC135:
+	.ascii	"\012Great! You have a fish, maybe you can make a fi"
+	.ascii	"re later and eat it!\000"
+	.align	2
+.LC136:
+	.ascii	"Where would you like to go now?\0121. Attempt to ca"
+	.ascii	"tch a fish\0122. Travel upstream\0123. Travel downs"
+	.ascii	"tream\0124. Cross the river\0125. Go back\012\012\000"
+	.align	2
+.LC137:
+	.ascii	"\012You place the fish back into the water.\000"
+	.text
+	.align	2
+	.global	fish
+	.type	fish, %function
+fish:
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #16
+	str	r0, [fp, #-16]
+	ldr	r3, .L168
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	bne	.L164
+	ldr	r0, .L168+4
+	bl	puts
+	ldr	r0, .L168+8
+	bl	river
+	b	.L163
+.L164:
+	ldr	r3, .L168+12
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	bne	.L166
+	ldr	r0, .L168+16
+	bl	puts
+	ldr	r0, .L168+8
+	bl	river
+	b	.L163
+.L166:
+	ldr	r0, .L168+20
+	mov	r1, #1
+	mov	r2, #2
+	bl	getUserInput
+	str	r0, [fp, #-8]
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L167
+	ldr	r0, .L168+24
+	bl	puts
+	ldr	r3, .L168+12
+	mov	r2, #1
+	str	r2, [r3, #0]
+	ldr	r0, .L168+28
+	bl	river
+	b	.L163
+.L167:
+	ldr	r0, .L168+32
+	bl	puts
+	ldr	r0, .L168+28
+	bl	river
+.L163:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L169:
+	.align	2
+.L168:
+	.word	brokenArm
+	.word	.LC131
+	.word	.LC132
+	.word	hasFish
+	.word	.LC133
+	.word	.LC134
+	.word	.LC135
+	.word	.LC136
+	.word	.LC137
+	.size	fish, .-fish
+	.section	.rodata
+	.align	2
+.LC138:
+	.ascii	"\012You climb the nearest tree. You idiot... bears "
+	.ascii	"can climb trees\000"
+	.align	2
+.LC139:
+	.ascii	"You still have that fish in you back pocket. It may"
+	.ascii	" be your only hope to survive.\012Do you want to us"
+	.ascii	"e the fish?\0121. Yes\0122. No\012\012\000"
+	.align	2
+.LC140:
+	.ascii	"\012You throw the fish and divert the bear. You're "
+	.ascii	"safe... for now. Try and\012find some weapons for n"
+	.ascii	"ext time.\000"
+	.align	2
+.LC141:
+	.ascii	"\012You travel back upstream. What do you want to d"
+	.ascii	"o now?\0121. Attempt to catch another fish\0122. Tr"
+	.ascii	"avel upstream\0123. Travel downstream\0124. Cross t"
+	.ascii	"he river\0125. Go back\012\012\000"
+	.align	2
+.LC142:
+	.ascii	"\012The bear attacks you viciously... he clearly wa"
+	.ascii	"nts that fish. You put up a good fight\012 and walk"
+	.ascii	" away with your fish still in hand, but not without"
+	.ascii	" a few scratches\000"
+	.align	2
+.LC143:
+	.ascii	"You lose 15 health. Current health: %d. Try and fin"
+	.ascii	"d some weaponsto protect yourself.\012\000"
+	.align	2
+.LC144:
+	.ascii	"You travel back upstream. What do you want to do no"
+	.ascii	"w?\0122. Travel upstream\0124. Cross the river\0125"
+	.ascii	". Go back\012\012\000"
+	.align	2
+.LC145:
+	.ascii	"\012The bear knocks you out of the tree. You fall t"
+	.ascii	"o the ground and injure your arm, but are able to r"
+	.ascii	"un away back to safety\000"
+	.align	2
+.LC146:
+	.ascii	"You lose 10 health. Current health: %d\012\000"
+	.align	2
+.LC147:
+	.ascii	"Select your next move:\0121. Attempt to catch a fis"
+	.ascii	"h\0122. Travel upstream\0124. Cross the river\0125."
+	.ascii	" Go back\012\012\000"
+	.align	2
+.LC148:
+	.ascii	"\012You draw your sword. The bear lets out a roar a"
+	.ascii	"nd begins to charge at you.In an epic battle to the"
+	.ascii	" death\012 you come out victorious. The bear is dea"
+	.ascii	"d.You skin it and make an awesome coat, like a boss"
+	.ascii	".\012YOU WIN!\000"
+	.align	2
+.LC149:
+	.ascii	"\012The bear begins to approach you, and begins to "
+	.ascii	"charge. You pull out yourshotgun and fire on the be"
+	.ascii	"ar.\012from 30 feet out. He's wounded but stillcomi"
+	.ascii	"ng. You fire two more shots on him and he falls to "
+	.ascii	"the ground.\012The bear is dead. YOU WIN!\000"
+	.align	2
+.LC150:
+	.ascii	"\0121v1 against a bear with no weapons... good choi"
+	.ascii	"ce\000"
+	.align	2
+.LC151:
+	.ascii	"You lose 30 health. Current health: %d\012\000"
+	.align	2
+.LC152:
+	.ascii	"How are you even alive right now?! Select your next"
+	.ascii	" move:\0121.Attempt tocatch a fish\0122. Travel ups"
+	.ascii	"tream\0124. Cross the river\0125. Go back\012\012\000"
+	.align	2
+.LC153:
+	.ascii	"\012Good idea, that bear looks angry. Some weaponry"
+	.ascii	" might come in handy.\000"
+	.align	2
+.LC154:
+	.ascii	"\012Close call but you've retreated safely. Select "
+	.ascii	"your next move:\0121. Attempt to catch a fish\0122."
+	.ascii	" Travel upstream\0123. Travel downstream\0124. Cros"
+	.ascii	"s the river\0125. Go back\012\012\000"
+	.text
+	.align	2
+	.global	bear
+	.type	bear, %function
+bear:
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #16
+	str	r0, [fp, #-16]
+	ldr	r0, [fp, #-16]
+	mov	r1, #1
+	mov	r2, #3
+	bl	getUserInput
+	str	r0, [fp, #-8]
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L171
+	ldr	r0, .L178
+	bl	puts
+	ldr	r3, .L178+4
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	bne	.L172
+	ldr	r0, .L178+8
+	mov	r1, #1
+	mov	r2, #2
+	bl	getUserInput
+	str	r0, [fp, #-12]
+	ldr	r3, [fp, #-12]
+	cmp	r3, #1
+	bne	.L173
+	ldr	r3, .L178+4
+	mov	r2, #0
+	str	r2, [r3, #0]
+	ldr	r3, .L178+12
+	mov	r0, r3
+	bl	printf
+	ldr	r0, .L178+16
+	bl	river
+	b	.L170
+.L173:
+	ldr	r0, .L178+20
+	bl	puts
+	ldr	r3, .L178+24
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #15
+	ldr	r3, .L178+24
+	str	r2, [r3, #0]
+	bl	check
+	ldr	r2, .L178+28
+	ldr	r3, .L178+24
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L178+32
+	bl	river
+	b	.L170
+.L172:
+	ldr	r0, .L178+36
+	bl	puts
+	ldr	r3, .L178+40
+	mov	r2, #1
+	str	r2, [r3, #0]
+	ldr	r3, .L178+24
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L178+24
+	str	r2, [r3, #0]
+	bl	check
+	ldr	r2, .L178+44
+	ldr	r3, .L178+24
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L178+48
+	bl	river
+	b	.L170
+.L171:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L175
+	ldr	r3, .L178+52
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	bne	.L176
+	ldr	r3, .L178+56
+	mov	r0, r3
+	bl	printf
+	mov	r0, #0
+	bl	exit
+.L176:
+	ldr	r3, .L178+60
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	bne	.L177
+	ldr	r3, .L178+64
+	mov	r0, r3
+	bl	printf
+	mov	r0, #0
+	bl	exit
+.L177:
+	ldr	r0, .L178+68
+	bl	puts
+	ldr	r3, .L178+24
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #30
+	ldr	r3, .L178+24
+	str	r2, [r3, #0]
+	bl	check
+	ldr	r2, .L178+72
+	ldr	r3, .L178+24
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L178+76
+	bl	river
+	b	.L170
+.L175:
+	ldr	r3, .L178+80
+	mov	r0, r3
+	bl	printf
+	ldr	r0, .L178+84
+	bl	river
+.L170:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L179:
+	.align	2
+.L178:
+	.word	.LC138
+	.word	hasFish
+	.word	.LC139
+	.word	.LC140
+	.word	.LC141
+	.word	.LC142
+	.word	health
+	.word	.LC143
+	.word	.LC144
+	.word	.LC145
+	.word	brokenArm
+	.word	.LC146
+	.word	.LC147
+	.word	SWORD
+	.word	.LC148
+	.word	shotgun
+	.word	.LC149
+	.word	.LC150
+	.word	.LC151
+	.word	.LC152
+	.word	.LC153
+	.word	.LC154
+	.size	bear, .-bear
+	.section	.rodata
+	.align	2
+.LC155:
+	.ascii	"\012You slipped on a wet rock crossing the river an"
+	.ascii	"d the current was to strong for you to escape. \012"
+	.ascii	"Unfortunatley there was a waterfall up ahead and yo"
+	.ascii	"u plumeted to the bottom of the falls\000"
+	.text
+	.align	2
+	.global	waterfall
+	.type	waterfall, %function
+waterfall:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	ldr	r0, .L181
+	bl	puts
+	ldr	r3, .L181+4
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L181+4
+	str	r2, [r3, #0]
+	bl	check
+	ldr	r2, .L181+8
+	ldr	r3, .L181+4
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	bl	markingsExit
+	ldmfd	sp!, {fp, pc}
+.L182:
+	.align	2
+.L181:
+	.word	.LC155
+	.word	health
+	.word	.LC146
+	.size	waterfall, .-waterfall
+	.section	.rodata
+	.align	2
+.LC156:
+	.ascii	"\012You start the trek upstream and see a beaver da"
+	.ascii	"m up ahead. You're curious so you get as close as p"
+	.ascii	"ossible.\012A beaver sneaks up behind you and bites"
+	.ascii	" you in the ankle! Ouch!\000"
+	.align	2
+.LC157:
+	.ascii	"You lose 5 health. Current health: %d\012\000"
+	.align	2
+.LC158:
+	.ascii	"Looks like upstream was a bad idea. You hobble back"
+	.ascii	" to th main river. Select your next move:\0121. Att"
+	.ascii	"empt to catch a fish\0122. Travel upstream\0123. Tr"
+	.ascii	"avel downstream\0124. Cross the river\0125. Go back"
+	.ascii	"\012\012\000"
+	.text
+	.align	2
+	.global	beaver
+	.type	beaver, %function
+beaver:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	str	r0, [fp, #-8]
+	ldr	r0, .L184
+	bl	puts
+	ldr	r3, .L184+4
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #5
+	ldr	r3, .L184+4
+	str	r2, [r3, #0]
+	bl	check
+	ldr	r2, .L184+8
+	ldr	r3, .L184+4
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L184+12
+	bl	river
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L185:
+	.align	2
+.L184:
+	.word	.LC156
+	.word	health
+	.word	.LC157
+	.word	.LC158
+	.size	beaver, .-beaver
+	.section	.rodata
+	.align	2
+.LC159:
+	.ascii	"You climb a small hill and that hopes that it might"
+	.ascii	" provide a better view are shattered, there is a va"
+	.ascii	"lley and a mountain in the distance and forest all "
+	.ascii	"around. No sign of civilization to be found.\012 \000"
+	.align	2
+.LC160:
+	.ascii	"Current health: %d \012 \012 \012\000"
+	.align	2
+.LC161:
+	.ascii	"1)Is that the sounds of bees?Lets try and get some "
+	.ascii	"honey! \012 \000"
+	.align	2
+.LC162:
+	.ascii	"2)Rest on the hill. Maybe you're tired, mabe you're"
+	.ascii	" lazy. Either way rest a while. \012 \000"
+	.align	2
+.LC163:
+	.ascii	"3)Explore into the valley and towards the mountain."
+	.ascii	"\012 \000"
+	.align	2
+.LC164:
+	.ascii	"\012 \000"
+	.align	2
+.LC165:
+	.ascii	"The bee's swarm you you and string angrily, really "
+	.ascii	"you should have seen this coming.\012  -10 health \012"
+	.ascii	" \000"
+	.align	2
+.LC166:
+	.ascii	"The Sun light comforts you like an old friends and "
+	.ascii	"you quickly fall sleep. When you awake you find you"
+	.ascii	" have an unbearable sun burn and cant help but thin"
+	.ascii	"k what a bad idea this was.\012 -10 health \012 \000"
+	.align	2
+.LC167:
+	.ascii	"The walk down into the valley is an uneasy one. The"
+	.ascii	"re are many stones along the path and you nearly tr"
+	.ascii	"ip several times.\000"
+	.align	2
+.LC168:
+	.ascii	"invalid input \000"
+	.text
+	.align	2
+	.global	hill
+	.type	hill, %function
+hill:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r3, .L191
+	mov	r0, r3
+	bl	printf
+	ldr	r2, .L191+4
+	ldr	r3, .L191+8
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L191+12
+	bl	puts
+	ldr	r0, .L191+16
+	bl	puts
+	ldr	r0, .L191+20
+	bl	puts
+	bl	flush
+	ldr	r2, .L191+24
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r0, .L191+28
+	bl	puts
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L187
+	ldr	r0, .L191+32
+	bl	puts
+	ldr	r3, .L191+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L191+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	hill
+.L187:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L188
+	ldr	r0, .L191+36
+	bl	puts
+	ldr	r3, .L191+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L191+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	hill
+.L188:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L189
+	ldr	r0, .L191+40
+	bl	puts
+	bl	valley
+.L189:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	beq	.L186
+	ldr	r0, .L191+44
+	bl	puts
+	bl	hill
+.L186:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L192:
+	.align	2
+.L191:
+	.word	.LC159
+	.word	.LC160
+	.word	health
+	.word	.LC161
+	.word	.LC162
+	.word	.LC163
+	.word	.LC4
+	.word	.LC164
+	.word	.LC165
+	.word	.LC166
+	.word	.LC167
+	.word	.LC168
+	.size	hill, .-hill
+	.section	.rodata
+	.align	2
+.LC169:
+	.ascii	"The valley is beautiful and fully of vibrant flower"
+	.ascii	"s. The foot of the mountain is close by and the sha"
+	.ascii	"dow it casts provides slight respite. \000"
+	.align	2
+.LC170:
+	.ascii	"1)Stay a while and pick flowers, what could go wron"
+	.ascii	"g? \012 \000"
+	.align	2
+.LC171:
+	.ascii	"2)Trying to prove that you're tough, lets climb tha"
+	.ascii	"t mountain and show them who's boss.( who are you t"
+	.ascii	"alking to?) \012 \000"
+	.align	2
+.LC172:
+	.ascii	"3)This valley looks full of life perhaps there is f"
+	.ascii	"ood near by, lets take a look.\012 \000"
+	.align	2
+.LC173:
+	.ascii	"You skip throughout the valley and pick a bunch of "
+	.ascii	"red flowers. Congrats you now have red flowers.\000"
+	.align	2
+.LC174:
+	.ascii	"You've picked all the flowers and possibly ruined t"
+	.ascii	"his valley for the next passer by, but hey you foun"
+	.ascii	"d a path.\000"
+	.align	2
+.LC175:
+	.ascii	"You put all your energy into the climb berfore you,"
+	.ascii	" you are lucky not to fall, but the effort alone ju"
+	.ascii	"st might kill you.\012 -10 health \000"
+	.align	2
+.LC176:
+	.ascii	"You find some fruit, lucky you!\012 After eating th"
+	.ascii	"e fruit you feel a lot better +20 health \000"
+	.align	2
+.LC177:
+	.ascii	"The food is gone but hey these angry looking fire a"
+	.ascii	"nts might make great friends... or not.\012 -10 hea"
+	.ascii	"lth \000"
+	.align	2
+.LC178:
+	.ascii	"You climb the hill, and you remember some annoying "
+	.ascii	"nursery rhyme from when you were young.\000"
+	.text
+	.align	2
+	.global	valley
+	.type	valley, %function
+valley:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L201
+	bl	puts
+	ldr	r2, .L201+4
+	ldr	r3, .L201+8
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L201+12
+	bl	puts
+	ldr	r0, .L201+16
+	bl	puts
+	ldr	r0, .L201+20
+	bl	puts
+	bl	flush
+	ldr	r2, .L201+24
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r0, .L201+28
+	bl	puts
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L194
+	ldr	r3, .L201+32
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	beq	.L195
+	ldr	r0, .L201+36
+	bl	puts
+	ldr	r3, .L201+32
+	mov	r2, #1
+	str	r2, [r3, #0]
+	bl	valley
+	b	.L194
+.L195:
+	ldr	r0, .L201+40
+	bl	puts
+	bl	comeToPath
+.L194:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L196
+	ldr	r0, .L201+44
+	bl	puts
+	ldr	r3, .L201+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L201+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	mountain
+.L196:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L197
+	ldr	r3, .L201+48
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	beq	.L198
+	ldr	r0, .L201+52
+	bl	puts
+	ldr	r3, .L201+48
+	mov	r2, #1
+	str	r2, [r3, #0]
+	ldr	r3, .L201+8
+	ldr	r3, [r3, #0]
+	add	r2, r3, #20
+	ldr	r3, .L201+8
+	str	r2, [r3, #0]
+	bl	valley
+	b	.L197
+.L198:
+	ldr	r0, .L201+56
+	bl	puts
+	ldr	r3, .L201+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L201+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	valley
+.L197:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	bne	.L199
+	ldr	r0, .L201+60
+	bl	puts
+	bl	hill
+	b	.L193
+.L199:
+	ldr	r0, .L201+64
+	bl	puts
+	bl	valley
+.L193:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L202:
+	.align	2
+.L201:
+	.word	.LC169
+	.word	.LC160
+	.word	health
+	.word	.LC170
+	.word	.LC171
+	.word	.LC172
+	.word	.LC4
+	.word	.LC164
+	.word	RED_FLOWERS
+	.word	.LC173
+	.word	.LC174
+	.word	.LC175
+	.word	fruit
+	.word	.LC176
+	.word	.LC177
+	.word	.LC178
+	.word	.LC168
+	.size	valley, .-valley
+	.section	.rodata
+	.align	2
+.LC179:
+	.ascii	"You reach a flat point in the mountain, an old camp"
+	.ascii	" site? You can't be sure. In front of you there is "
+	.ascii	"a dark cave, as well as a winding path that skirts "
+	.ascii	"the edge of the mountain. \012 \000"
+	.align	2
+.LC180:
+	.ascii	"1)The path along the edge of the cliff doesn't look"
+	.ascii	" safe, are you still trying to prove you're tough, "
+	.ascii	"if so why not give it a shot. \000"
+	.align	2
+.LC181:
+	.ascii	"2)Adventure calls and every good adventure needs a "
+	.ascii	"cave! You rush forward into the mount of the cave s"
+	.ascii	"eeking fortune or whatever.\000"
+	.align	2
+.LC182:
+	.ascii	"3)Up this high you hear the rude bleating of a moun"
+	.ascii	"tain goat, you think he'd make a fine coat to keep "
+	.ascii	"you warm. After him!\000"
+	.align	2
+.LC183:
+	.ascii	"4)Your on a mountain, how could you pass up the cha"
+	.ascii	"nce to yodel?\000"
+	.align	2
+.LC184:
+	.ascii	" you slowly ease yourself along the thin path, hugg"
+	.ascii	"ing close to the rock wall in front of you.\000"
+	.align	2
+.LC185:
+	.ascii	"As you heroically sruge into the cave you realise j"
+	.ascii	"ust how idiot of an idea this was.\000"
+	.align	2
+.LC186:
+	.ascii	"You are fast, but the mountain goat is.. well a goa"
+	.ascii	"t and much more suit to this kind of thing, you tak"
+	.ascii	"e a nasty fall down the mountain, what ever were yo"
+	.ascii	"u thinking?\012 -40 health \000"
+	.align	2
+.LC187:
+	.ascii	"There are few moments in ones life where they feel "
+	.ascii	"truly free, when you saw the small rock slide your "
+	.ascii	"caterwauling created, it was not one of them.\012 -"
+	.ascii	"30 health \000"
+	.text
+	.align	2
+	.global	mountain
+	.type	mountain, %function
+mountain:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r3, .L209
+	mov	r0, r3
+	bl	printf
+	ldr	r2, .L209+4
+	ldr	r3, .L209+8
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L209+12
+	bl	puts
+	ldr	r0, .L209+16
+	bl	puts
+	ldr	r0, .L209+20
+	bl	puts
+	ldr	r0, .L209+24
+	bl	puts
+	bl	flush
+	ldr	r2, .L209+28
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r0, .L209+32
+	bl	puts
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L204
+	ldr	r0, .L209+36
+	bl	puts
+	bl	cliff
+.L204:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L205
+	ldr	r0, .L209+40
+	bl	puts
+	bl	cave
+.L205:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L206
+	ldr	r0, .L209+44
+	bl	puts
+	ldr	r3, .L209+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #40
+	ldr	r3, .L209+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	valley
+.L206:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	bne	.L207
+	ldr	r0, .L209+48
+	bl	puts
+	ldr	r3, .L209+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #30
+	ldr	r3, .L209+8
+	str	r2, [r3, #0]
+	bl	mountain
+	b	.L203
+.L207:
+	ldr	r0, .L209+52
+	bl	puts
+	bl	mountain
+.L203:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L210:
+	.align	2
+.L209:
+	.word	.LC179
+	.word	.LC160
+	.word	health
+	.word	.LC180
+	.word	.LC181
+	.word	.LC182
+	.word	.LC183
+	.word	.LC4
+	.word	.LC164
+	.word	.LC184
+	.word	.LC185
+	.word	.LC186
+	.word	.LC187
+	.word	.LC168
+	.size	mountain, .-mountain
+	.section	.rodata
+	.align	2
+.LC188:
+	.ascii	"The cave is dark and you can barely make out your s"
+	.ascii	"urroundings. There are rocks more rocks and some ro"
+	.ascii	"cks you think might actually be bones, but most lik"
+	.ascii	"ely still just rocks, you hope. \000"
+	.align	2
+.LC189:
+	.ascii	"1)You've come this far, why not go a little farther"
+	.ascii	", deeper into the cave! \000"
+	.align	2
+.LC190:
+	.ascii	"2)You really hope that those rocks aren't bones, bu"
+	.ascii	"t lets check just to be sure.\000"
+	.align	2
+.LC191:
+	.ascii	"3)Your laziness knows no bounds.Lets have a nap, at"
+	.ascii	" least you won't be rained on. \000"
+	.align	2
+.LC192:
+	.ascii	"4)Mysterious cave mushrooms, what a great idea! \000"
+	.align	2
+.LC193:
+	.ascii	"5)Leave the cave, it's too dark in here anyhow.\000"
+	.align	2
+.LC194:
+	.ascii	"As you venture deeper into the cave a large rock fr"
+	.ascii	"om the ceiling crashes into you. Oddly enoug at the"
+	.ascii	" time this happened your only thought was 'is it ca"
+	.ascii	"lled stalactite or stalagmite?'\012 -30 health \000"
+	.align	2
+.LC195:
+	.ascii	"Of course its a dead body your luck isn't good enou"
+	.ascii	"gh for it not to be, but hey he's got a sword that "
+	.ascii	"you can take!\000"
+	.align	2
+.LC196:
+	.ascii	"You've already gotten the sword why not let the dea"
+	.ascii	"d rest.\000"
+	.align	2
+.LC197:
+	.ascii	"The cold hard cave floor puts your back out, now on"
+	.ascii	" top off being slightly injured you feel old, congr"
+	.ascii	"ats. \012 -10 health \000"
+	.align	2
+.LC198:
+	.ascii	"The mushrooms taste purple. A haze engulfs you and "
+	.ascii	"when you awake you're wearing a tie-dye shirt, and "
+	.ascii	"have no idea where it came from. You think yourself"
+	.ascii	" until you violentily vomit.\012 -10 health \000"
+	.align	2
+.LC199:
+	.ascii	"You leave the cave seeking the light of day once ag"
+	.ascii	"ain.\000"
+	.text
+	.align	2
+	.global	cave
+	.type	cave, %function
+cave:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r0, .L219
+	bl	puts
+	ldr	r2, .L219+4
+	ldr	r3, .L219+8
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L219+12
+	bl	puts
+	ldr	r0, .L219+16
+	bl	puts
+	ldr	r0, .L219+20
+	bl	puts
+	ldr	r0, .L219+24
+	bl	puts
+	ldr	r0, .L219+28
+	bl	puts
+	bl	flush
+	ldr	r2, .L219+32
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r0, .L219+36
+	bl	puts
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L212
+	ldr	r0, .L219+40
+	bl	puts
+	ldr	r3, .L219+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #30
+	ldr	r3, .L219+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	cave
+.L212:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L213
+	ldr	r3, .L219+44
+	ldr	r3, [r3, #0]
+	cmp	r3, #1
+	beq	.L214
+	ldr	r0, .L219+48
+	bl	puts
+	ldr	r3, .L219+44
+	mov	r2, #1
+	str	r2, [r3, #0]
+	bl	cave
+	b	.L213
+.L214:
+	ldr	r0, .L219+52
+	bl	puts
+	bl	cave
+.L213:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L215
+	ldr	r0, .L219+56
+	bl	puts
+	ldr	r3, .L219+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L219+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	cave
+.L215:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	bne	.L216
+	ldr	r0, .L219+60
+	bl	puts
+	ldr	r3, .L219+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L219+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	startFunc
+.L216:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #5
+	bne	.L217
+	ldr	r0, .L219+64
+	bl	puts
+	bl	mountain
+	b	.L211
+.L217:
+	ldr	r0, .L219+68
+	bl	puts
+	bl	cave
+.L211:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L220:
+	.align	2
+.L219:
+	.word	.LC188
+	.word	.LC160
+	.word	health
+	.word	.LC189
+	.word	.LC190
+	.word	.LC191
+	.word	.LC192
+	.word	.LC193
+	.word	.LC4
+	.word	.LC164
+	.word	.LC194
+	.word	SWORD
+	.word	.LC195
+	.word	.LC196
+	.word	.LC197
+	.word	.LC198
+	.word	.LC199
+	.word	.LC168
+	.size	cave, .-cave
+	.section	.rodata
+	.align	2
+.LC200:
+	.ascii	"The narrow ledge you stand upon is making unnerving"
+	.ascii	" cracking sounds. You're pretty sure this is the en"
+	.ascii	"d, but seeing as you went out onto the cliff in the"
+	.ascii	" first place I wouldn't trust your judgement.\012 \000"
+	.align	2
+.LC201:
+	.ascii	"1)Hey you saw this in a video game once, its called"
+	.ascii	" the leap of faith, why not try it you've already p"
+	.ascii	"roven you're stupid enough.\000"
+	.align	2
+.LC202:
+	.ascii	"2)Forward is the only option, continue along the al"
+	.ascii	"ready falling apart cliff edge, I'm sure you'll be "
+	.ascii	"just fine.\000"
+	.align	2
+.LC203:
+	.ascii	"3)Hmm lets pick another direction, why not try clim"
+	.ascii	"bing up higher, that seems like a good idea.\000"
+	.align	2
+.LC204:
+	.ascii	"4)Go back the way you came. See this wasn't a good "
+	.ascii	"idea.\000"
+	.align	2
+.LC205:
+	.ascii	"You leap from the cliff edge and assume you are goi"
+	.ascii	"ng to die as you free fall.\000"
+	.align	2
+.LC206:
+	.ascii	"\012With a loud splash you land in a river. After y"
+	.ascii	"ou gather your bearings you look around . There are"
+	.ascii	" large rocks and the current seems moderately stron"
+	.ascii	"g.\012Select your next move:\0121. Attempt to catch"
+	.ascii	" a fish\0122. Travel upstream\0123. Travel downstre"
+	.ascii	"am\0124. Cross the river\0125. Go back\012\012\000"
+	.align	2
+.LC207:
+	.ascii	"The ledge buckles under your weight and you tumble "
+	.ascii	"down the sheer mountain face towards the valley bel"
+	.ascii	"ow.\012 -30 health \000"
+	.align	2
+.LC208:
+	.ascii	"The climb not only wastes tons of time but you end "
+	.ascii	"up back by the cave, well done you achieved nothing"
+	.ascii	". Other then getting a nasty gash in your hand.\012"
+	.ascii	" -10 health \000"
+	.align	2
+.LC209:
+	.ascii	"Well you didn't waste any time so i guess this wasn"
+	.ascii	"'t a total loss.\000"
+	.text
+	.align	2
+	.global	cliff
+	.type	cliff, %function
+cliff:
+	@ args = 0, pretend = 0, frame = 8
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #8
+	ldr	r3, .L227
+	mov	r0, r3
+	bl	printf
+	ldr	r2, .L227+4
+	ldr	r3, .L227+8
+	ldr	r3, [r3, #0]
+	mov	r0, r2
+	mov	r1, r3
+	bl	printf
+	ldr	r0, .L227+12
+	bl	puts
+	ldr	r0, .L227+16
+	bl	puts
+	ldr	r0, .L227+20
+	bl	puts
+	ldr	r0, .L227+24
+	bl	puts
+	bl	flush
+	ldr	r2, .L227+28
+	sub	r3, fp, #8
+	mov	r0, r2
+	mov	r1, r3
+	bl	__isoc99_scanf
+	ldr	r0, .L227+32
+	bl	puts
+	ldr	r3, [fp, #-8]
+	cmp	r3, #1
+	bne	.L222
+	ldr	r0, .L227+36
+	bl	puts
+	ldr	r0, .L227+40
+	bl	river
+.L222:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #2
+	bne	.L223
+	ldr	r0, .L227+44
+	bl	puts
+	ldr	r3, .L227+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #30
+	ldr	r3, .L227+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	valley
+.L223:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #3
+	bne	.L224
+	ldr	r0, .L227+48
+	bl	puts
+	ldr	r3, .L227+8
+	ldr	r3, [r3, #0]
+	sub	r2, r3, #10
+	ldr	r3, .L227+8
+	str	r2, [r3, #0]
+	bl	check
+	bl	mountain
+.L224:
+	ldr	r3, [fp, #-8]
+	cmp	r3, #4
+	bne	.L225
+	ldr	r0, .L227+52
+	bl	puts
+	bl	mountain
+	b	.L221
+.L225:
+	ldr	r0, .L227+56
+	bl	puts
+	bl	cliff
+.L221:
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, pc}
+.L228:
+	.align	2
+.L227:
+	.word	.LC200
+	.word	.LC160
+	.word	health
+	.word	.LC201
+	.word	.LC202
+	.word	.LC203
+	.word	.LC204
+	.word	.LC4
+	.word	.LC164
+	.word	.LC205
+	.word	.LC206
+	.word	.LC207
+	.word	.LC208
+	.word	.LC209
+	.word	.LC168
+	.size	cliff, .-cliff
+	.ident	"GCC: (Debian 4.6.3-14+rpi1) 4.6.3"
+	.section	.note.GNU-stack,"",%progbits
