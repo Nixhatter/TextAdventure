@@ -53,6 +53,7 @@ void markingsExit();
 void check();
 
 
+
  
 
 char c;
@@ -89,7 +90,7 @@ void startFunc() {
 		case '1' : printf("going into the woods\n");
 				   stayPut();
 		case '2' : printf("going uphill\n");
-				   ComeToPath();
+				   comeToPath();
 		case '3' : printf(" following the white rabbit\n");
 				   whiteRabbit();
 		case '4' : printf("1)Try and find some higher ground /n");
@@ -299,7 +300,7 @@ void climbTree() {
   if (choice == 1)
     cliff();
   else if (choice == 2)
-    OutsideHouse();
+    outsideHouse();
   else if (choice == 3)
     printf("\n\nYou open up the cellphone and to your surprise, there is cell service! \
     You call 911 and get through to an operator.\nThey are able to find your location and they \
