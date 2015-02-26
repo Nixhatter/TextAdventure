@@ -97,7 +97,7 @@ int end(){
 
 void check(){
 	if(health<=0){
-		printf("You have died, better luc next time. \n");
+		printf("You have died, better luck next time. \n");
 		exit(0);
 	}
 }
@@ -677,7 +677,7 @@ void bear(char* message){
                " up a good fight\n and walk away with your fish still in hand, but not"
                " without a few scratches\n");
         health -= 15;
-        //checkHealth();
+        check();
         printf("You lose 15 health. Current health: %d. Try and find some weapons"
                "to protect yourself.\n", health);
         river("You travel back upstream. What do you want to do now?\n2. Travel"
@@ -689,7 +689,7 @@ void bear(char* message){
              " your arm, but are able to run away back to safety\n");
       brokenArm = 1;
       health -= 10;
-      //checkHealth();
+      check();
       printf("You lose 10 health. Current health: %d\n", health);
       river("Select your next move:\n1. Attempt to catch a fish\n2. Travel upstream\n"
             "4. Cross the river\n5. Go back\n\n");
@@ -712,7 +712,7 @@ void bear(char* message){
     else{ //No weapons available
       printf("\n1v1 against a bear with no weapons... good choice\n");
       health -= 30;
-      //checkHealth();
+      check();
       printf("You lose 30 health. Current health: %d\n", health);
       river("How are you even alive right now?! Select your next move:\n1.Attempt to"
             "catch a fish\n2. Travel upstream\n4. Cross the river\n5. Go back\n\n");
@@ -731,7 +731,7 @@ void waterfall(){
          " for you to escape. \nUnfortunatley there was a waterfall up ahead and you"
          " plumeted to the bottom of the falls\n");
   health -= 10;
-  //checkHealth();
+  check();
   printf("You lose 10 health. Current health: %d\n", health);
   //GO TO SOMEONE ELSES GAME
 }
@@ -741,7 +741,7 @@ void beaver(char* message){
          " so you get as close as possible.\nA beaver sneaks up behind you and bites you"
          " in the ankle! Ouch!\n");
   health -= 5;
-  //checkHealth();
+  check();
   printf("You lose 5 health. Current health: %d\n", health);
   river("Looks like upstream was a bad idea. You hobble back to th main river."
         " Select your next move:\n1. Attempt to catch a fish\n2. Travel upstream\n"
