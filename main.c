@@ -22,6 +22,7 @@ int survivalItem3 = 0;
 int hasFish = 0;
 int brokenArm = 0;
 
+void start();
 int end();
 void startFunc();
 void runGame();
@@ -42,7 +43,7 @@ void bear();
 void beaver();
 void waterfall();
 void final();
-int ending();
+void ending();
 void comeToPath();
 void outsideHouse();
 void house();
@@ -420,7 +421,9 @@ void ending() {
       	shed();
     }else if (choice==2){
       	printf ("As you walk in something hits you in the back of the head and you black out....\n"); 
-      	teaParty(); // to alice and wonderland branch
+      	
+      	// Just commenting the line below out for now to see if the rest will compile!! - Laura
+      	//teaParty(); // to alice and wonderland branch
     }else if (choice==3){
       	printf ("You walk back around front.\n");
       	outsideHouse();
@@ -783,7 +786,7 @@ if(i==4){
 	printf("The mushrooms taste purple. A haze engulfs you and when you awake you're wearing a tie-dye shirt, and have no idea where it came from. You think yourself until you violentily vomit.\n -10 health \n");
 	health= health-10;
 	check();
-	start();
+	startFunc();
 }
 if(i==5){
 	printf("You leave the cave seeking the light of day once again.\n");
