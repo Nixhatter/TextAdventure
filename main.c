@@ -396,6 +396,7 @@ void climbTree() {
     You call 911 and get through to an operator.\nThey are able to find your location and they \n\
     send a helicopter to save you.\n\n\nVICTORY!!\nCongratulations, you've won!\n");
     finished = 1;
+    exit(0);
     //ending();
 }
 
