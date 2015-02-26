@@ -98,6 +98,7 @@ int getUserInput (char* message, int low, int high) {
 void startFunc() {
 	printf("\n+-----------------------------------------+\n");
 	printf("\n+-----------------------------------------+\n");
+	printf("You awake lost in the woods. You are all alone and need to find your way home. \n \n");
 	printf("Please select an option using\n");
 	printf("the integers on the left.\n\n");
 	printf("Where do you want to go?\n");
@@ -243,6 +244,7 @@ void croquet() {
 		case '3' :
 				SWORD = 1;
 				printf("You manage to grab a sword and go directly for the Queen! \n");
+				printf("Then you wake up... \n");
 				exit(0);
 		default  : goto start;
 	}
@@ -909,7 +911,7 @@ void cliff(){
 		mountain();
 	}
 	if(i==4){
-		printf("Well you didnt waste any time so i guess this wasn't a total loss.\n");
+		printf("Well you didn't waste any time so i guess this wasn't a total loss.\n");
 		mountain();	
 	}
 	else{
