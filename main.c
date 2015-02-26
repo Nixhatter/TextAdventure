@@ -237,31 +237,31 @@ void buildFire() {
 
 
 void fixCellphone() {
-  printf("\n\nYou open up your cellphone and see that it is completely out of battery. \n
-  You vaguely remember reading an article on how to build your own battery powered charger. \n
-  It seemed difficult, and you are without a soldering iron, but you think it might be worth a shot. \n
-  You search around the area and miraculously find some copper wires on the ground. \n
-  You dig out some batteries from the bottom of your backpack and try to remember the steps to build the charger.\n
-  You manage to MacGyver a battery that you think will work, now you just have to decide how to connect the wires\n
+  printf("\n\nYou open up your cellphone and see that it is completely out of battery. \n\
+  You vaguely remember reading an article on how to build your own battery powered charger. \n\
+  It seemed difficult, and you are without a soldering iron, but you think it might be worth a shot. \n\
+  You search around the area and miraculously find some copper wires on the ground. \n\
+  You dig out some batteries from the bottom of your backpack and try to remember the steps to build the charger.\n\
+  You manage to MacGyver a battery that you think will work, now you just have to decide how to connect the wires\n\
   to your phone's battery. ");
-  int choice = getUserInput("\nWhat will you do? \n\t\1. Take the battery out of your phone and try to attach the wires to it\n
+  int choice = getUserInput("\nWhat will you do? \n\t\1. Take the battery out of your phone and try to attach the wires to it\n\
   \t2.Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
   if (choice == 1) {
     cellphone = 1;
-    printf("\n\nYou are able to get a charge on your cellphone! \n
-    	Achievement unlocked: Charged cellphone\nUnfortunately, there is no service where you are.\n
+    printf("\n\nYou are able to get a charge on your cellphone! \n\
+    	Achievement unlocked: Charged cellphone\nUnfortunately, there is no service where you are.\n\
     	You need to move to a new location in order to get cell service and call for help.\n");
     chooseNewLocation();
   }
 
   else if (choice == 2) {
-    printf("\n\nYou eagerly push the power button on your phone and wait to see what happens. \n
-    	Nothing comes up on the screen but you feel the phone getting warm in your hands. \n
-    	You think that this must be a good sign, and wait as the phone gets warmer and warmer. \n
-    	Suddenly, you realize that you must have connected the wrong wires to the wrong terminals\n
-    	and that the battery must be short-circuiting! Unfortunately, you are not able to \n
-    	disconnect the wires in time and the phone blows up in your hands. A sharp piece of metal \n
-    	flies from the phone and into your temple, and you feel the blood starting to trickle down \n
+    printf("\n\nYou eagerly push the power button on your phone and wait to see what happens. \n\
+    	Nothing comes up on the screen but you feel the phone getting warm in your hands. \n\
+    	You think that this must be a good sign, and wait as the phone gets warmer and warmer. \n\
+    	Suddenly, you realize that you must have connected the wrong wires to the wrong terminals\n\
+    	and that the battery must be short-circuiting! Unfortunately, you are not able to \n\
+    	disconnect the wires in time and the phone blows up in your hands. A sharp piece of metal \n\
+    	flies from the phone and into your temple, and you feel the blood starting to trickle down \n\
     	your face as everything fades to black...\n\n\nGAME OVER\n");
    	finished = 1;
    	health = 0;
@@ -300,8 +300,8 @@ void climbTree() {
   else if (choice == 2)
     outsideHouse();
   else if (choice == 3)
-    printf("\n\nYou open up the cellphone and to your surprise, there is cell service! \n
-    You call 911 and get through to an operator.\nThey are able to find your location and they \n
+    printf("\n\nYou open up the cellphone and to your surprise, there is cell service! \n\
+    You call 911 and get through to an operator.\nThey are able to find your location and they \n\
     send a helicopter to save you.\n\n\ntVICTORY!!\nCongratulations, you've won!\n");
     finished = 1;
     ending();
