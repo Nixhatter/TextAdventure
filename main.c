@@ -311,6 +311,7 @@ void climbTree() {
 
 
 //torreys part
+void ending() {
   if(luckItem1==1 && luckItem2==1 && luckItem3==1){
     	finished=1;
 	printf ("You've won the Lucky way!\n");
@@ -323,7 +324,8 @@ void climbTree() {
   }else if (health<=0){
     	finished=1;
     	printf ("You have Died!\n");
-  }
+  } 
+}
 
    void comeToPath(){
     int choice;
@@ -341,7 +343,7 @@ void climbTree() {
       	woodsClearing();
     }else if (choice==3){
       	printf ("You head back to where You Started\n");
-      	start();
+      	startFunc();
     }else{
     	comeToPath();
     }
@@ -442,7 +444,7 @@ void climbTree() {
       	health=0;
     }else if (choice==2){
       	printf ("You make your way to the apple tree.\n");
-      	Tree();
+      	tree();
     }else if (choice==3){
       	printf ("You head towards the strange markings.\n");
       	markingsExit();
@@ -463,12 +465,12 @@ void climbTree() {
     printf ("3. Go back to the opening.\n");
     scanf("%d",&choice);
     if (choice==1){
-      	printf ("You pick up an apple off the ground and inspect it, looks good so you take a big bite, turns out it was rotten to the core! your vision fades as you hit the ground. WHO EATS FOOD OFF THE FOREST FLOOOR!?!??!?\n");
+      	printf ("You pick up an apple off the ground and inspect it, looks good so you take a big bite, turns out it was rotten to the core! your vision fades as you hit the ground. WHO EATS FOOD OFF THE FOREST FLOOOR!?!?\n");
       	health=0;
     }else if (choice==2){
       	printf ("You grab a small rock and throw it straight up at the apple above you as hard as you can. Your Athletics lvl isn't high enough so you miss the apple entirely and it comes down and hits you on the head. You really should have thought to maybe, you know... move?\n"); 
       	health=0;
-      	location = "newLocation";
+      	//location = "newLocation";
     }else if (choice==3){
       	printf ("You walk back to the clearing.\n");
       	woodsClearing();
@@ -832,4 +834,5 @@ void check(){
 	if(health<=0){
 		printf("You have died, better luc next time. \n");
 		exit(0);
+	}
 }
