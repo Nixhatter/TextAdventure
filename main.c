@@ -18,6 +18,8 @@ int survivalItem2 = 0;
 int survivalItem3 = 0;
 int hasFish = 0;
 int brokenArm = 0;
+int fruit=0;
+int RED_FLOWERS=0;
 
 void start();		// Generic
 void startFunc();
@@ -736,12 +738,13 @@ void beaver(char* message){
 void hill(){
 int i;
 printf("You climb a small hill and that hopes that it might provide a better view are shattered, there is a valley and a mountain in the distance and forest all around. No sign of civilization to be found.\n ");
-printf("Current health: %d \n",health); 
+printf("Current health: %d \n \n \n",health); 
 printf("1)Is that the sounds of bees?Lets try and get some honey! \n");
 printf("2)Rest on the hill. Maybe you're tired, mabe you're lazy. Either way rest a while. \n");
 printf("3)Explore into the valley and towards the mountain.\n");
 //printf("4)/n");
 scanf("%d", &i);
+printf("\n \n");
 if(i==1){
 	printf("The bee's swarm you you and string angrily, really you should have seen this coming.\n  -10 health \n");
 	health= health-10;
@@ -768,13 +771,23 @@ else{
 void valley(){
 int i;
 printf("The valley is beautiful and fully of vibrant flowers. The foot of the mountain is close by and the shadow it casts provides slight respite. \n");
-printf("Current health: %d \n", health); 
+printf("Current health: %d \n \n \n", health); 
 printf("1)Stay a while and pick flowers, what could go wrong? \n");
 printf("2)Trying to prove that you're tough, lets climb that mountain and show them who's boss.( who are you talking to?) \n");
 printf("3)This valley looks full of life perhaps there is food near by, lets take a look.\n");
 //printf("4)/n");
 scanf("%d", &i);
+printf("\n \n");
 if(i==1){
+	if(RED_FLOWERS!=1){
+		printf("You skip throughout the valley and pick a bunch of red flowers. Congrats you now have red flowers./n");
+		RED_FLOWERS();
+		valley();
+	}
+	else{
+		printf("You've picked all the flowers and possibly ruined this valley for the next passer by, but hey you found a path./n");
+		cometopath();
+	}	
 }
 if(i==2){
 	printf("You put all your energy into the climb berfore you, you are lucky not to fall, but the effort alone just might kill you.\n -10 health \n");
@@ -783,8 +796,22 @@ if(i==2){
 	mountain();
 }
 if(i==3){
+	if(fruit!=1){
+		printf("You find some fruit, lucky you!/n After eating the fruit you feel a lot better +20 health /n");
+		fruit=1;
+		health=health+20;
+		valley();
+	}
+	else{
+		printf("The food is gone but hey these angry looking fire ants might make great friends... or not./n -10 health /n");
+		health=health-10;
+		check();
+		valley();	
+	}
 }
 if(i==4){
+	printf("You climb the hill, and you remember some annoying nursery rhyme from when you were young./n");
+	hill();
 }
 else{
 	printf("invalid input \n");
@@ -794,12 +821,13 @@ else{
 void mountain(){
 int i;
 printf("You reach a flat point in the mountain, an old camp site? You can't be sure. In front of you there is a dark cave, as well as a winding path that skirts the edge of the mountain. \n ");
-printf("Current health: %d \n",health); 
+printf("Current health: %d \n \n \n",health); 
 printf("1)The path along the edge of the cliff doesn't look safe, are you still trying to prove you're tough, if so why not give it a shot. \n");
 printf("2)Adventure calls and every good adventure needs a cave! You rush forward into the mount of the cave seeking fortune or whatever.\n");
 printf("3)Up this high you hear the rude bleating of a mountain goat, you think he'd make a fine coat to keep you warm. After him!\n");
 printf("4)Your on a mountain, how could you pass up the chance to yodel?\n");
 scanf("%d", &i);
+printf("\n \n")
 if(i==1){
 	printf(" you slowly ease yourself along the thin path, hugging close to the rock wall in front of you.\n");
 	cliff();
@@ -827,13 +855,14 @@ else{
 void cave(){
 int i;
 printf("The cave is dark and you can barely make out your surroundings. There are rocks more rocks and some rocks you think might actually be bones, but most likely still just rocks, you hope. \n");
-printf("Current health: %d \n",health); 
+printf("Current health: %d \n \n \n",health); 
 printf("1)You've come this far, why not go a little farther, deeper into the cave! \n");
 printf("2)You really hope that those rocks aren't bones, but lets check just to be sure.\n");
 printf("3)Your laziness knows no bounds.Lets have a nap, at least you won't be rained on. \n");
 printf("4)Mysterious cave mushrooms, what a great idea! \n");
 printf("5)Leave the cave, it's too dark in here anyhow.\n" );
 scanf("%d", &i);
+printf("\n \n");
 if(i==1){
 	printf("As you venture deeper into the cave a large rock from the ceiling crashes into you. Oddly enoug at the time this happened your only thought was 'is it called stalactite or stalagmite?'\n -30 health \n");
 	health=health-30;
@@ -875,16 +904,19 @@ else{
 void cliff(){
 int i;
 printf("The narrow ledge you stand upon is making unnerving cracking sounds. You're pretty sure this is the end, but seeing as you went out onto the cliff in the first place I wouldn't trust your judgement.\n ");
-printf("Current health: %d \n",health); 
+printf("Current health: %d \n \n \n",health); 
 printf("1)Hey you saw this in a video game once, its called the leap of faith, why not try it you've already proven you're stupid enough.\n");
 printf("2)Forward is the only option, continue along the already falling apart cliff edge, I'm sure you'll be just fine.\n");
 printf("3)Hmm lets pick another direction, why not try climbing up higher, that seems like a good idea.\n");
 printf("4)Go back the way you came. See this wasn't a good idea.\n"); 
-//printf("4)/n");
 scanf("%d", &i);
+printf("\n \n");
 if(i==1){
 	printf("You leap from the cliff edge and assume you are going to die as you free fall.\n"); 
-	waterfall();
+	river("\nWith a loud splash you land in a river. After you gather your bearings you look around . There are large rocks and the"
+				" current seems moderately strong.\nSelect your next move:\n1. Attempt"
+        			" to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
+        			" the river\n5. Go back\n\n");
 }
 if(i==2){
 	printf("The ledge buckles under your weight and you tumble down the sheer mountain face towards the valley below.\n -30 health \n");
