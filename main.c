@@ -20,7 +20,6 @@ int hasFish = 0;
 int brokenArm = 0;
 
 void start();		// Generic
-int end();			// Generic
 void startFunc();
 void runGame();
 void stayPut();
@@ -38,15 +37,13 @@ void fish();
 void bear();
 void beaver();
 void waterfall();
-void final();		// Generic
-void ending();
-void comeToPath();
-void outsideHouse();
-void house();
-void shed();
-void woodsClearing();
-void tree();
-void markingsExit();
+void comeToPath(); 		// Torrey
+void outsideHouse(); 	// Torrey
+void house(); 			// Torrey
+void shed(); 			// Torrey
+void woodsClearing();	// Torrey
+void tree(); 			// Torrey
+void markingsExit();  	// Torrey
 void check();
 void whiteRabbit(); // Dillon
 void teaParty();	// Dillon
@@ -72,15 +69,6 @@ int main() {
 	startFunc();
 	return 0;
 }
-// Generic death function
-void final(char* message) {
-	flush();
-	printf("you died :( \n\n");
-	printf("%s",message);
-	printf("\n");
-	scanf("%c", &c);
-	end();	
-}
 
 char* inventory(int item){
 	switch(item){
@@ -88,11 +76,6 @@ char* inventory(int item){
 		case 1 : return "you have item 1\n";
 		default : return "default\n";
 	}
-}
-// Terminate the game
-int end(){
-	flush();
-	exit(0);
 }
 
 void check(){
@@ -247,10 +230,16 @@ void garden() {
 		case '1' : printf("Let's play");
 			   croquet();
 		case '2' : printf("OFF WITH HER HEAD she exclaims \n");
-			   final("You have been beheaded");
+			   health=health-100;
+			   printf("You have been beheaded");
+			   check();
 		case '3' : printf("OFF WITH HER HEAD she exclaims \n");
-			   final("You have been beheaded");
-		default  : final("You should have accepted the invitation.");
+			   health=health-100;
+			   printf("You have been beheaded");
+			   check();
+		default  : printf("You should have accepted the invitation.");
+		health=health-100;
+		check();
 	}
 }
 void croquet() {
@@ -268,18 +257,24 @@ void croquet() {
 	scanf("%c", &c);
 	switch(c){
 		case '1' : printf("The judge believes you, but the Queen demands you die! \n");
-				final("You have been found guilty and sentenced to death");
+				printf("You have been found guilty and sentenced to death");
+				health=health-100;
+				check();
 		case '2' : printf("Suit yourself \n");
-			   final("You've been sentenced to death by beheading");
+			   printf("You've been sentenced to death by beheading");
+			   health=health-100;
+			   check();
 		case '3' :  if (rand() < .5)
 				{
 				SWORD = 1;
 				printf("You manage to grab a sword and go directly for the Queen! \n");
-				end();
+				exit(0);
 				}
 				else {
 					printf("You fail miserably and get beheaded. \n");
-			   		final("The guards stab you as you try to grab their swords.");
+			   		printf("The guards stab you as you try to grab their swords.");
+					health=health-100;
+					check();
 				}
 		default  : goto start;
 	}
@@ -326,7 +321,7 @@ void buildFire() {
     	Everything fades to black... \n\n\nGAME OVER\n");
   	finished = 1;
   	health = 0;
-  	ending();
+  	check();
   }
 }
 
@@ -360,7 +355,7 @@ void fixCellphone() {
     	your face as everything fades to black...\n\n\nGAME OVER\n");
    	finished = 1;
    	health = 0;
-   	ending();
+   	check();
    	
   }
 }
@@ -404,21 +399,6 @@ void climbTree() {
 
 
 //torreys part
-void ending() {
-  if(POTION==1 && KEY==1 && SWORD==1){
-    	finished=1;
-	printf ("You've won the Lucky way!\n");
-  }else if(braveItem1==1 && braveItem2==1 && braveItem3==1){
-    	finished=1;
-    	printf ("You've won the Brave way!\n");
-  }else if(survivalItem1==1 && survivalItem2==1 && survivalItem3==1){
-    	finished=1;
-    	printf ("You've won the Survival way!\n");
-  }else if (health<=0){
-    	finished=1;
-    	printf ("You have Died!\n");
-  } 
-}
 
    void comeToPath(){
     int choice;
@@ -454,6 +434,7 @@ void ending() {
     if (choice==1){
       	printf ("You throw a rock through the window, you then hear a loud bang and a pain in your chest! Guess someone was home!\n");
       	health=0;
+		check();
     }else if (choice==2){
       	printf ("You make your way to the door.\n");
       	house();
@@ -480,7 +461,8 @@ void ending() {
     scanf("%d",&choice);
     if (choice==1){
       	printf ("Oh he gives you the shotgun alright... right in the chest.\n");
-  	health=0;
+		health=0;
+		check();
     }else if (choice==2){
       	printf ("You find shotgun ammo and take some\n");
       	ammo=1;
@@ -535,6 +517,7 @@ void ending() {
       	printf ("You grab some berries from the bush and eat a few\n");
 	printf ("You feel your stomach rumble then your heart stop, guess those weren't raspberries....oh well, you really shouldn't trust the everything the narrator tells you!\n");
       	health=0;
+		check();
     }else if (choice==2){
       	printf ("You make your way to the apple tree.\n");
       	tree();
@@ -560,10 +543,11 @@ void ending() {
     if (choice==1){
       	printf ("You pick up an apple off the ground and inspect it, looks good so you take a big bite, turns out it was rotten to the core! your vision fades as you hit the ground. WHO EATS FOOD OFF THE FOREST FLOOOR!?!?\n");
       	health=0;
+		check();
     }else if (choice==2){
       	printf ("You grab a small rock and throw it straight up at the apple above you as hard as you can. Your Athletics lvl isn't high enough so you miss the apple entirely and it comes down and hits you on the head. You really should have thought to maybe, you know... move?\n"); 
       	health=0;
-      	//location = "newLocation";
+      	check();
     }else if (choice==3){
       	printf ("You walk back to the clearing.\n");
       	woodsClearing();
