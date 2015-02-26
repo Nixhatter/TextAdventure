@@ -215,19 +215,19 @@ void buildFire() {
   printf("\n\nYou look around and find some driftwood, sticks, dry leaves, flint and some old magazines.\n");
   int choice = getUserInput("\nWhat will you build your fire out of?\n\t\1.Dry leaves and sticks\n\t2.Driftwood and magazines\n", 1, 2);
   if (choice == 1) {
-    printf("\n\nYou have managed to get a fire started with the flint, sticks and dry leaves.\n
-    	You warm yourself up around the fire and pack the extra materials you gathered in your \n
+    printf("\n\nYou have managed to get a fire started with the flint, sticks and dry leaves.\n\
+    	You warm yourself up around the fire and pack the extra materials you gathered in your \n\
     	backpack so that you can make a fire again if you need to. Achievement unlocked: Fire building\n");
     fire = 1;
     stayPut();
   }
   else if (choice == 2) {
-    printf("\n\nYou use the flint and are able to start a fire! \n
-    	You watch as the colours of the magazine cover begin to melt and the fire gives off a dark smoke.\n
-    	You lean in to warm yourself closer to the fire, and begin to feel dizzy. Little did you know, \n
-    	but the salt from the seawater in the driftwood and the paints and chemicals used in the ink of \n
-    	the magazine are giving off a toxic smoke as they burn. Your last thoughts are of regret that you \n
-    	didn't finish reading that book on how to survive in the woods that you got last Christmas. \n
+    printf("\n\nYou use the flint and are able to start a fire! \n\
+    	You watch as the colours of the magazine cover begin to melt and the fire gives off a dark smoke.\n\
+    	You lean in to warm yourself closer to the fire, and begin to feel dizzy. Little did you know, \n\
+    	but the salt from the seawater in the driftwood and the paints and chemicals used in the ink of \n\
+    	the magazine are giving off a toxic smoke as they burn. Your last thoughts are of regret that you \n\
+    	didn't finish reading that book on how to survive in the woods that you got last Christmas. \n\
     	Everything fades to black... \n\n\nGAME OVER\n");
   	finished = 1;
   	health = 0;
