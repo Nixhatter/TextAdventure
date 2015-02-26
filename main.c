@@ -43,12 +43,12 @@ void beaver();
 void waterfall();
 void final();
 int ending();
-void ComeToPath();
-void OutsideHouse();
-void House();
-void Shed();
-void WoodsClearing();
-void Tree();
+void comeToPath();
+void outsideHouse();
+void house();
+void shed();
+void woodsClearing();
+void tree();
 void markingsExit();
 void check();
 
