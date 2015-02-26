@@ -686,14 +686,16 @@ void bear(char* message){
       //VICTORY
       printf("\nYou draw your sword. The bear lets out a roar and begins to charge at you."
              "In an epic battle to the death\n you come out victorious. The bear is dead."
-             "You skin it and make an awesome coat, like a boss.");
+             "You skin it and make an awesome coat, like a boss.\nYOU WIN!");
+             exit(0);
     }
     else if (shotgun == 1){ //Use shotgun to fight bear
        //VICTORY
       printf("\nThe bear begins to approach you, and begins to charge. You pull out your"
              "shotgun and fire on the bear.\nfrom 30 feet out. He's wounded but still"
              "coming. You fire two more shots on him and he falls to the ground.\n"
-             "The bear is dead");
+             "The bear is dead. YOU WIN!");
+             exit(0);
     }
     else{ //No weapons available
       printf("\n1v1 against a bear with no weapons... good choice\n");
