@@ -302,9 +302,9 @@ void climbTree() {
   else if (choice == 3)
     printf("\n\nYou open up the cellphone and to your surprise, there is cell service! \n\
     You call 911 and get through to an operator.\nThey are able to find your location and they \n\
-    send a helicopter to save you.\n\n\ntVICTORY!!\nCongratulations, you've won!\n");
+    send a helicopter to save you.\n\n\nVICTORY!!\nCongratulations, you've won!\n");
     finished = 1;
-    ending();
+    //ending();
 }
 
 
