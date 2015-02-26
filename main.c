@@ -101,7 +101,7 @@ void runGame() {
 // ----------------------------------------------------------------------
 void startFunc() {
 	printf("\n-----------------------------------------\n");
-	printf("You awake lost in the woods. You are all alone and need to find your way home. \n \n")
+	printf("You awake lost in the woods. You are all alone and need to find your way home. \n \n");
 	printf("Please select an option using\n");
 	printf("the integers on the left.\n\n");
 	printf("Where do you want to go?\n");
