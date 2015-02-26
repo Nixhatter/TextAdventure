@@ -7,12 +7,9 @@ int cellphone = 0;
 int finished = 0;
 int shotgun = 0;
 int ammo = 0;
-int potion = 0;
-int key = 0;
-int hasSword = 0;
-int luckItem1 = 0;
-int luckItem2 = 0;
-int luckItem3 = 0;
+int potion = 0;		//Luck item 1
+int key = 0;		//Luck item 2
+int hasSword = 0;	//Luck item 3
 int braveItem1 = 0;
 int braveItem2 = 0;
 int braveItem3 = 0;
@@ -31,7 +28,6 @@ void buildFire();
 void fixCellphone();
 void climbTree();
 void chooseNewLocation();
-void whiteRabbit();
 void hill();
 void valley();
 void mountain();
@@ -52,7 +48,7 @@ void woodsClearing();
 void tree();
 void markingsExit();
 void check();
-
+void whiteRabbit(); //Dillon's Functions
 
 
  
@@ -105,15 +101,17 @@ void startFunc() {
 		default  : goto beginning;
 	}
 }
-	void whiteRabbit() {
+// ----------------------------------------------------------------------
+// Dillon's Code
+// ----------------------------------------------------------------------
+void whiteRabbit() {
 	flush();
 	printf("You fall into a rabbit hole!\n");
 	printf("There is a potion and a key on a table, and a really small door. The door is only big enough to fit a mouse.");
 	start:
 	printf("(1)Drink the potion \n");
 	printf("(2)Grab the key \n");
-	printf("(3)Squeeze through the door \n");
-	//if(item1) printf(", (a)go to final area");
+	printf("(3)Look for a sword \n");
 	printf("\n");
 	scanf("%c", &c);
 	switch(c){
@@ -126,6 +124,61 @@ void startFunc() {
 		default  : goto start;
 	}
 }
+void caterpillar() {
+	flush();
+	printf("You meet a caterpillar smoking a hookah!\n");
+	printf("He tells you to be weary of the queen and sends you on your way");
+	start:
+	printf("(1)Go to the garden \n");
+	printf("(2)Go to the tea party \n");
+	//if(item1) printf(", (a)go to final area");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : garden();
+		case '2' : teaParty();
+		default  : goto start;
+	}
+}
+void teaParty() {
+	flush();
+	printf("You approach a house in the woods..\n");
+	printf("There's a rabbit and a man with a rather large tophat on.");
+	printf("The man asks Why is a raven like a writing desk?");
+	start:
+	printf("(1) I don't have the faintest idea \n");
+	printf("(2) because they both produce flat notes! \n");
+	printf("(3) Edgar Allen Poe wrote on both \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("Try again!");
+			   goto start;
+		case '2' : printf("Correct! he exclaims, as he pushes you down a random path");
+				garden();
+		default  : goto start;
+	}
+}
+void garden() {
+	flush();
+	printf(" You approach a garden with red roses dripping of paint.\n");
+	printf(" The Red Queen approaches and asks if you want to play croquet with her");
+	start:
+	printf("(1) Accept the invitation \n");
+	printf("(2) Refuse politely \n");
+	printf("(3) Refuse aggressively \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("Let's play");
+		case '2' : printf("OFF WITH HER HEAD she exclaims");
+		case '3' : printf("OFF WITH HER HEAD she exclaims");
+		default  : goto start;
+	}
+}
+// ----------------------------------------------------------------------
+// End of Dillon's Code
+// ----------------------------------------------------------------------
 	void final() {
 	final:
 	flush();
@@ -310,7 +363,7 @@ void climbTree() {
 
 //torreys part
 void ending() {
-  if(luckItem1==1 && luckItem2==1 && luckItem3==1){
+  if(potion==1 && key==1 && hasSword==1){
     	finished=1;
 	printf ("You've won the Lucky way!\n");
   }else if(braveItem1==1 && braveItem2==1 && braveItem3==1){
