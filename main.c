@@ -741,20 +741,19 @@ void hill(){
 int i;
 printf("You climb a small hill and that hopes that it might provide a better view are shattered, there is a valley and a mountain in the distance and forest all around. No sign of civilization to be found.\n ");
 printf("Current health: %d \n \n \n",health); 
-printf("1)Is that the sounds of bees?Lets try and get some honey! \n");
-printf("2)Rest on the hill. Maybe you're tired, mabe you're lazy. Either way rest a while. \n");
-printf("3)Explore into the valley and towards the mountain.\n");
-//printf("4)/n");
+printf("1)Is that the sounds of bees?Lets try and get some honey! \n \n");
+printf("2)Rest on the hill. Maybe you're tired, mabe you're lazy. Either way rest a while. \n \n");
+printf("3)Explore into the valley and towards the mountain.\n \n");
 scanf("%d", &i);
 printf("\n \n");
 if(i==1){
-	printf("The bee's swarm you you and string angrily, really you should have seen this coming.\n  -10 health \n");
+	printf("The bee's swarm you you and string angrily, really you should have seen this coming.\n  -10 health \n \n");
 	health= health-10;
 	check();
 	hill();	
 }
 if(i==2){
-	printf("The Sun light comforts you like an old friends and you quickly fall sleep. When you awake you find you have an unbearable sun burn and cant help but think what a bad idea this was.\n -10 health \n");
+	printf("The Sun light comforts you like an old friends and you quickly fall sleep. When you awake you find you have an unbearable sun burn and cant help but think what a bad idea this was.\n -10 health \n \n");
 	health=health-10;
 	check();
 	hill();
@@ -774,20 +773,20 @@ void valley(){
 int i;
 printf("The valley is beautiful and fully of vibrant flowers. The foot of the mountain is close by and the shadow it casts provides slight respite. \n");
 printf("Current health: %d \n \n \n", health); 
-printf("1)Stay a while and pick flowers, what could go wrong? \n");
-printf("2)Trying to prove that you're tough, lets climb that mountain and show them who's boss.( who are you talking to?) \n");
-printf("3)This valley looks full of life perhaps there is food near by, lets take a look.\n");
-//printf("4)/n");
+printf("1)Stay a while and pick flowers, what could go wrong? \n \n");
+printf("2)Trying to prove that you're tough, lets climb that mountain and show them who's boss.( who are you talking to?) \n \n");
+printf("3)This valley looks full of life perhaps there is food near by, lets take a look.\n \n");
+
 scanf("%d", &i);
 printf("\n \n");
 if(i==1){
 	if(RED_FLOWERS!=1){
-		printf("You skip throughout the valley and pick a bunch of red flowers. Congrats you now have red flowers./n");
+		printf("You skip throughout the valley and pick a bunch of red flowers. Congrats you now have red flowers.\n");
 		RED_FLOWERS=1;
 		valley();
 	}
 	else{
-		printf("You've picked all the flowers and possibly ruined this valley for the next passer by, but hey you found a path./n");
+		printf("You've picked all the flowers and possibly ruined this valley for the next passer by, but hey you found a path.\n");
 		cometopath();
 	}	
 }
@@ -799,20 +798,20 @@ if(i==2){
 }
 if(i==3){
 	if(fruit!=1){
-		printf("You find some fruit, lucky you!/n After eating the fruit you feel a lot better +20 health /n");
+		printf("You find some fruit, lucky you!\n After eating the fruit you feel a lot better +20 health \n");
 		fruit=1;
 		health=health+20;
 		valley();
 	}
 	else{
-		printf("The food is gone but hey these angry looking fire ants might make great friends... or not./n -10 health /n");
+		printf("The food is gone but hey these angry looking fire ants might make great friends... or not.\n -10 health \n");
 		health=health-10;
 		check();
 		valley();	
 	}
 }
 if(i==4){
-	printf("You climb the hill, and you remember some annoying nursery rhyme from when you were young./n");
+	printf("You climb the hill, and you remember some annoying nursery rhyme from when you were young.\n");
 	hill();
 }
 else{
