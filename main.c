@@ -49,6 +49,9 @@ void tree();
 void markingsExit();
 void check();
 void whiteRabbit(); //Dillon's Functions
+void teaParty();
+void garden();
+void caterpillar();
 
 
  
