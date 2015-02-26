@@ -213,23 +213,22 @@ void stayPut() {
 
 void buildFire() {
   printf("\n\nYou look around and find some driftwood, sticks, dry leaves, flint and some old magazines.\n");
-  int choice = getUserInput("\nWhat will you build your fire out of?\n\t\
-  	1.Dry leaves and sticks\n\t2.Driftwood and magazines\n", 1, 2);
+  int choice = getUserInput("\nWhat will you build your fire out of?\n\t\1.Dry leaves and sticks\n\t2.Driftwood and magazines\n", 1, 2);
   if (choice == 1) {
-    printf("\n\nYou have managed to get a fire started with the flint, sticks and dry leaves.\
-    	You warm yourself up around the fire and pack the extra materials you gathered in your \
+    printf("\n\nYou have managed to get a fire started with the flint, sticks and dry leaves.\n
+    	You warm yourself up around the fire and pack the extra materials you gathered in your \n
     	backpack so that you can make a fire again if you need to. Achievement unlocked: Fire building\n");
     fire = 1;
     stayPut();
   }
   else if (choice == 2) {
-    printf("\n\n\tYou use the flint and are able to start a fire! \
-    	You watch as the colours of the magazine cover begin to melt and the fire gives off a dark smoke.\
-    	You lean in to warm yourself closer to the fire, and begin to feel dizzy. Little did you know, \
-    	but the salt from the seawater in the driftwood and the paints and chemicals used in the ink of \
-    	the magazine are giving off a toxic smoke as they burn. Your last thoughts are of regret that you \
-    	didn't finish reading that book on how to survive in the woods that you got last Christmas. \
-    	Everything fades to black... \n\t\t\tGAME OVER\n");
+    printf("\n\nYou use the flint and are able to start a fire! \n
+    	You watch as the colours of the magazine cover begin to melt and the fire gives off a dark smoke.\n
+    	You lean in to warm yourself closer to the fire, and begin to feel dizzy. Little did you know, \n
+    	but the salt from the seawater in the driftwood and the paints and chemicals used in the ink of \n
+    	the magazine are giving off a toxic smoke as they burn. Your last thoughts are of regret that you \n
+    	didn't finish reading that book on how to survive in the woods that you got last Christmas. \n
+    	Everything fades to black... \n\n\nGAME OVER\n");
   	finished = 1;
   	health = 0;
   	ending();
@@ -238,33 +237,32 @@ void buildFire() {
 
 
 void fixCellphone() {
-  printf("\n\nYou open up your cellphone and see that it is completely out of battery. \
-  You vaguely remember reading an article on how to build your own battery powered charger. \
-  It seemed difficult, and you are without a soldering iron, but you think it might be worth a shot. \
-  You search around the area and miraculously find some copper wires on the ground. \
-  You dig out some batteries from the bottom of your backpack and try to remember the steps to build the charger.\
-  You manage to MacGyver a battery that you think will work, now you just have to decide how to connect the wires\
+  printf("\n\nYou open up your cellphone and see that it is completely out of battery. \n
+  You vaguely remember reading an article on how to build your own battery powered charger. \n
+  It seemed difficult, and you are without a soldering iron, but you think it might be worth a shot. \n
+  You search around the area and miraculously find some copper wires on the ground. \n
+  You dig out some batteries from the bottom of your backpack and try to remember the steps to build the charger.\n
+  You manage to MacGyver a battery that you think will work, now you just have to decide how to connect the wires\n
   to your phone's battery. ");
-  int choice = getUserInput("\nWhat will you do? \n\t\
-  	1. Take the battery out of your phone and try to attach the wires to it\n\t2.\
-  	Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
+  int choice = getUserInput("\nWhat will you do? \n\t\1. Take the battery out of your phone and try to attach the wires to it\n
+  \t2.Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
   if (choice == 1) {
     cellphone = 1;
-    printf("\n\nYou are able to get a charge on your cellphone! \
-    	Achievement unlocked: Charged cellphone\nUnfortunately, there is no service where you are.\
+    printf("\n\nYou are able to get a charge on your cellphone! \n
+    	Achievement unlocked: Charged cellphone\nUnfortunately, there is no service where you are.\n
     	You need to move to a new location in order to get cell service and call for help.\n");
     chooseNewLocation();
   }
 
   else if (choice == 2) {
-    printf("\n\nYou eagerly push the power button on your phone and wait to see what happens. \
-    	Nothing comes up on the screen but you feel the phone getting warm in your hands. \
-    	You think that this must be a good sign, and wait as the phone gets warmer and warmer. \
-    	Suddenly, you realize that you must have connected the wrong wires to the wrong terminals\
-    	and that the battery must be short-circuiting! Unfortunately, you are not able to \
-    	disconnect the wires in time and the phone blows up in your hands. A sharp piece of metal \
-    	flies from the phone and into your temple, and you feel the blood starting to trickle down \
-    	your face as everything fades to black...\n\t\t\tGAME OVER\n");
+    printf("\n\nYou eagerly push the power button on your phone and wait to see what happens. \n
+    	Nothing comes up on the screen but you feel the phone getting warm in your hands. \n
+    	You think that this must be a good sign, and wait as the phone gets warmer and warmer. \n
+    	Suddenly, you realize that you must have connected the wrong wires to the wrong terminals\n
+    	and that the battery must be short-circuiting! Unfortunately, you are not able to \n
+    	disconnect the wires in time and the phone blows up in your hands. A sharp piece of metal \n
+    	flies from the phone and into your temple, and you feel the blood starting to trickle down \n
+    	your face as everything fades to black...\n\n\nGAME OVER\n");
    	finished = 1;
    	health = 0;
    	ending();
@@ -275,8 +273,7 @@ void fixCellphone() {
 
 void chooseNewLocation() {
   // Choose between climbing a tree or going back to the original 5 options
-  int choice = getUserInput("\nWhat will you choose?\n\t1. Climb the tallest tree you see near you\n\t\
-  	2. Choose one of the original 5 choices\n", 1, 2);
+  int choice = getUserInput("\nWhat will you choose?\n\t1. Climb the tallest tree you see near you\n\t\2. Choose one of the original 5 choices\n", 1, 2);
   if (choice == 1)
     climbTree();
   else if (choice == 2)
@@ -303,9 +300,9 @@ void climbTree() {
   else if (choice == 2)
     outsideHouse();
   else if (choice == 3)
-    printf("\n\nYou open up the cellphone and to your surprise, there is cell service! \
-    You call 911 and get through to an operator.\nThey are able to find your location and they \
-    send a helicopter to save you.\n\t\t\tVICTORY!!\nCongratulations, you've won!\n");
+    printf("\n\nYou open up the cellphone and to your surprise, there is cell service! \n
+    You call 911 and get through to an operator.\nThey are able to find your location and they \n
+    send a helicopter to save you.\n\n\ntVICTORY!!\nCongratulations, you've won!\n");
     finished = 1;
     ending();
 }
@@ -491,7 +488,7 @@ void ending() {
     scanf("%d",&choice);
     if (choice==1){
       	printf ("You fall over as a voice startles you saying \"Welcome to standing up school!\" \"and you fail...\" \n");
-	printf ("ACHIVEMENT GET: asdf movie refrence");
+	printf ("ACHIVEMENT GET: asdf movie refrence\n");
 	markingsExit();
     }else if (choice==2){
       	printf ("You walk back to the clearing.\n");
