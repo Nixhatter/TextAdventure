@@ -81,8 +81,8 @@ void startFunc() {
 	beginning:
 	flush();
 	printf("(1)the woods \n"
-	"(2)follow the rabbit \n"
-	"(3)up the hill \n"
+	"(2)up the hill \n"
+	"(3)follow the rabbit \n"
 	"(4) \n"
 	"(5)follow the sound of running water\n ");
 	printf("\n\n");
