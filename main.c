@@ -244,8 +244,8 @@ void fixCellphone() {
   You dig out some batteries from the bottom of your backpack and try to remember the steps to build the charger.\n\
   You manage to MacGyver a battery that you think will work, now you just have to decide how to connect the wires\n\
   to your phone's battery. ");
-  int choice = getUserInput("\nWhat will you do? \n\t\1. Take the battery out of your phone and try to attach the wires to it\n\
-  \t2.Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
+  int choice = getUserInput("\nWhat will you do? \n\t\ 1. Take the battery out of your phone and try to attach the wires to it\n\
+  \t 2.Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
   if (choice == 1) {
     cellphone = 1;
     printf("\n\nYou are able to get a charge on your cellphone! \n\
