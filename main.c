@@ -7,9 +7,9 @@ int cellphone = 0;
 int finished = 0;
 int shotgun = 0;
 int ammo = 0;
-int potion = 0;		//Luck item 1
-int key = 0;		//Luck item 2
-int SWORD = 0;	//Luck item 3
+int POTION = 0;		//Luck item 1
+int KEY = 0;		//Luck item 2
+int SWORD = 0;		//Luck item 3
 int braveItem1 = 0;
 int braveItem2 = 0;
 int braveItem3 = 0;
@@ -20,7 +20,7 @@ int hasFish = 0;
 int brokenArm = 0;
 
 void start();		// Generic
-int end();		// Generic
+int end();			// Generic
 void startFunc();
 void runGame();
 void stayPut();
@@ -48,7 +48,7 @@ void woodsClearing();
 void tree();
 void markingsExit();
 void check();
-void whiteRabbit(); 	// Dillon
+void whiteRabbit(); // Dillon
 void teaParty();	// Dillon
 void garden();		// Dillon
 void caterpillar();	// Dillon
@@ -57,6 +57,10 @@ void croquet(); 	// Dillon
 char c;
 
 char* inventory(int);
+
+// ----------------------------------------------------------------------
+// GENERIC FUNCTIONS
+// ----------------------------------------------------------------------
 
 void flush(){
 	fflush(stdout);
@@ -68,159 +72,11 @@ int main() {
 	startFunc();
 	return 0;
 }
-
-void startFunc() {
-	printf("You Find yourself in the middle of nothing\n");
-	printf("Please select an option using\n");
-	printf("the integers on the left.\n\n");
-
-	printf("Where do you want to go?\n");
-	beginning:
-	flush();
-	printf("(1) The woods \n"
-	"(2) Follow the path \n"
-	"(3) Follow the rabbit \n"
-	"(4) Up the hill\n"
-	"(5) Follow the sound of running water\n ");
-	printf("\n\n");
-	scanf("%c", &c);
-	switch(c){
-		case '1' : printf("going into the woods\n");
-				   stayPut();
-		case '2' : printf("going uphill\n");
-				   comeToPath();
-		case '3' : printf(" following the white rabbit\n");
-				   whiteRabbit();
-		case '4' : printf("1)Try and find some higher ground /n");
-				   hill();
-		case '5' : printf("following the sound of running water.\n");
-				   river("\nYou have followed the sound of running water and come across"
-        			" a large river; almost\n30 meters across. There are large rocks and the"
-				" current seems moderately strong.\nSelect your next move:\n1. Attempt"
-        			" to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
-        			" the river\n5. Go back\n\n");
-		default  : goto beginning;
-	}
-}
-// ----------------------------------------------------------------------
-// Dillon's Code
-// ----------------------------------------------------------------------
-void whiteRabbit() {
-	flush();
-	printf("You fall into a rabbit hole!\n");
-	printf("There is a potion and a key on a table, and a really small door. The door is only big enough to fit a mouse.\n");
-	printf("\n\n");
-	start:
-	printf("(1)Drink the potion \n");
-	printf("(2)Grab the key \n");
-	printf("(3)Attempt to go through the door\n");
-	printf("\n");
-	scanf("%c", &c);
-	switch(c){
-		case '1' : printf("You drink the potion\n");
-				   potion=1; goto start;
-		case '2' : printf("The key is now in your pocket\n");
-					key=1; goto start;
-		case '3' : if(potion=1 & key=1) {
-						printf("You go through the door!\n"); 
-						caterpillar();
-					}
-					else printf("You cant go through the door\n");
-		default  : goto start;
-	}
-}
-void caterpillar() {
-	flush();
-	printf("You meet a caterpillar smoking a hookah!\n");
-	printf("He tells you to be weary of the queen and sends you on your way\n");
-	printf("\n\n");
-	start:
-	printf("(1)Go to the garden \n");
-	printf("(2)Go to the tea party \n");
-	//if(item1) printf(", (a)go to final area");
-	printf("\n");
-	scanf("%c", &c);
-	switch(c){
-		case '1' : garden();
-		case '2' : teaParty();
-		default  : goto start;
-	}
-}
-void teaParty() {
-	flush();
-	printf("You approach a house in the woods..\n");
-	printf("There's a rabbit and a man with a rather large tophat on. \n");
-	printf("The man asks Why is a raven like a writing desk? \n");
-	start:
-	printf("(1) I don't have the faintest idea \n");
-	printf("(2) because they both produce flat notes! \n");
-	printf("(3) Edgar Allen Poe wrote on both \n");
-	printf("\n");
-	scanf("%c", &c);
-	switch(c){
-		case '1' : printf("Try again! \n");
-			   goto start;
-		case '2' : printf("Correct! he exclaims, as he pushes you down a random path \n");
-				garden();
-		default  : goto start;
-	}
-}
-void garden() {
-	flush();
-	printf(" You approach a garden with red roses dripping of paint.\n");
-	printf(" The Red Queen approaches and asks if you want to play croquet with her \n");
-	start:
-	printf("(1) Accept the invitation \n");
-	printf("(2) Refuse politely \n");
-	printf("(3) Refuse aggressively \n");
-	printf("\n\n");
-	scanf("%c", &c);
-	switch(c){
-		case '1' : printf("Let's play");
-			   croquet();
-		case '2' : printf("OFF WITH HER HEAD she exclaims \n");
-			   final();
-		case '3' : printf("OFF WITH HER HEAD she exclaims \n");
-			   final();
-		default  : goto start;
-	}
-}
-void croquet() {
-	flush();
-	printf(" You grab your flamingo and play your game. To your surprise, you're awfully good and beat the Queen!.\n");
-	printf(" Sadly, she accuses you of cheating! \n");
-	printf(" You find yourself in a courthouse, packed with people. \n");
-	printf("\n\n");
-	start:
-	printf("(1) Plead innocent \n");
-	printf("(2) Plead guilty \n");
-	printf("(3) Attempt to grab a weapon (50% chance of success) \n");
-	printf("\n");
-	scanf("%c", &c);
-	switch(c){
-		case '1' : printf("The judge believes you, but the Queen demands you die! \n");
-				final();
-		case '2' : printf("Suit yourself \n");
-			   final();
-		case '3' :  if (rand() < .5)
-				{
-				SWORD = 1;
-				printf("You manage to grab a sword and go directly for the Queen! \n");
-				end();
-				}
-				else {
-					printf("You fail miserably and get beheaded. \n");
-			   		final();
-				}
-		default  : goto start;
-	}
-}
-// ----------------------------------------------------------------------
-// End of Dillon's Code
-// ----------------------------------------------------------------------
-	void final() {
+// Generic death function
+void final(char* message) {
 	flush();
 	printf("you died :( \n\n");
+	printf("%s",message);
 	printf("\n");
 	scanf("%c", &c);
 	end();	
@@ -233,14 +89,18 @@ char* inventory(int item){
 		default : return "default\n";
 	}
 }
-
+// Terminate the game
 int end(){
 	flush();
-	scanf("%c",&c);
-	return 0;
+	exit(0);
 }
 
-// Laura's part
+void check(){
+	if(health<=0){
+		printf("You have died, better luc next time. \n");
+		exit(0);
+	}
+}
 int getUserInput (char* message, int low, int high) {
   int userInput;
   int inputOK = 0;
@@ -267,7 +127,168 @@ int getUserInput (char* message, int low, int high) {
 void runGame() {
   stayPut();
 }
+// ----------------------------------------------------------------------
+// OUR JOURNEY BEGINS HERE
+// ----------------------------------------------------------------------
+void startFunc() {
+	printf("You Find yourself in the middle of nothing\n");
+	printf("Please select an option using\n");
+	printf("the integers on the left.\n\n");
 
+	printf("Where do you want to go?\n");
+	beginning:
+	flush();
+	printf("(1) The woods \n"
+	"(2) Follow the path \n"
+	"(3) Follow the rabbit \n"
+	"(4) Up the hill\n"
+	"(5) Follow the sound of running water\n ");
+	printf("\n\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("going into the woods\n\n");
+				   stayPut();
+		case '2' : printf("going uphill\n\n");
+				   comeToPath();
+		case '3' : printf(" Following the white rabbit \n\n");
+				   whiteRabbit();
+		case '4' : printf("1)Try and find some higher ground \n\n");
+				   hill();
+		case '5' : printf("following the sound of running water.\n");
+				   river("\nYou have followed the sound of running water and come across"
+        			" a large river; almost\n30 meters across. There are large rocks and the"
+				" current seems moderately strong.\nSelect your next move:\n1. Attempt"
+        			" to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
+        			" the river\n5. Go back\n\n");
+		default  : goto beginning;
+	}
+}
+// ----------------------------------------------------------------------
+// Dillon's Code
+// ----------------------------------------------------------------------
+void whiteRabbit() {
+	printf("\n");
+	printf("You fall into a rabbit hole!\n");
+	printf("There is a POTION and a KEY on a table, and a really small door. The door is only big enough to fit a mouse.");
+	printf("\n");
+	start:
+	flush();
+	printf("(1)Drink the POTION \n");
+	printf("(2)Grab the KEY \n");
+	printf("(3)Attempt to go through the door\n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("You drink the POTION\n");
+				   POTION=1; goto start;
+		case '2' : printf("The KEY is now in your pocket\n");
+					KEY=1; goto start;
+		case '3' : if(POTION & KEY) {
+						printf("You go through the door!\n"); 
+						caterpillar();
+					}
+					else printf("The door is far too small and seems to be locked.\n");
+		default  : goto start;
+	}
+}
+void caterpillar() {
+	printf("\n");
+	printf("You meet a caterpillar smoking a hookah!\n");
+	printf("He tells you to be weary of the queen and sends you on your way\n");
+	printf("\n");
+	start:
+	flush();
+	printf("(1)Go to the garden \n");
+	printf("(2)Go to the tea party \n");
+	//if(item1) printf(", (a)go to final area");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : garden();
+		case '2' : teaParty();
+		default  : goto start;
+	}
+}
+void teaParty() {
+	printf("\n");
+	printf("You approach a house in the woods..\n");
+	printf("There's a rabbit and a man with a rather large tophat on. \n");
+	printf("The man asks Why is a raven like a writing desk? \n");
+	printf("\n");
+	start:
+	flush();
+	printf("(1) I don't have the faintest idea \n");
+	printf("(2) because they both produce flat notes! \n");
+	printf("(3) Edgar Allen Poe wrote on both \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("Try again! \n");
+			   goto start;
+		case '2' : printf("Correct! he exclaims, as he pushes you down a random path \n");
+				garden();
+		case '3' : printf("I don't think that's correct. - the hare says. But you should follow me.");
+					//go to someone elses timeline
+		default  : goto start;
+	}
+}
+void garden() {
+	printf("\n");
+	printf(" You approach a garden with red roses dripping of paint.\n");
+	printf(" The Red Queen approaches and asks if you want to play croquet with her \n");
+	start:
+	flush();
+	printf("(1) Accept the invitation \n");
+	printf("(2) Refuse politely \n");
+	printf("(3) Refuse aggressively \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("Let's play");
+			   croquet();
+		case '2' : printf("OFF WITH HER HEAD she exclaims \n");
+			   final("You have been beheaded");
+		case '3' : printf("OFF WITH HER HEAD she exclaims \n");
+			   final("You have been beheaded");
+		default  : final("You should have accepted the invitation.");
+	}
+}
+void croquet() {
+	printf("\n");
+	printf(" You grab your flamingo and play your game. To your surprise, you're awfully good and beat the Queen!.\n");
+	printf(" Sadly, she accuses you of cheating! \n");
+	printf(" You find yourself in a courthouse, packed with people. \n");
+	printf("\n");
+	start:
+	flush();
+	printf("(1) Plead innocent \n");
+	printf("(2) Plead guilty \n");
+	printf("(3) Attempt to grab a weapon (50 percent chance of success) \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("The judge believes you, but the Queen demands you die! \n");
+				final("You have been found guilty and sentenced to death");
+		case '2' : printf("Suit yourself \n");
+			   final("You've been sentenced to death by beheading");
+		case '3' :  if (rand() < .5)
+				{
+				SWORD = 1;
+				printf("You manage to grab a sword and go directly for the Queen! \n");
+				end();
+				}
+				else {
+					printf("You fail miserably and get beheaded. \n");
+			   		final("The guards stab you as you try to grab their swords.");
+				}
+		default  : goto start;
+	}
+}
+// ----------------------------------------------------------------------
+// End of Dillon's Code
+// ----------------------------------------------------------------------
+
+// Laura's part
 void stayPut() {
   int choice = getUserInput("What will you do next?\n\t1. Look around for materials to build a\
   	fire from\n\t2. Try to call for help on your cellphone\n\t3. Climb a tree to get a good look around.\n", 1, 3);
@@ -384,7 +405,7 @@ void climbTree() {
 
 //torreys part
 void ending() {
-  if(potion==1 && key==1 && SWORD==1){
+  if(POTION==1 && KEY==1 && SWORD==1){
     	finished=1;
 	printf ("You've won the Lucky way!\n");
   }else if(braveItem1==1 && braveItem2==1 && braveItem3==1){
@@ -900,12 +921,5 @@ if(i==4){
 else{
 	printf("invalid input \n");
 	cliff();
-	}
-}	
-
-void check(){
-	if(health<=0){
-		printf("You have died, better luc next time. \n");
-		exit(0);
 	}
 }
