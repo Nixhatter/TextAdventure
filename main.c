@@ -213,7 +213,7 @@ void stayPut() {
 
 void buildFire() {
   printf("\n\nYou look around and find some driftwood, sticks, dry leaves, flint and some old magazines.\n");
-  int choice = getUserInput("\nWhat will you build your fire out of?\n\t\1.Dry leaves and sticks\n\t2.Driftwood and magazines\n", 1, 2);
+  int choice = getUserInput("\nWhat will you build your fire out of?\n\t\ 1.Dry leaves and sticks\n\t 2.Driftwood and magazines\n", 1, 2);
   if (choice == 1) {
     printf("\n\nYou have managed to get a fire started with the flint, sticks and dry leaves.\n\
     	You warm yourself up around the fire and pack the extra materials you gathered in your \n\
