@@ -9,7 +9,7 @@ int shotgun = 0;
 int ammo = 0;
 int potion = 0;		//Luck item 1
 int key = 0;		//Luck item 2
-int hasSword = 0;	//Luck item 3
+int SWORD = 0;	//Luck item 3
 int braveItem1 = 0;
 int braveItem2 = 0;
 int braveItem3 = 0;
@@ -19,8 +19,8 @@ int survivalItem3 = 0;
 int hasFish = 0;
 int brokenArm = 0;
 
-void start();
-int end();
+void start();		// Generic
+int end();		// Generic
 void startFunc();
 void runGame();
 void stayPut();
@@ -38,7 +38,7 @@ void fish();
 void bear();
 void beaver();
 void waterfall();
-void final();
+void final();		// Generic
 void ending();
 void comeToPath();
 void outsideHouse();
@@ -48,13 +48,11 @@ void woodsClearing();
 void tree();
 void markingsExit();
 void check();
-void whiteRabbit(); //Dillon's Functions
-void teaParty();
-void garden();
-void caterpillar();
-
-
- 
+void whiteRabbit(); 	// Dillon
+void teaParty();	// Dillon
+void garden();		// Dillon
+void caterpillar();	// Dillon
+void croquet(); 	// Dillon
 
 char c;
 
@@ -63,8 +61,8 @@ char* inventory(int);
 void flush(){
 	fflush(stdout);
 	fflush(stdin);
+	printf("\n\n\n");
 }
-
 
 int main() {
 	startFunc();
@@ -110,11 +108,12 @@ void startFunc() {
 void whiteRabbit() {
 	flush();
 	printf("You fall into a rabbit hole!\n");
-	printf("There is a potion and a key on a table, and a really small door. The door is only big enough to fit a mouse.");
+	printf("There is a potion and a key on a table, and a really small door. The door is only big enough to fit a mouse.\n");
+	printf("\n\n");
 	start:
 	printf("(1)Drink the potion \n");
 	printf("(2)Grab the key \n");
-	printf("(3)Look for a sword \n");
+	printf("(3)Attempt to go through the door\n");
 	printf("\n");
 	scanf("%c", &c);
 	switch(c){
@@ -122,15 +121,19 @@ void whiteRabbit() {
 				   potion=1; goto start;
 		case '2' : printf("The key is now in your pocket\n");
 					key=1; goto start;
-		case '3' : if(potion & key) printf("You go through the door!");
-					else printf("you cant go through the door");
+		case '3' : if(potion=1 & key=1) {
+						printf("You go through the door!\n"); 
+						caterpillar();
+					}
+					else printf("You cant go through the door\n");
 		default  : goto start;
 	}
 }
 void caterpillar() {
 	flush();
 	printf("You meet a caterpillar smoking a hookah!\n");
-	printf("He tells you to be weary of the queen and sends you on your way");
+	printf("He tells you to be weary of the queen and sends you on your way\n");
+	printf("\n\n");
 	start:
 	printf("(1)Go to the garden \n");
 	printf("(2)Go to the tea party \n");
@@ -146,8 +149,8 @@ void caterpillar() {
 void teaParty() {
 	flush();
 	printf("You approach a house in the woods..\n");
-	printf("There's a rabbit and a man with a rather large tophat on.");
-	printf("The man asks Why is a raven like a writing desk?");
+	printf("There's a rabbit and a man with a rather large tophat on. \n");
+	printf("The man asks Why is a raven like a writing desk? \n");
 	start:
 	printf("(1) I don't have the faintest idea \n");
 	printf("(2) because they both produce flat notes! \n");
@@ -155,9 +158,9 @@ void teaParty() {
 	printf("\n");
 	scanf("%c", &c);
 	switch(c){
-		case '1' : printf("Try again!");
+		case '1' : printf("Try again! \n");
 			   goto start;
-		case '2' : printf("Correct! he exclaims, as he pushes you down a random path");
+		case '2' : printf("Correct! he exclaims, as he pushes you down a random path \n");
 				garden();
 		default  : goto start;
 	}
@@ -165,17 +168,50 @@ void teaParty() {
 void garden() {
 	flush();
 	printf(" You approach a garden with red roses dripping of paint.\n");
-	printf(" The Red Queen approaches and asks if you want to play croquet with her");
+	printf(" The Red Queen approaches and asks if you want to play croquet with her \n");
 	start:
 	printf("(1) Accept the invitation \n");
 	printf("(2) Refuse politely \n");
 	printf("(3) Refuse aggressively \n");
-	printf("\n");
+	printf("\n\n");
 	scanf("%c", &c);
 	switch(c){
 		case '1' : printf("Let's play");
-		case '2' : printf("OFF WITH HER HEAD she exclaims");
-		case '3' : printf("OFF WITH HER HEAD she exclaims");
+			   croquet();
+		case '2' : printf("OFF WITH HER HEAD she exclaims \n");
+			   final();
+		case '3' : printf("OFF WITH HER HEAD she exclaims \n");
+			   final();
+		default  : goto start;
+	}
+}
+void croquet() {
+	flush();
+	printf(" You grab your flamingo and play your game. To your surprise, you're awfully good and beat the Queen!.\n");
+	printf(" Sadly, she accuses you of cheating! \n");
+	printf(" You find yourself in a courthouse, packed with people. \n");
+	printf("\n\n");
+	start:
+	printf("(1) Plead innocent \n");
+	printf("(2) Plead guilty \n");
+	printf("(3) Attempt to grab a weapon (50% chance of success) \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("The judge believes you, but the Queen demands you die! \n");
+				final();
+		case '2' : printf("Suit yourself \n");
+			   final();
+		case '3' :  if (rand() < .5)
+				{
+				SWORD = 1;
+				printf("You manage to grab a sword and go directly for the Queen! \n");
+				end();
+				}
+				else {
+					printf("You fail miserably and get beheaded. \n");
+			   		final();
+				}
 		default  : goto start;
 	}
 }
@@ -183,29 +219,11 @@ void garden() {
 // End of Dillon's Code
 // ----------------------------------------------------------------------
 	void final() {
-	final:
 	flush();
-	printf("(1) end this adventure (2) do nothing");
+	printf("you died :( \n\n");
 	printf("\n");
 	scanf("%c", &c);
-	switch(c){
-		case 'n' : printf("\n");
-				   printf("doing nothing again\n"); goto final;
-		case 'e' : printf("ENDING!\n");
-				   printf("\n"); break;
-		default  : goto final;
-	}
-	
-	if(potion && key){
-		printf("Congratulations!");
-		end();
-	} else {
-		printf("You failed to get the items");
-		if(!potion && !key) printf("You didn't get either");
-		else if(!potion) printf("you forgot item1");
-		else printf("you forgot item2");
-		end();
-	}
+	end();	
 }
 
 char* inventory(int item){
@@ -366,7 +384,7 @@ void climbTree() {
 
 //torreys part
 void ending() {
-  if(potion==1 && key==1 && hasSword==1){
+  if(potion==1 && key==1 && SWORD==1){
     	finished=1;
 	printf ("You've won the Lucky way!\n");
   }else if(braveItem1==1 && braveItem2==1 && braveItem3==1){
@@ -657,7 +675,7 @@ void bear(char* message){
     }
   }
   else if (input == 2){ //Fight
-    if (hasSword == 1){ //Use sword to figh bear
+    if (SWORD == 1){ //Use sword to figh bear
       //VICTORY
       printf("\nYou draw your sword. The bear lets out a roar and begins to charge at you."
              "In an epic battle to the death\n you come out victorious. The bear is dead."
@@ -818,9 +836,9 @@ if(i==1){
 	cave();
 }
 if(i==2){
-	if(hasSword!=1){
+	if(SWORD!=1){
 		printf("Of course its a dead body your luck isn't good enough for it not to be, but hey he's got a sword that you can take!\n");
-		hasSword=1;
+		SWORD=1;
 		cave();
 	}
 	else{
