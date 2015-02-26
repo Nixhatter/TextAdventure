@@ -80,11 +80,11 @@ void startFunc() {
 	printf("Where do you want to go?\n");
 	beginning:
 	flush();
-	printf("(1)the woods \n"
-	"(2)up the hill \n"
-	"(3)follow the rabbit \n"
-	"(4) \n"
-	"(5)follow the sound of running water\n ");
+	printf("(1) The woods \n"
+	"(2) Follow the path \n"
+	"(3) Follow the rabbit \n"
+	"(4) Up the hill\n"
+	"(5) Follow the sound of running water\n ");
 	printf("\n\n");
 	scanf("%c", &c);
 	switch(c){
