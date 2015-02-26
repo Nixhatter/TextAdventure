@@ -10,12 +10,6 @@ int ammo = 0;
 int POTION = 0;		//Luck item 1
 int KEY = 0;		//Luck item 2
 int SWORD = 0;		//Luck item 3
-int braveItem1 = 0;
-int braveItem2 = 0;
-int braveItem3 = 0;
-int survivalItem1 = 0;
-int survivalItem2 = 0;
-int survivalItem3 = 0;
 int hasFish = 0;
 int brokenArm = 0;
 int fruit=0;
@@ -46,7 +40,7 @@ void shed(); 			// Torrey
 void woodsClearing();	// Torrey
 void tree(); 			// Torrey
 void markingsExit();  	// Torrey
-void check();
+void check();			//GENERIC
 void whiteRabbit(); // Dillon
 void teaParty();	// Dillon
 void garden();		// Dillon
@@ -54,8 +48,6 @@ void caterpillar();	// Dillon
 void croquet(); 	// Dillon
 
 char c;
-
-char* inventory(int);
 
 // ----------------------------------------------------------------------
 // GENERIC FUNCTIONS
@@ -70,14 +62,6 @@ void flush(){
 int main() {
 	startFunc();
 	return 0;
-}
-
-char* inventory(int item){
-	switch(item){
-		case 0 : return "you have nothing\n";
-		case 1 : return "you have item 1\n";
-		default : return "default\n";
-	}
 }
 
 void check(){
@@ -116,10 +100,9 @@ void runGame() {
 // OUR JOURNEY BEGINS HERE
 // ----------------------------------------------------------------------
 void startFunc() {
-	printf("You Find yourself in the middle of nothing\n");
+	printf("\n-----------------------------------------\n");
 	printf("Please select an option using\n");
 	printf("the integers on the left.\n\n");
-
 	printf("Where do you want to go?\n");
 	beginning:
 	flush();
@@ -131,16 +114,11 @@ void startFunc() {
 	printf("\n\n");
 	scanf("%c", &c);
 	switch(c){
-		case '1' : printf("going into the woods\n\n");
-				   stayPut();
-		case '2' : printf("going uphill\n\n");
-				   comeToPath();
-		case '3' : printf(" Following the white rabbit \n\n");
-				   whiteRabbit();
-		case '4' : printf("1)Try and find some higher ground \n\n");
-				   hill();
-		case '5' : printf("following the sound of running water.\n");
-				   river("\nYou have followed the sound of running water and come across"
+		case '1' : stayPut();
+		case '2' : comeToPath();
+		case '3' : whiteRabbit();
+		case '4' : hill();
+		case '5' : river("\nYou have followed the sound of running water and come across"
         			" a large river; almost\n30 meters across. There are large rocks and the"
 				" current seems moderately strong.\nSelect your next move:\n1. Attempt"
         			" to catch a fish\n2. Travel upstream\n3. Travel downstream\n4. Cross"
@@ -185,7 +163,6 @@ void caterpillar() {
 	flush();
 	printf("(1)Go to the garden \n");
 	printf("(2)Go to the tea party \n");
-	//if(item1) printf(", (a)go to final area");
 	printf("\n");
 	scanf("%c", &c);
 	switch(c){
@@ -213,7 +190,7 @@ void teaParty() {
 		case '2' : printf("Correct! he exclaims, as he pushes you down a random path \n");
 				garden();
 		case '3' : printf("I don't think that's correct. - the hare says. But you should follow me.");
-					//go to someone elses timeline
+					markingsExit();
 		default  : goto start;
 	}
 }
@@ -305,7 +282,7 @@ void stayPut() {
 
 void buildFire() {
   printf("\n\nYou look around and find some driftwood, sticks, dry leaves, flint and some old magazines.\n");
-  int choice = getUserInput("\nWhat will you build your fire out of?\n\t\ 1. Dry leaves and sticks\n\t 2. Driftwood and magazines\n", 1, 2);
+  int choice = getUserInput("\nWhat will you build your fire out of?\n\t 1. Dry leaves and sticks\n\t 2. Driftwood and magazines\n", 1, 2);
   if (choice == 1) {
     printf("\n\nYou have managed to get a fire started with the flint, sticks and dry leaves.\n\
     	You warm yourself up around the fire and pack the extra materials you gathered in your \n\
@@ -329,15 +306,15 @@ void buildFire() {
 
 
 void fixCellphone() {
-  printf("\n\nYou open up your cellphone and see that it is completely out of battery. \n\
-  You vaguely remember reading an article on how to build your own battery powered charger. \n\
-  It seemed difficult, and you are without a soldering iron, but you think it might be worth a shot. \n\
-  You search around the area and miraculously find some copper wires on the ground. \n\
-  You dig out some batteries from the bottom of your backpack and try to remember the steps to build the charger.\n\
-  You manage to MacGyver a battery that you think will work, now you just have to decide how to connect the wires\n\
-  to your phone's battery. ");
-  int choice = getUserInput("\nWhat will you do? \n\t\ 1. Take the battery out of your phone and try to attach the wires to it\n\
-  \t 2. Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
+  printf("\n\nYou open up your cellphone and see that it is completely out of battery. \n"
+  "You vaguely remember reading an article on how to build your own battery powered charger. \n"
+  "It seemed difficult, and you are without a soldering iron, but you think it might be worth a shot. \n"
+  "You search around the area and miraculously find some copper wires on the ground. \n"
+  "You dig out some batteries from the bottom of your backpack and try to remember the steps to build the charger.\n"
+  "You manage to MacGyver a battery that you think will work, now you just have to decide how to connect the wires\n"
+  "to your phone's battery. ");
+  int choice = getUserInput("\nWhat will you do? \n\t 1. Take the battery out of your phone and try to attach the wires to it\n"
+  "\t 2. Leave the battery in your phone and root around through the power socket with the wires\n", 1, 2);
   if (choice == 1) {
     cellphone = 1;
     printf("\n\nYou are able to get a charge on your cellphone! \n\
@@ -362,10 +339,9 @@ void fixCellphone() {
   }
 }
 
-
 void chooseNewLocation() {
   // Choose between climbing a tree or going back to the original 5 options
-  int choice = getUserInput("\nWhat will you choose?\n\t 1. Climb the tallest tree you see near you\n\t\ 2. Choose one of the original 5 choices\n", 1, 2);
+  int choice = getUserInput("\nWhat will you choose?\n\t 1. Climb the tallest tree you see near you\n\t 2. Choose one of the original 5 choices\n", 1, 2);
   if (choice == 1)
     climbTree();
   else if (choice == 2)
@@ -405,9 +381,9 @@ void climbTree() {
 
    void comeToPath(){
     int choice;
-    printf ("You come across a Path, you don't know where it leads but you can also see what looks to be an opening i bit deeper into the woods.\n");
+    printf ("You come across a Path, you don't know where it leads but you can also see what looks to be an opening a bit deeper into the woods.\n");
     printf ("Would you like to:\n");
-    printf ("1. See whats down the path.\n");
+    printf ("1. See what's down the path.\n");
     printf ("2. Push your way to the clearing.\n");
     printf ("3. Head back to the Start\n");
     scanf("%d",&choice);
@@ -427,7 +403,7 @@ void climbTree() {
 
   void outsideHouse(){
     int choice;
-    printf ("You come across a broken down house, you cant tell if anyone is living there or not. Theres also a shed behind the house which may have useful supplies.\n");
+    printf ("You come across a broken down house, you cant tell if anyone is living there or not. There's also a shed behind the house which may have useful supplies.\n");
     printf ("Would you like to:\n");
     printf ("1. Throw a stone at the window to see if anyone is home.\n");
     printf ("2. Go in the house.\n");
@@ -459,8 +435,8 @@ void climbTree() {
     printf ("1. Demand he gives you the shotgun.\n");
     printf ("2. Open cupboard\n");
     printf ("3. Ask for the shotgun.\n");
-    printf ("4. Take ths shotgun.\n");
-    printf ("5. leave the house\n");
+    printf ("4. Take the shotgun.\n");
+    printf ("5. Leave the house\n");
     scanf("%d",&choice);
     if (choice==1){
       	printf ("Oh he gives you the shotgun alright... right in the chest.\n");
@@ -722,7 +698,7 @@ void waterfall(){
   health -= 10;
   check();
   printf("You lose 10 health. Current health: %d\n", health);
-  //GO TO SOMEONE ELSES GAME
+		markingsExit();
 }
 
 void beaver(char* message){
@@ -788,7 +764,7 @@ if(i==1){
 	}
 	else{
 		printf("You've picked all the flowers and possibly ruined this valley for the next passer by, but hey you found a path.\n");
-		cometopath();
+		comeToPath();
 	}	
 }
 if(i==2){
@@ -829,7 +805,7 @@ printf("2)Adventure calls and every good adventure needs a cave! You rush forwar
 printf("3)Up this high you hear the rude bleating of a mountain goat, you think he'd make a fine coat to keep you warm. After him!\n");
 printf("4)Your on a mountain, how could you pass up the chance to yodel?\n");
 scanf("%d", &i);
-printf("\n \n")
+printf("\n \n");
 if(i==1){
 	printf(" you slowly ease yourself along the thin path, hugging close to the rock wall in front of you.\n");
 	cliff();
