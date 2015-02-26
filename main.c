@@ -474,9 +474,7 @@ void ending() {
       	shed();
     }else if (choice==2){
       	printf ("As you walk in something hits you in the back of the head and you black out....\n"); 
-      	
-      	// Just commenting the line below out for now to see if the rest will compile!! - Laura
-      	//teaParty(); // to alice and wonderland branch
+      	teaParty(); // to alice and wonderland branch
     }else if (choice==3){
       	printf ("You walk back around front.\n");
       	outsideHouse();
