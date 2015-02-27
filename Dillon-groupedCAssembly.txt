@@ -1,0 +1,643 @@
+// ----------------------------------------------------------------------
+// Dillon's Code
+// ----------------------------------------------------------------------
+———————————C CODE—————————
+void whiteRabbit() {
+	printf("\n");
+	printf("You fall into a rabbit hole!\n");
+	printf("There is a POTION and a KEY on a table, and a really small door. The door is only big enough to fit a mouse.");
+	printf("\n");
+	start:
+	flush();
+	printf("(1)Drink the POTION \n");
+	printf("(2)Grab the KEY \n");
+	printf("(3)Attempt to go through the door\n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("You drink the POTION\n");
+				   POTION=1; goto start;
+		case '2' : printf("The KEY is now in your pocket\n");
+					KEY=1; goto start;
+		case '3' : if(POTION & KEY) {
+						printf("You go through the door!\n"); 
+						caterpillar();
+					}
+					else printf("The door is far too small and seems to be locked.\n");
+		default  : goto start;
+	}
+}
+———————————END C CODE—————————
+
+———————————ARM ASSEMBLY CODE—————————
+.LC15:				@Print statements
+	.ascii	"You fall into a rabbit hole!\000"
+	.align	2
+.LC16:
+	.ascii	"There is a POTION and a KEY on a table, and a reall"
+	.ascii	"y small door. The door is only big enough to fit a "
+	.ascii	"mouse.\000"
+	.align	2
+.LC17:
+	.ascii	"(1)Drink the POTION \000"
+	.align	2
+.LC18:
+	.ascii	"(2)Grab the KEY \000"
+	.align	2
+.LC19:
+	.ascii	"(3)Attempt to go through the door\000"
+	.align	2
+.LC20:
+	.ascii	"You drink the POTION\000"
+	.align	2
+.LC21:
+	.ascii	"The KEY is now in your pocket\000"
+	.align	2
+.LC22:
+	.ascii	"You go through the door!\000"
+	.align	2
+.LC23:
+	.ascii	"The door is far too small and seems to be locked.\000"
+	.text
+	.align	2
+	.global	whiteRabbit
+	.type	whiteRabbit, %function
+whiteRabbit: @START of Dillons comments
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar		@print statements
+	ldr	r0, .L37
+	bl	puts
+	ldr	r3, .L37+4
+	mov	r0, r3
+	bl	printf
+	mov	r0, #10
+	bl	putchar		@end print statements
+.L30:
+	bl	flush		@calls flush()
+	ldr	r0, .L37+8
+	bl	puts
+	ldr	r0, .L37+12
+	bl	puts
+	ldr	r0, .L37+16
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L37+20
+	mov	r0, r3
+	ldr	r1, .L37+24
+	bl	__isoc99_scanf		@	fflush(stdout);
+	ldr	r3, .L37+24	
+	ldrb	r3, [r3, #0]	@	fflush(stdin);
+	cmp	r3, #50
+	beq	.L33
+	cmp	r3, #51
+	beq	.L34
+	cmp	r3, #49
+	bne	.L36
+.L32:				@ case 1
+	ldr	r0, .L37+28
+	bl	puts
+	ldr	r3, .L37+32
+	mov	r2, #1		@set POTION=1
+	str	r2, [r3, #0]	
+	b	.L30		@go back to start of whiteRabbit
+.L33:				@case 2
+	ldr	r0, .L37+36
+	bl	puts	
+	ldr	r3, .L37+40
+	mov	r2, #1		@set KEY=1
+	str	r2, [r3, #0]
+	b	.L30		@go back to start of whiteRabbit
+.L34:				@case 3
+	ldr	r3, .L37+32
+	ldr	r2, [r3, #0]
+	ldr	r3, .L37+40
+	ldr	r3, [r3, #0]
+	and	r3, r2, r3
+	cmp	r3, #0		@if potion=1 & key=1
+	beq	.L35
+	ldr	r0, .L37+44
+	bl	puts
+	bl	caterpillar	@call caterpillar()
+	b	.L30
+.L35: @if potion=0 or key=0
+	ldr	r0, .L37+48
+	bl	puts
+	b	.L30
+.L36:	@default switch, goes back to whiteRabbit()
+	b	.L30
+
+———————————END ARM ASSEMBLY CODE—————————
+———————————C CODE—————————
+void caterpillar() {
+	printf("\n");
+	printf("You meet a caterpillar smoking a hookah!\n");
+	printf("He tells you to be weary of the queen and sends you on your way\n");
+	printf("\n");
+	start:
+	flush();
+	printf("(1)Go to the garden \n");
+	printf("(2)Go to the tea party \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : garden();
+		case '2' : teaParty();
+		default  : goto start;
+	}
+}
+———————————END C CODE—————————
+
+———————————ARM ASSEMBLY CODE—————————
+.LC24: 		@caterpillar()
+	.ascii	"You meet a caterpillar smoking a hookah!\000"  @print statements
+	.align	2
+.LC25:
+	.ascii	"He tells you to be weary of the queen and sends you"
+	.ascii	" on your way\000"
+	.align	2
+.LC26:
+	.ascii	"(1)Go to the garden \000"
+	.align	2
+.LC27:
+	.ascii	"(2)Go to the tea party \000"  @end print statements
+	.text
+	.align	2
+	.global	caterpillar
+	.type	caterpillar, %function
+caterpillar:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr} @print statements
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar
+	ldr	r0, .L45
+	bl	puts
+	ldr	r0, .L45+4
+	bl	puts
+	mov	r0, #10
+	bl	putchar			@end print statements
+.L40:
+	bl	flush			@flush()
+	ldr	r0, .L45+8
+	bl	puts
+	ldr	r0, .L45+12
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L45+16
+	mov	r0, r3
+	ldr	r1, .L45+20
+	bl	__isoc99_scanf 		@ fflush(stdout);
+	ldr	r3, .L45+20
+	ldrb	r3, [r3, #0]	@ fflush(stdin);
+	cmp	r3, #49				@ case '1' : garden();	
+	beq	.L42
+	cmp	r3, #50				@ case '2' : teaParty();
+	beq	.L43
+	b	.L44				@ default  : goto start;
+.L42:
+	bl	garden				@garden();
+.L43:
+	bl	teaParty			@teaParty();
+	b	.L40
+.L44:
+	b	.L40				@ goto start
+———————————END ARM ASSEMBLY CODE—————————
+———————————C CODE—————————
+void teaParty() {
+	printf("\n");
+	printf("You approach a house in the woods..\n");
+	printf("There's a rabbit and a man with a rather large tophat on. \n");
+	printf("The man asks Why is a raven like a writing desk? \n");
+	printf("\n");
+	start:
+	flush();
+	printf("(1) I don't have the faintest idea \n");
+	printf("(2) because they both produce flat notes! \n");
+	printf("(3) Edgar Allen Poe wrote on both \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("Try again! \n");
+			   goto start;
+		case '2' : printf("Correct! he exclaims, as he pushes you down a random path \n");
+				garden();
+		case '3' : printf("I don't think that's correct. - the hare says. But you should follow me.");
+					markingsExit();
+		default  : goto start;
+	}
+}
+———————————END C CODE—————————
+———————————ARM ASSEMBLY CODE—————————
+.LC28:						@print statements
+	.ascii	"You approach a house in the woods..\000"
+	.align	2
+.LC29:
+	.ascii	"There's a rabbit and a man with a rather large toph"
+	.ascii	"at on. \000"
+	.align	2
+.LC30:
+	.ascii	"The man asks Why is a raven like a writing desk? \000"
+	.align	2
+.LC31:
+	.ascii	"(1) I don't have the faintest idea \000"
+	.align	2
+.LC32:
+	.ascii	"(2) because they both produce flat notes! \000"
+	.align	2
+.LC33:
+	.ascii	"(3) Edgar Allen Poe wrote on both \000"
+	.align	2  			@ end print statements
+.LC34:					@ case '1'
+	.ascii	"Try again! \000"
+	.align	2
+.LC35:					@ case '2'
+	.ascii	"Correct! he exclaims, as he pushes you down a rando"
+	.ascii	"m path \000"
+	.align	2
+.LC36:					@case '3'
+	.ascii	"I don't think that's correct. - the hare says. But "
+	.ascii	"you should follow me.\000"
+	.text
+	.align	2
+	.global	teaParty
+	.type	teaParty, %function
+teaParty:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar			@print statements
+	ldr	r0, .L54
+	bl	puts
+	ldr	r0, .L54+4
+	bl	puts
+	ldr	r0, .L54+8
+	bl	puts
+	mov	r0, #10
+	bl	putchar			@end print statements
+.L48:		
+	bl	flush			@flush()
+	ldr	r0, .L54+12
+	bl	puts
+	ldr	r0, .L54+16
+	bl	puts
+	ldr	r0, .L54+20
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L54+24
+	mov	r0, r3
+	ldr	r1, .L54+28
+	bl	__isoc99_scanf		@ fflush(stdout);
+	ldr	r3, .L54+28
+	ldrb	r3, [r3, #0]	@ fflush(stdin);
+	cmp	r3, #50				@ switch(c) case 1
+	beq	.L51
+	cmp	r3, #51				@ switch(c) case 2
+	beq	.L52
+	cmp	r3, #49				@ switch(c) case 3
+	bne	.L53
+.L50:						@ case '1' : printf("Try again! \n");
+	ldr	r0, .L54+32
+	bl	puts
+	b	.L48		@goto start;
+.L51:						@ case '2' : printf("Correct! he exclaims, as he pushes you down a random path \n");
+	ldr	r0, .L54+36
+	bl	puts
+	bl	garden		@call garden()
+.L52:					@ case '3' : printf("I don't think that's correct. - the hare says. But you should follow me.");
+	ldr	r3, .L54+40
+	mov	r0, r3
+	bl	printf
+	bl	markingsExit	@call markingsexit();
+	b	.L48
+.L53:
+	b	.L48
+———————————END ARM ASSEMBLY CODE—————————
+———————————C CODE—————————
+void garden() {
+	printf("\n");
+	printf(" You approach a garden with red roses dripping of paint.\n");
+	printf(" The Red Queen approaches and asks if you want to play croquet with her \n");
+	start:
+	flush();
+	printf("(1) Accept the invitation \n");
+	printf("(2) Refuse politely \n");
+	printf("(3) Refuse aggressively \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("Let's play");
+			   croquet();
+		case '2' : printf("OFF WITH HER HEAD she exclaims \n");
+			   health=0;
+			   printf("You have been beheaded");
+			   check();
+		case '3' : printf("OFF WITH HER HEAD she exclaims \n");
+			   health=0;
+			   printf("You have been beheaded");
+			   check();
+		default  : printf("You should have accepted the invitation.");
+		health=0;
+		check();
+	}
+}
+———————————END C CODE—————————
+———————————ARM ASSEMBLY CODE—————————
+.LC37:				@Print statements
+	.ascii	" You approach a garden with red roses dripping of p"
+	.ascii	"aint.\000"
+	.align	2
+.LC38:
+	.ascii	" The Red Queen approaches and asks if you want to p"
+	.ascii	"lay croquet with her \000"
+	.align	2
+.LC39:
+	.ascii	"(1) Accept the invitation \000"
+	.align	2
+.LC40:
+	.ascii	"(2) Refuse politely \000"
+	.align	2
+.LC41:
+	.ascii	"(3) Refuse aggressively \000"
+	.align	2
+.LC42:
+	.ascii	"Let's play\000"
+	.align	2
+.LC43:
+	.ascii	"OFF WITH HER HEAD she exclaims \000"
+	.align	2
+.LC44:
+	.ascii	"You have been beheaded\000"
+	.align	2
+.LC45:
+	.ascii	"You should have accepted the invitation.\000"
+	.text				
+	.align	2
+	.global	garden
+	.type	garden, %function
+garden:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar
+	ldr	r0, .L62
+	bl	puts
+	ldr	r0, .L62+4
+	bl	puts			@end print statements
+.L57:
+	bl	flush			@flush()
+	ldr	r0, .L62+8
+	bl	puts
+	ldr	r0, .L62+12
+	bl	puts
+	ldr	r0, .L62+16
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L62+20
+	mov	r0, r3
+	ldr	r1, .L62+24
+	bl	__isoc99_scanf		@ fflush(stdout);
+	ldr	r3, .L62+24
+	ldrb	r3, [r3, #0]	@ fflush(stdin);
+	cmp	r3, #50				@switch 1
+	beq	.L60
+	cmp	r3, #51				@switch 2
+	beq	.L61
+	cmp	r3, #49				@ switch 3 
+	bne	.L58
+.L59:						@ case '1' : printf("Let's play"); croquet();
+	ldr	r3, .L62+28
+	mov	r0, r3
+	bl	printf
+	bl	croquet
+.L60:						@ case '2' : printf("OFF WITH HER HEAD she exclaims \n");
+	ldr	r0, .L62+32
+	bl	puts
+	ldr	r3, .L62+36
+	mov	r2, #0				@ health=0;
+	str	r2, [r3, #0]
+	ldr	r3, .L62+40
+	mov	r0, r3
+	bl	printf				@ printf("You have been beheaded");
+	bl	check				@ check();
+.L61:						@ case '3' : printf("OFF WITH HER HEAD she exclaims \n");
+	ldr	r0, .L62+32
+	bl	puts
+	ldr	r3, .L62+36
+	mov	r2, #0				@ health=0;
+	str	r2, [r3, #0]
+	ldr	r3, .L62+40
+	mov	r0, r3
+	bl	printf				@ printf("You have been beheaded");
+	bl	check				@ check()
+.L58:						@ default  : printf("You should have accepted the invitation.");
+	ldr	r3, .L62+44	
+	mov	r0, r3
+	bl	printf
+	ldr	r3, .L62+36
+	mov	r2, #0				@ health=0;
+	str	r2, [r3, #0]	
+	bl	check				@ check();
+	ldmfd	sp!, {fp, pc}
+———————————END ARM ASSEMBLY CODE—————————
+———————————C CODE—————————
+void croquet() {
+	printf("\n");
+	printf(" You grab your flamingo and play your game. To your surprise, you're awfully good and beat the Queen!.\n");
+	printf(" Sadly, she accuses you of cheating! \n");
+	printf(" You find yourself in a courthouse, packed with people. \n");
+	printf("\n");
+	start:
+	flush();
+	printf("(1) Plead innocent \n");
+	printf("(2) Plead guilty \n");
+	printf("(3) Attempt to grab a weapon (50 percent chance of success) \n");
+	printf("\n");
+	scanf("%c", &c);
+	switch(c){
+		case '1' : printf("The judge believes you, but the Queen demands you die! \n");
+				printf("You have been found guilty and sentenced to death");
+				health=0;
+				check();
+		case '2' : printf("Suit yourself \n");
+			   printf("You've been sentenced to death by beheading");
+			   health=0;
+			   check();
+		case '3' :
+				SWORD = 1;
+				printf("You manage to grab a sword and go directly for the Queen! \n");
+				printf("Then you wake up... \n");
+				exit(0);
+		default  : goto start;
+	}
+}
+———————————END C CODE—————————
+———————————ARM assembly language—————————
+.L62:						@ print statements
+	.word	.LC37
+	.word	.LC38
+	.word	.LC39
+	.word	.LC40
+	.word	.LC41
+	.word	.LC13
+	.word	c
+	.word	.LC42
+	.word	.LC43
+	.word	health
+	.word	.LC44
+	.word	.LC45
+	.size	garden, .-garden
+	.section	.rodata
+	.align	2
+.LC46:
+	.ascii	" You grab your flamingo and play your game. To your"
+	.ascii	" surprise, you're awfully good and beat the Queen!."
+	.ascii	"\000"
+	.align	2
+.LC47:
+	.ascii	" Sadly, she accuses you of cheating! \000"
+	.align	2
+.LC48:
+	.ascii	" You find yourself in a courthouse, packed with peo"
+	.ascii	"ple. \000"
+	.align	2
+.LC49:
+	.ascii	"(1) Plead innocent \000"
+	.align	2
+.LC50:
+	.ascii	"(2) Plead guilty \000"
+	.align	2
+.LC51:
+	.ascii	"(3) Attempt to grab a weapon (50 percent chance of "
+	.ascii	"success) \000"
+	.align	2
+.LC52:
+	.ascii	"The judge believes you, but the Queen demands you d"
+	.ascii	"ie! \000"
+	.align	2
+.LC53:
+	.ascii	"You have been found guilty and sentenced to death\000"
+	.align	2
+.LC54:
+	.ascii	"Suit yourself \000"
+	.align	2
+.LC55:
+	.ascii	"You've been sentenced to death by beheading\000"
+	.align	2
+.LC56:
+	.ascii	"You manage to grab a sword and go directly for the "
+	.ascii	"Queen! \000"
+	.align	2
+.LC57:
+	.ascii	"Then you wake up... \000"
+	.text
+	.align	2
+	.global	croquet
+	.type	croquet, %function
+croquet:
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #10
+	bl	putchar
+	ldr	r0, .L71
+	bl	puts
+	ldr	r0, .L71+4
+	bl	puts
+	ldr	r0, .L71+8
+	bl	puts
+	mov	r0, #10
+	bl	putchar				@end print statements
+.L65:
+	bl	flush				@ flush();
+	ldr	r0, .L71+12
+	bl	puts
+	ldr	r0, .L71+16
+	bl	puts
+	ldr	r0, .L71+20
+	bl	puts
+	mov	r0, #10
+	bl	putchar
+	ldr	r3, .L71+24
+	mov	r0, r3
+	ldr	r1, .L71+28
+	bl	__isoc99_scanf		@ fflush(stdout);
+	ldr	r3, .L71+28
+	ldrb	r3, [r3, #0]	@ fflush(stdin);
+	cmp	r3, #50				@switch 1
+	beq	.L68
+	cmp	r3, #51				@switch 2
+	beq	.L69
+	cmp	r3, #49				@switch 3
+	bne	.L70
+.L67:				@case '1' : printf("The judge believes you, but the Queen demands you die! \n");
+	ldr	r0, .L71+32
+	bl	puts
+	ldr	r3, .L71+36
+	mov	r0, r3
+	bl	printf
+	ldr	r3, .L71+40
+	mov	r2, #0			@health=0
+	str	r2, [r3, #0]
+	bl	check			@check();
+.L68:					@ case '2' : printf("Suit yourself \n");
+	ldr	r0, .L71+44
+	bl	puts
+	ldr	r3, .L71+48
+	mov	r0, r3
+	bl	printf
+	ldr	r3, .L71+40
+	mov	r2, #0			@health=0
+	str	r2, [r3, #0]
+	bl	check			@check()
+.L69:					@case '3' 
+	ldr	r3, .L71+52
+	mov	r2, #1			@SWORD=1
+	str	r2, [r3, #0]
+	ldr	r0, .L71+56
+	bl	puts
+	ldr	r0, .L71+60
+	bl	puts
+	mov	r0, #0
+	bl	exit			@exit(0)
+.L70:
+	b	.L65
+.L72:
+	.align	2
+.L71:
+	.word	.LC46
+	.word	.LC47
+	.word	.LC48
+	.word	.LC49
+	.word	.LC50
+	.word	.LC51
+	.word	.LC13
+	.word	c
+	.word	.LC52
+	.word	.LC53
+	.word	health
+	.word	.LC54
+	.word	.LC55
+	.word	SWORD
+	.word	.LC56
+	.word	.LC57
+	.size	croquet, .-croquet
+	.section	.rodata
+	.align	2			@END OF DILLON'S COMMENTING
+———————————END ARM assembly language—————————
+// ----------------------------------------------------------------------
+// End of Dillon's Code
+// ----------------------------------------------------------------------
