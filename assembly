@@ -1107,37 +1107,37 @@ fixCellphone:
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	sub	sp, sp, #8
-	ldr	r3, .L88
+	ldr	r3, .L88		@(printf(“You open the cellphone (...)
 	mov	r0, r3
-	bl	printf
-	ldr	r0, .L88+4
+	bl	printf			@)
+	ldr	r0, .L88+4		
 	mov	r1, #1
 	mov	r2, #2
-	bl	getUserInput
-	str	r0, [fp, #-8]
-	ldr	r3, [fp, #-8]
+	bl	getUserInput		(choice = getUserInput(...)
+	str	r0, [fp, #-8]		@)
+	ldr	r3, [fp, #-8]		@(if (choice == 1)
 	cmp	r3, #1
-	bne	.L86
-	ldr	r3, .L88+8
-	mov	r2, #1
-	str	r2, [r3, #0]
-	ldr	r0, .L88+12
-	bl	puts
-	bl	chooseNewLocation
-	b	.L85
+	bne	.L86			@)
+	ldr	r3, .L88+8		@(cellphone = 1
+	mov	r2, #1		
+	str	r2, [r3, #0]		@)
+	ldr	r0, .L88+12		@(printf(“You are able to get ...”)
+	bl	puts			@)
+	bl	chooseNewLocation	@(chooseNewLocation
+	b	.L85			@)
 .L86:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
-	bne	.L85
-	ldr	r0, .L88+16
-	bl	puts
-	ldr	r3, .L88+20
+	ldr	r3, [fp, #-8]		@(else if (choice == 2)
+	cmp	r3, #2			
+	bne	.L85			@)
+	ldr	r0, .L88+16		@(printf(“You eagerly push the ...”)
+	bl	puts			@)
+	ldr	r3, .L88+20		@(finished = 1
 	mov	r2, #1
-	str	r2, [r3, #0]
-	ldr	r3, .L88+24
-	mov	r2, #0
-	str	r2, [r3, #0]
-	bl	check
+	str	r2, [r3, #0]		@)
+	ldr	r3, .L88+24		@(health = 0
+	mov	r2, #0			
+	str	r2, [r3, #0]		@)
+	bl	check			@(check())
 .L85:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
@@ -1171,18 +1171,19 @@ chooseNewLocation:
 	ldr	r0, .L93
 	mov	r1, #1
 	mov	r2, #2
-	bl	getUserInput
-	str	r0, [fp, #-8]
-	ldr	r3, [fp, #-8]
-	cmp	r3, #1
-	bne	.L91
-	bl	climbTree
-	b	.L90
+	bl	getUserInput		@(int choice = getUserInput(...)
+	str	r0, [fp, #-8]		@)
+	ldr	r3, [fp, #-8]		@(if (choice == 1)
+	cmp	r3, #1			
+	bne	.L91			@)
+	bl	climbTree		@(climbTree()
+	b	.L90			@)
 .L91:
-	ldr	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]		@(if (choice == 2)
 	cmp	r3, #2
-	bne	.L90
-	bl	startFunc
+	bne	.L90			@)	
+	bl	startFunc		@(startFunc())
+
 .L90:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
@@ -1225,9 +1226,9 @@ climbTree:
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	sub	sp, sp, #136
-	ldr	r0, .L101
-	bl	puts
-	ldr	r3, .L101+4
+	ldr	r0, .L101		@(printf(“You decide to climb a tall..)
+	bl	puts			@)
+	ldr	r3, .L101+4		@(char choices[] = “What will you do?...”
 	sub	ip, fp, #72
 	mov	lr, r3
 	ldmia	lr!, {r0, r1, r2, r3}
@@ -1238,8 +1239,8 @@ climbTree:
 	stmia	ip!, {r0, r1, r2, r3}
 	ldmia	lr, {r0, r1, r2, r3}
 	stmia	ip!, {r0, r1, r2}
-	strb	r3, [ip, #0]
-	ldr	r3, .L101+8
+	strb	r3, [ip, #0]		@)
+	ldr	r3, .L101+8		@(char specialChoice[] = “Try your...”
 	sub	ip, fp, #136
 	mov	lr, r3
 	ldmia	lr!, {r0, r1, r2, r3}
@@ -1250,57 +1251,57 @@ climbTree:
 	stmia	ip!, {r0, r1, r2, r3}
 	ldmia	lr, {r0, r1, r2, r3}
 	stmia	ip!, {r0, r1, r2}
-	strh	r3, [ip, #0]	@ movhi
-	ldr	r2, .L101+12
+	strh	r3, [ip, #0]		@)
+	ldr	r2, .L101+12		@(printf(“%s”, choices
 	sub	r3, fp, #72
 	mov	r0, r2
 	mov	r1, r3
-	bl	printf
-	ldr	r3, .L101+16
+	bl	printf			@)
+	ldr	r3, .L101+16		@(if (cellphone == 1)
 	ldr	r3, [r3, #0]
 	cmp	r3, #1
-	bne	.L96
-	ldr	r2, .L101+12
+	bne	.L96			@)
+	ldr	r2, .L101+12		@(printf(“%s”,specialChoice
 	sub	r3, fp, #136
 	mov	r0, r2
-	mov	r1, r3
-	bl	printf
+	mov	r1, r3			@)
+	bl	printf			@(choice = getUserInput(...)
 	ldr	r0, .L101+20
 	mov	r1, #1
 	mov	r2, #3
-	bl	getUserInput
-	str	r0, [fp, #-8]
+	bl	getUserInput		
+	str	r0, [fp, #-8]		@)
 	b	.L97
 .L96:
-	ldr	r0, .L101+20
+	ldr	r0, .L101+20		@(choice = getUserInput(...)
 	mov	r1, #1
 	mov	r2, #2
 	bl	getUserInput
-	str	r0, [fp, #-8]
+	str	r0, [fp, #-8]		@)
 .L97:
-	ldr	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]		@(if (choice == 1)	
 	cmp	r3, #1
-	bne	.L98
-	bl	cliff
-	b	.L99
+	bne	.L98			@)
+	bl	cliff			@(cliff()
+	b	.L99			@)
 .L98:
-	ldr	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]		@(else if (choice == 2)
 	cmp	r3, #2
-	bne	.L100
-	bl	outsideHouse
-	b	.L99
+	bne	.L100			@)
+	bl	outsideHouse		@(outsideHouse
+	b	.L99			@)
 .L100:
-	ldr	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]		@(else if (choice == 3)
 	cmp	r3, #3
-	bne	.L99
-	ldr	r0, .L101+24
-	bl	puts
+	bne	.L99			@)
+	ldr	r0, .L101+24		@(printf(“You open up the ...”)
+	bl	puts			@)
 .L99:
-	ldr	r3, .L101+28
+	ldr	r3, .L101+28		@(finished = 1
 	mov	r2, #1
-	str	r2, [r3, #0]
-	mov	r0, #0
-	bl	exit
+	str	r2, [r3, #0]		@)
+	mov	r0, #0			@(exit 0
+	bl	exit			@)
 .L102:
 	.align	2
 .L101:
@@ -1314,7 +1315,7 @@ climbTree:
 	.word	finished
 	.size	climbTree, .-climbTree
 	.section	.rodata
-	.align	2
+	.align	2 @(End of Laura’s commenting)
 .LC74:
 	.ascii	"You come across a Path, you don't know where it lea"
 	.ascii	"ds but you can also see what looks to be an opening"
