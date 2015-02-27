@@ -2616,74 +2616,79 @@ beaver:
 	.align	2
 	.global	hill
 	.type	hill, %function
-hill:
+#-----------------------------------------------------------------------------------
+#
+# Jon Creighton's Comments
+#
+#-----------------------------------------------------------------------------------	
+hill:				
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	sub	sp, sp, #8
-	ldr	r3, .L191
-	mov	r0, r3
-	bl	printf
-	ldr	r2, .L191+4
-	ldr	r3, .L191+8
+	ldr	r3, .L191	@( Loads messages for the hill location)
+	mov	r0, r3	
+	bl	printf		@(prints message .LC159, location description) 
+	ldr	r2, .L191+4	@(Loads message .LC160, current health message) 
+	ldr	r3, .L191+8	@(Loads var health)
 	ldr	r3, [r3, #0]
 	mov	r0, r2
 	mov	r1, r3
-	bl	printf
-	ldr	r0, .L191+12
-	bl	puts
+	bl	printf		@(prints current heallth message %d)
+	ldr	r0, .L191+12	
+	bl	puts		@(load and prints hill option 1, .LC161) 
 	ldr	r0, .L191+16
-	bl	puts
+	bl	puts		@(load and prints hill option 2, .LC162)
 	ldr	r0, .L191+20
-	bl	puts
-	bl	flush
-	ldr	r2, .L191+24
+	bl	puts		@(load and print hill option 3, .LC163) 
+	bl	flush		@(calls flush())
+	ldr	r2, .L191+24	@(load .LC4 "%d")
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
-	bl	__isoc99_scanf
-	ldr	r0, .L191+28
+	bl	__isoc99_scanf	@(scanf for user input) 
+	ldr	r0, .L191+28	@(line break)
 	bl	puts
 	ldr	r3, [fp, #-8]
-	cmp	r3, #1
+	cmp	r3, #1		@(compare user input to 1)
 	bne	.L187
-	ldr	r0, .L191+32
+	ldr	r0, .L191+32	@(load bee swarm message)
 	bl	puts
-	ldr	r3, .L191+8
+	ldr	r3, .L191+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #10
+	sub	r2, r3, #10	@(-10 health)
 	ldr	r3, .L191+8
 	str	r2, [r3, #0]
-	bl	check
+	bl	check		@(call check())
 	bl	hill
 .L187:
 	ldr	r3, [fp, #-8]
-	cmp	r3, #2
+	cmp	r3, #2		@(compare user input to 2)
 	bne	.L188
-	ldr	r0, .L191+36
+	ldr	r0, .L191+36	@(load sun burn message)
 	bl	puts
-	ldr	r3, .L191+8
+	ldr	r3, .L191+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #10
+	sub	r2, r3, #10	@(-10 health)
 	ldr	r3, .L191+8
 	str	r2, [r3, #0]
-	bl	check
+	bl	check		@(call check())
 	bl	hill
 .L188:
 	ldr	r3, [fp, #-8]
-	cmp	r3, #3
+	cmp	r3, #3		@(compare user input to three)
 	bne	.L189
-	ldr	r0, .L191+40
+	ldr	r0, .L191+40	@(load valley message) 
 	bl	puts
-	bl	valley
+	bl	valley		@(call valley)
 .L189:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #4
 	beq	.L186
-	ldr	r0, .L191+44
+	ldr	r0, .L191+44	@(invalid user input message)
 	bl	puts
-	bl	hill
+	bl	hill		@(call hill())
 .L186:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
@@ -2759,99 +2764,99 @@ valley:
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	sub	sp, sp, #8
-	ldr	r0, .L201
+	ldr	r0, .L201	@(load and printssthe valley description message)
 	bl	puts
-	ldr	r2, .L201+4
-	ldr	r3, .L201+8
+	ldr	r2, .L201+4	@(load health message)
+	ldr	r3, .L201+8	@(health var)
 	ldr	r3, [r3, #0]
 	mov	r0, r2
 	mov	r1, r3
 	bl	printf
-	ldr	r0, .L201+12
+	ldr	r0, .L201+12	@(load and print valley option 1)
 	bl	puts
-	ldr	r0, .L201+16
+	ldr	r0, .L201+16	@(load and print valley option 2)
 	bl	puts
-	ldr	r0, .L201+20
+	ldr	r0, .L201+20	@(load and print valley option 3)
 	bl	puts
-	bl	flush
-	ldr	r2, .L201+24
+	bl	flush		@(call flush())
+	ldr	r2, .L201+24	@(load "%d" for the scanf)
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r0, .L201+28
+	ldr	r0, .L201+28	@(line break)
 	bl	puts
 	ldr	r3, [fp, #-8]
-	cmp	r3, #1
+	cmp	r3, #1		@(scanf '%d'== 1)
 	bne	.L194
-	ldr	r3, .L201+32
+	ldr	r3, .L201+32	@(load var RED_FLOWERS)
 	ldr	r3, [r3, #0]
-	cmp	r3, #1
+	cmp	r3, #1		@(in the c code its check if RED_FLOWERS!=1)
 	beq	.L195
-	ldr	r0, .L201+36
+	ldr	r0, .L201+36	@(red flower message)
 	bl	puts
 	ldr	r3, .L201+32
 	mov	r2, #1
-	str	r2, [r3, #0]
-	bl	valley
+	str	r2, [r3, #0]	@(set RED_FLOWERS=1)
+	bl	valley		@(call valley())
 	b	.L194
 .L195:
 	ldr	r0, .L201+40
 	bl	puts
 	bl	comeToPath
 .L194:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
+	ldr	r3, [fp, #-8]	@(load scanf '%d')
+	cmp	r3, #2		@('%d'==2)
 	bne	.L196
-	ldr	r0, .L201+44
+	ldr	r0, .L201+44	@(valley-moutain message)  
 	bl	puts
-	ldr	r3, .L201+8
+	ldr	r3, .L201+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #10
+	sub	r2, r3, #10	@(-10 health)
 	ldr	r3, .L201+8
 	str	r2, [r3, #0]
-	bl	check
+	bl	check		@(call check())
 	bl	mountain
 .L196:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
+	ldr	r3, [fp, #-8]	@(load scanf'%d')
+	cmp	r3, #3		@('%d'==3)
 	bne	.L197
-	ldr	r3, .L201+48
+	ldr	r3, .L201+48	@(var fruiit)
 	ldr	r3, [r3, #0]
-	cmp	r3, #1
+	cmp	r3, #1		@(fruit ==1)
 	beq	.L198
-	ldr	r0, .L201+52
+	ldr	r0, .L201+52	@(fruit success message)
 	bl	puts
-	ldr	r3, .L201+48
+	ldr	r3, .L201+4	@( current health message)
 	mov	r2, #1
 	str	r2, [r3, #0]
-	ldr	r3, .L201+8
+	ldr	r3, .L201+8	@(load health)
 	ldr	r3, [r3, #0]
-	add	r2, r3, #20
+	add	r2, r3, #20	@(+20 health)
 	ldr	r3, .L201+8
 	str	r2, [r3, #0]
 	bl	valley
 	b	.L197
 .L198:
-	ldr	r0, .L201+56
+	ldr	r0, .L201+56 	@(fruit fail message)
 	bl	puts
-	ldr	r3, .L201+8
+	ldr	r3, .L201+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #10
+	sub	r2, r3, #10	@(-10 health)
 	ldr	r3, .L201+8
 	str	r2, [r3, #0]
 	bl	check
 	bl	valley
 .L197:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #4
+	ldr	r3, [fp, #-8]	@(scanf'%d')
+	cmp	r3, #4		@('%d'==4)
 	bne	.L199
-	ldr	r0, .L201+60
+	ldr	r0, .L201+60	@(valley-hill mesage)
 	bl	puts
-	bl	hill
+	bl	hill		@(call hill())
 	b	.L193
 .L199:
-	ldr	r0, .L201+64
+	ldr	r0, .L201+64	@(invalid input message)
 	bl	puts
 	bl	valley
 .L193:
@@ -2934,72 +2939,72 @@ mountain:
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	sub	sp, sp, #8
-	ldr	r3, .L209
+	ldr	r3, .L209	@(print mountain description)
 	mov	r0, r3
 	bl	printf
-	ldr	r2, .L209+4
-	ldr	r3, .L209+8
+	ldr	r2, .L209+4	@(health message)
+	ldr	r3, .L209+8	@(health var)
 	ldr	r3, [r3, #0]
 	mov	r0, r2
 	mov	r1, r3
 	bl	printf
-	ldr	r0, .L209+12
+	ldr	r0, .L209+12	@(option1 message)
 	bl	puts
-	ldr	r0, .L209+16
+	ldr	r0, .L209+16	@(option 2 mesage)
 	bl	puts
-	ldr	r0, .L209+20
+	ldr	r0, .L209+20	@(option 3 message)
 	bl	puts
-	ldr	r0, .L209+24
+	ldr	r0, .L209+24	@(option 4 message)
 	bl	puts
-	bl	flush
-	ldr	r2, .L209+28
+	bl	flush		@(call flush())
+	ldr	r2, .L209+28	@(load scanf '%d')
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r0, .L209+32
+	ldr	r0, .L209+32	@(print line break)
 	bl	puts
 	ldr	r3, [fp, #-8]
-	cmp	r3, #1
+	cmp	r3, #1		@('%d'==1)
 	bne	.L204
-	ldr	r0, .L209+36
+	ldr	r0, .L209+36	@(print mountain-cliff message) 
 	bl	puts
-	bl	cliff
+	bl	cliff		@(call cliff())
 .L204:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
+	ldr	r3, [fp, #-8]	@(load '%d')
+	cmp	r3, #2		@('%d'==2)
 	bne	.L205
-	ldr	r0, .L209+40
+	ldr	r0, .L209+40	@(print mountain-cave message)
 	bl	puts
 	bl	cave
 .L205:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
+	ldr	r3, [fp, #-8]	@(load '%d;)
+	cmp	r3, #3		@('%d' ==3)
 	bne	.L206
-	ldr	r0, .L209+44
+	ldr	r0, .L209+44	@(goat message)
 	bl	puts
-	ldr	r3, .L209+8
+	ldr	r3, .L209+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #40
+	sub	r2, r3, #40	@(-40 health)
 	ldr	r3, .L209+8
 	str	r2, [r3, #0]
-	bl	check
-	bl	valley
+	bl	check		@(call check())
+	bl	valley		@(call valley)
 .L206:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #4
+	ldr	r3, [fp, #-8]	@(load '%d')
+	cmp	r3, #4		@('%d'==4)
 	bne	.L207
-	ldr	r0, .L209+48
+	ldr	r0, .L209+48	@(print yodel message)
 	bl	puts
-	ldr	r3, .L209+8
+	ldr	r3, .L209+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #30
+	sub	r2, r3, #30	@(-30 health)
 	ldr	r3, .L209+8
 	str	r2, [r3, #0]
-	bl	mountain
+	bl	mountain	@(call mountain)
 	b	.L203
 .L207:
-	ldr	r0, .L209+52
+	ldr	r0, .L209+52	@(invalid input message)
 	bl	puts
 	bl	mountain
 .L203:
@@ -3088,99 +3093,99 @@ cave:
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	sub	sp, sp, #8
-	ldr	r0, .L219
+	ldr	r0, .L219	@(load and print cave description message)
 	bl	puts
-	ldr	r2, .L219+4
-	ldr	r3, .L219+8
+	ldr	r2, .L219+4	@(load health message)
+	ldr	r3, .L219+8	@(load health var)
 	ldr	r3, [r3, #0]
 	mov	r0, r2
 	mov	r1, r3
 	bl	printf
-	ldr	r0, .L219+12
+	ldr	r0, .L219+12	@(print option 1)
 	bl	puts
-	ldr	r0, .L219+16
+	ldr	r0, .L219+16	@(print option 2)
 	bl	puts
-	ldr	r0, .L219+20
+	ldr	r0, .L219+20	@(print option 3)
 	bl	puts
-	ldr	r0, .L219+24
+	ldr	r0, .L219+24	@(print option 4)
 	bl	puts
-	ldr	r0, .L219+28
+	ldr	r0, .L219+28	@(print option 5)
 	bl	puts
-	bl	flush
-	ldr	r2, .L219+32
+	bl	flush		@(call flush())
+	ldr	r2, .L219+32	@(load '%d' for scanf)
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r0, .L219+36
+	ldr	r0, .L219+36	@(print line break)
 	bl	puts
 	ldr	r3, [fp, #-8]
-	cmp	r3, #1
+	cmp	r3, #1		@('%d'==1)
 	bne	.L212
-	ldr	r0, .L219+40
+	ldr	r0, .L219+40	@(deeper into the cave message)
 	bl	puts
-	ldr	r3, .L219+8
+	ldr	r3, .L219+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #30
+	sub	r2, r3, #30	@(-30 health)	
 	ldr	r3, .L219+8
 	str	r2, [r3, #0]
-	bl	check
-	bl	cave
+	bl	check		@(call check())
+	bl	cave		@(call cave())
 .L212:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
+	ldr	r3, [fp, #-8]	@(load '%d')
+	cmp	r3, #2		@('%d'==2)
 	bne	.L213
-	ldr	r3, .L219+44
+	ldr	r3, .L219+44	@(has sword var)
 	ldr	r3, [r3, #0]
-	cmp	r3, #1
+	cmp	r3, #1		@(if var has sword ==1)
 	beq	.L214
-	ldr	r0, .L219+48
+	ldr	r0, .L219+48	@(get sword message)
 	bl	puts
 	ldr	r3, .L219+44
-	mov	r2, #1
+	mov	r2, #1		@(set has sword=1)
 	str	r2, [r3, #0]
-	bl	cave
+	bl	cave		@(cave())
 	b	.L213
 .L214:
-	ldr	r0, .L219+52
+	ldr	r0, .L219+52	@(let the dead rest message)	
 	bl	puts
 	bl	cave
 .L213:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
+	ldr	r3, [fp, #-8]	@(load '%d')
+	cmp	r3, #3		@(if '%d'==3)
 	bne	.L215
-	ldr	r0, .L219+56
+	ldr	r0, .L219+56	@(cave sleep message)
 	bl	puts
-	ldr	r3, .L219+8
+	ldr	r3, .L219+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #10
+	sub	r2, r3, #10	@(health-10)
 	ldr	r3, .L219+8
 	str	r2, [r3, #0]
-	bl	check
-	bl	cave
+	bl	check		@(call check())
+	bl	cave		@(cave())
 .L215:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #4
+	ldr	r3, [fp, #-8]	@(load '%d')
+	cmp	r3, #4		@('%d' ==4)	
 	bne	.L216
-	ldr	r0, .L219+60
+	ldr	r0, .L219+60	@(mushroom message)
 	bl	puts
-	ldr	r3, .L219+8
+	ldr	r3, .L219+8	@(load health)
 	ldr	r3, [r3, #0]
-	sub	r2, r3, #10
+	sub	r2, r3, #10	@(-10 health)
 	ldr	r3, .L219+8
 	str	r2, [r3, #0]
 	bl	check
-	bl	startFunc
+	bl	startFunc	@(send them back to start)
 .L216:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #5
+	ldr	r3, [fp, #-8]	@(load '%d')
+	cmp	r3, #5		@('%d'==5)
 	bne	.L217
-	ldr	r0, .L219+64
+	ldr	r0, .L219+64	@(leave the cave message)
 	bl	puts
-	bl	mountain
+	bl	mountain	@(call mountain())
 	b	.L211
 .L217:
-	ldr	r0, .L219+68
+	ldr	r0, .L219+68	@(invalide input message)
 	bl	puts
 	bl	cave
 .L211:
