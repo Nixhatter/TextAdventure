@@ -15,7 +15,6 @@ int brokenArm = 0;
 int fruit=0;
 int RED_FLOWERS=0;
 
-void start();		// Generic
 void startFunc();
 void stayPut();
 void buildFire();
