@@ -17,26 +17,26 @@
 	.type	health, %object
 	.size	health, 4
 health:
-	.word	100
+	.word	100				@(int health = 100
 	.global	fire
 	.bss
-	.align	2
-	.type	fire, %object
-	.size	fire, 4
-fire:
-	.space	4
-	.global	cellphone
+	.align	2				@)
+	.type	fire, %object			@(int fire = 0
+	.size	fire, 4				
+fire:						
+	.space	4				@)
+	.global	cellphone			@(int cellphone = 0
 	.align	2
 	.type	cellphone, %object
 	.size	cellphone, 4
 cellphone:
-	.space	4
-	.global	finished
+	.space	4				@)
+	.global	finished			@(int finished = 0
 	.align	2
 	.type	finished, %object
-	.size	finished, 4
+	.size	finished, 4	
 finished:
-	.space	4
+	.space	4				@)
 	.global	shotgun
 	.align	2
 	.type	shotgun, %object
@@ -190,59 +190,59 @@ getUserInput:
 	@ args = 0, pretend = 0, frame = 32
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #32
-	str	r0, [fp, #-24]
+	add	fp, sp, #4		@create frame pointer for reference
+	sub	sp, sp, #32		@make space on stack for variables
+	str	r0, [fp, #-24]		
 	str	r1, [fp, #-28]
 	str	r2, [fp, #-32]
-	mov	r3, #0
-	str	r3, [fp, #-8]
+	mov	r3, #0			@(inputOK = 0
+	str	r3, [fp, #-8]		@)
 	b	.L10
 .L14:
-	ldr	r3, .L15
+	ldr	r3, .L15		@(printf(“%s”,message)
 	mov	r0, r3
 	ldr	r1, [fp, #-24]
-	bl	printf
-	ldr	r3, .L15+4
+	bl	printf			@)
+	ldr	r3, .L15+4		@(printf(“Please enter the number of the option you would like: “)
 	mov	r0, r3
-	bl	printf
-	ldr	r2, .L15+8
+	bl	printf			@)
+	ldr	r2, .L15+8		@(result = scanf(“%d”, &userInput
 	sub	r3, fp, #16
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	str	r0, [fp, #-12]
-	ldr	r3, [fp, #-12]
+	str	r0, [fp, #-12]		@)
+	ldr	r3, [fp, #-12]		@(if (result == 1)
 	cmp	r3, #1
-	bne	.L11
-	ldr	r2, [fp, #-16]
+	bne	.L11			@)
+	ldr	r2, [fp, #-16]		@(if userInput > low
 	ldr	r3, [fp, #-28]
 	cmp	r2, r3
-	blt	.L12
-	ldr	r2, [fp, #-16]
+	blt	.L12			@)
+	ldr	r2, [fp, #-16]		@(if userInput <= high
 	ldr	r3, [fp, #-32]
 	cmp	r2, r3
-	bgt	.L12
-	mov	r3, #1
+	bgt	.L12			@)
+	mov	r3, #1			@(inputOK = 1
 	str	r3, [fp, #-8]
-	b	.L10
+	b	.L10			@)
 .L12:
-	ldr	r0, .L15+12
+	ldr	r0, .L15+12		@(printf(“Input is outside legal bounds.\n”)
 	bl	puts
-	b	.L10
+	b	.L10			@)
 .L11:
-	ldr	r0, .L15+16
-	bl	puts
-	mov	r0, #1
-	bl	exit
+	ldr	r0, .L15+16		@(printf(“Must enter an integer. Exiting program.\n”)
+	bl	puts			@)
+	mov	r0, #1			@(exit(1)
+	bl	exit			@)
 .L10:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #0
-	beq	.L14
-	ldr	r3, [fp, #-16]
+	ldr	r3, [fp, #-8]			@(while (! inputOK)
+	cmp	r3, #0				@)
+	beq	.L14				@if inputOK=0
+	ldr	r3, [fp, #-16]			@(return userInput
 	mov	r0, r3
 	sub	sp, fp, #4
-	ldmfd	sp!, {fp, pc}
+	ldmfd	sp!, {fp, pc}			@)
 .L16:
 	.align	2
 .L15:
@@ -917,7 +917,7 @@ croquet:
 	.align	2
 	.global	stayPut
 	.type	stayPut, %function
-stayPut:
+stayPut: @(Beginning of Laura’s commenting)
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
@@ -926,35 +926,35 @@ stayPut:
 	ldr	r0, .L78
 	mov	r1, #1
 	mov	r2, #3
-	bl	getUserInput
-	str	r0, [fp, #-8]
-	ldr	r3, [fp, #-8]
+	bl	getUserInput		@(int choice = getUserInput(...)
+	str	r0, [fp, #-8]		@)
+	ldr	r3, [fp, #-8]		@(if (choice == 1)
 	cmp	r3, #1
-	bne	.L74
-	ldr	r3, .L78+4
-	ldr	r3, [r3, #0]
-	cmp	r3, #1
-	beq	.L75
-	bl	buildFire
+	bne	.L74			@)
+	ldr	r3, .L78+4		@(if (fire != 1)
+	ldr	r3, [r3, #0]		
+	cmp	r3, #1			
+	beq	.L75			@)
+	bl	buildFire		@(buildFire())
 	b	.L73
 .L75:
-	ldr	r0, .L78+8
-	bl	puts
-	bl	stayPut
-	b	.L73
+	ldr	r0, .L78+8		@(printf(“You remember that (...)”
+	bl	puts			@)
+	bl	stayPut			@(stayPut()
+	b	.L73			@)
 .L74:
-	ldr	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]		@(else if (choice == 2)
 	cmp	r3, #2
-	bne	.L77
-	bl	fixCellphone
-	b	.L73
+	bne	.L77			@)
+	bl	fixCellphone		@(fixCellphone()
+	b	.L73			@)
 .L77:
-	ldr	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]		@(else if (choice == 3)
 	cmp	r3, #3
-	bne	.L73
-	bl	climbTree
+	bne	.L73			@)
+	bl	climbTree		@(climbTree())
 .L73:
-	sub	sp, fp, #4
+	sub	sp, fp, #4		@(exit)
 	ldmfd	sp!, {fp, pc}
 .L79:
 	.align	2
@@ -1006,36 +1006,36 @@ buildFire:
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	sub	sp, sp, #8
-	ldr	r0, .L83
-	bl	puts
-	ldr	r0, .L83+4
+	ldr	r0, .L83		@(printf(“You look around and (...)
+	bl	puts			@)
+	ldr	r0, .L83+4		
 	mov	r1, #1
 	mov	r2, #2
-	bl	getUserInput
-	str	r0, [fp, #-8]
-	ldr	r3, [fp, #-8]
+	bl	getUserInput		@(int choice = getUserInput(...)
+	str	r0, [fp, #-8]		@)
+	ldr	r3, [fp, #-8]		@(if (choice == 1)
 	cmp	r3, #1
-	bne	.L81
-	ldr	r0, .L83+8
-	bl	puts
-	ldr	r3, .L83+12
+	bne	.L81			@)
+	ldr	r0, .L83+8		@(printf(“You have managed (...)
+	bl	puts			@)
+	ldr	r3, .L83+12		@(fire = 1)
 	mov	r2, #1
-	str	r2, [r3, #0]
-	bl	stayPut
-	b	.L80
+	str	r2, [r3, #0]		@)
+	bl	stayPut			@(stayPut()
+	b	.L80			@)
 .L81:
-	ldr	r3, [fp, #-8]
+	ldr	r3, [fp, #-8]		@(if (choice == 2)
 	cmp	r3, #2
-	bne	.L80
-	ldr	r0, .L83+16
-	bl	puts
-	ldr	r3, .L83+20
+	bne	.L80			@)
+	ldr	r0, .L83+16		@(printf(“You use the flint and (...))
+	bl	puts			@)
+	ldr	r3, .L83+20		@(finished = 1
 	mov	r2, #1
-	str	r2, [r3, #0]
-	ldr	r3, .L83+24
+	str	r2, [r3, #0]		@)
+	ldr	r3, .L83+24		@(health = 0
 	mov	r2, #0
-	str	r2, [r3, #0]
-	bl	check
+	str	r2, [r3, #0]		@)
+	bl	check			@(check())
 .L80:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
