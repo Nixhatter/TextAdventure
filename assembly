@@ -394,22 +394,22 @@ startFunc:
 	.align	2
 	.global	whiteRabbit
 	.type	whiteRabbit, %function
-whiteRabbit:
+whiteRabbit: @START of Dillons comments
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	mov	r0, #10
-	bl	putchar
+	bl	putchar		@print statements
 	ldr	r0, .L37
 	bl	puts
 	ldr	r3, .L37+4
 	mov	r0, r3
 	bl	printf
 	mov	r0, #10
-	bl	putchar
+	bl	putchar		@end print statements
 .L30:
-	bl	flush
+	bl	flush		@calls flush()
 	ldr	r0, .L37+8
 	bl	puts
 	ldr	r0, .L37+12
@@ -423,44 +423,44 @@ whiteRabbit:
 	ldr	r1, .L37+24
 	bl	__isoc99_scanf
 	ldr	r3, .L37+24
-	ldrb	r3, [r3, #0]	@ zero_extendqisi2
+	ldrb	r3, [r3, #0]	@ Zero out whats in scanf
 	cmp	r3, #50
 	beq	.L33
 	cmp	r3, #51
 	beq	.L34
 	cmp	r3, #49
 	bne	.L36
-.L32:
+.L32:				@ case 1
 	ldr	r0, .L37+28
 	bl	puts
 	ldr	r3, .L37+32
-	mov	r2, #1
-	str	r2, [r3, #0]
-	b	.L30
-.L33:
+	mov	r2, #1		@set POTION=1
+	str	r2, [r3, #0]	
+	b	.L30		@go back to start of whiteRabbit
+.L33:				@case 2
 	ldr	r0, .L37+36
-	bl	puts
+	bl	puts	
 	ldr	r3, .L37+40
-	mov	r2, #1
+	mov	r2, #1		@set KEY=1
 	str	r2, [r3, #0]
-	b	.L30
-.L34:
+	b	.L30		@go back to start of whiteRabbit
+.L34:				@case 3
 	ldr	r3, .L37+32
 	ldr	r2, [r3, #0]
 	ldr	r3, .L37+40
 	ldr	r3, [r3, #0]
 	and	r3, r2, r3
-	cmp	r3, #0
+	cmp	r3, #0		@if potion=1 & key=1
 	beq	.L35
 	ldr	r0, .L37+44
 	bl	puts
-	bl	caterpillar
+	bl	caterpillar	@call caterpillar()
 	b	.L30
-.L35:
+.L35: @if potion=0 or key=0
 	ldr	r0, .L37+48
 	bl	puts
 	b	.L30
-.L36:
+.L36:	@default switch, goes back to whiteRabbit()
 	b	.L30
 .L38:
 	.align	2
@@ -481,8 +481,8 @@ whiteRabbit:
 	.size	whiteRabbit, .-whiteRabbit
 	.section	.rodata
 	.align	2
-.LC24:
-	.ascii	"You meet a caterpillar smoking a hookah!\000"
+.LC24: 		@caterpillar()
+	.ascii	"You meet a caterpillar smoking a hookah!\000"  @print statements
 	.align	2
 .LC25:
 	.ascii	"He tells you to be weary of the queen and sends you"
@@ -492,7 +492,7 @@ whiteRabbit:
 	.ascii	"(1)Go to the garden \000"
 	.align	2
 .LC27:
-	.ascii	"(2)Go to the tea party \000"
+	.ascii	"(2)Go to the tea party \000"  @end print statements
 	.text
 	.align	2
 	.global	caterpillar
@@ -500,7 +500,7 @@ whiteRabbit:
 caterpillar:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 1, uses_anonymous_args = 0
-	stmfd	sp!, {fp, lr}
+	stmfd	sp!, {fp, lr} @print statements
 	add	fp, sp, #4
 	mov	r0, #10
 	bl	putchar
@@ -509,9 +509,9 @@ caterpillar:
 	ldr	r0, .L45+4
 	bl	puts
 	mov	r0, #10
-	bl	putchar
+	bl	putchar			@end print statements
 .L40:
-	bl	flush
+	bl	flush			@flush()
 	ldr	r0, .L45+8
 	bl	puts
 	ldr	r0, .L45+12
@@ -521,21 +521,21 @@ caterpillar:
 	ldr	r3, .L45+16
 	mov	r0, r3
 	ldr	r1, .L45+20
-	bl	__isoc99_scanf
+	bl	__isoc99_scanf 		@ fflush(stdout);
 	ldr	r3, .L45+20
-	ldrb	r3, [r3, #0]	@ zero_extendqisi2
-	cmp	r3, #49
+	ldrb	r3, [r3, #0]	@ fflush(stdin);
+	cmp	r3, #49				@ case '1' : garden();	
 	beq	.L42
-	cmp	r3, #50
+	cmp	r3, #50				@ case '2' : teaParty();
 	beq	.L43
-	b	.L44
+	b	.L44				@ default  : goto start;
 .L42:
-	bl	garden
+	bl	garden				@garden();
 .L43:
-	bl	teaParty
+	bl	teaParty			@teaParty();
 	b	.L40
 .L44:
-	b	.L40
+	b	.L40				@ goto start
 .L46:
 	.align	2
 .L45:
@@ -548,7 +548,7 @@ caterpillar:
 	.size	caterpillar, .-caterpillar
 	.section	.rodata
 	.align	2
-.LC28:
+.LC28:						@print statements
 	.ascii	"You approach a house in the woods..\000"
 	.align	2
 .LC29:
@@ -566,15 +566,15 @@ caterpillar:
 	.align	2
 .LC33:
 	.ascii	"(3) Edgar Allen Poe wrote on both \000"
-	.align	2
-.LC34:
+	.align	2  			@ end print statements
+.LC34:					@ case '1'
 	.ascii	"Try again! \000"
 	.align	2
-.LC35:
+.LC35:					@ case '2'
 	.ascii	"Correct! he exclaims, as he pushes you down a rando"
 	.ascii	"m path \000"
 	.align	2
-.LC36:
+.LC36:					@case '3'
 	.ascii	"I don't think that's correct. - the hare says. But "
 	.ascii	"you should follow me.\000"
 	.text
@@ -587,7 +587,7 @@ teaParty:
 	stmfd	sp!, {fp, lr}
 	add	fp, sp, #4
 	mov	r0, #10
-	bl	putchar
+	bl	putchar			@print statements
 	ldr	r0, .L54
 	bl	puts
 	ldr	r0, .L54+4
@@ -595,9 +595,9 @@ teaParty:
 	ldr	r0, .L54+8
 	bl	puts
 	mov	r0, #10
-	bl	putchar
-.L48:
-	bl	flush
+	bl	putchar			@end print statements
+.L48:		
+	bl	flush			@flush()
 	ldr	r0, .L54+12
 	bl	puts
 	ldr	r0, .L54+16
@@ -609,34 +609,34 @@ teaParty:
 	ldr	r3, .L54+24
 	mov	r0, r3
 	ldr	r1, .L54+28
-	bl	__isoc99_scanf
+	bl	__isoc99_scanf		@ fflush(stdout);
 	ldr	r3, .L54+28
-	ldrb	r3, [r3, #0]	@ zero_extendqisi2
-	cmp	r3, #50
+	ldrb	r3, [r3, #0]	@ fflush(stdin);
+	cmp	r3, #50				@ switch(c) case 1
 	beq	.L51
-	cmp	r3, #51
+	cmp	r3, #51				@ switch(c) case 2
 	beq	.L52
-	cmp	r3, #49
+	cmp	r3, #49				@ switch(c) case 3
 	bne	.L53
-.L50:
+.L50:						@ case '1' : printf("Try again! \n");
 	ldr	r0, .L54+32
 	bl	puts
-	b	.L48
-.L51:
+	b	.L48		@goto start;
+.L51:						@ case '2' : printf("Correct! he exclaims, as he pushes you down a random path \n");
 	ldr	r0, .L54+36
 	bl	puts
-	bl	garden
-.L52:
+	bl	garden		@call garden()
+.L52:					@ case '3' : printf("I don't think that's correct. - the hare says. But you should follow me.");
 	ldr	r3, .L54+40
 	mov	r0, r3
 	bl	printf
-	bl	markingsExit
+	bl	markingsExit	@call markingsexit();
 	b	.L48
 .L53:
 	b	.L48
 .L55:
 	.align	2
-.L54:
+.L54:					@print statements
 	.word	.LC28
 	.word	.LC29
 	.word	.LC30
@@ -679,7 +679,7 @@ teaParty:
 	.align	2
 .LC45:
 	.ascii	"You should have accepted the invitation.\000"
-	.text
+	.text				
 	.align	2
 	.global	garden
 	.type	garden, %function
@@ -693,9 +693,9 @@ garden:
 	ldr	r0, .L62
 	bl	puts
 	ldr	r0, .L62+4
-	bl	puts
+	bl	puts			@end print statements
 .L57:
-	bl	flush
+	bl	flush			@flush()
 	ldr	r0, .L62+8
 	bl	puts
 	ldr	r0, .L62+12
@@ -707,52 +707,52 @@ garden:
 	ldr	r3, .L62+20
 	mov	r0, r3
 	ldr	r1, .L62+24
-	bl	__isoc99_scanf
+	bl	__isoc99_scanf		@ fflush(stdout);
 	ldr	r3, .L62+24
-	ldrb	r3, [r3, #0]	@ zero_extendqisi2
-	cmp	r3, #50
+	ldrb	r3, [r3, #0]	@ fflush(stdin);
+	cmp	r3, #50				@switch 1
 	beq	.L60
-	cmp	r3, #51
+	cmp	r3, #51				@switch 2
 	beq	.L61
-	cmp	r3, #49
+	cmp	r3, #49				@ switch 3 
 	bne	.L58
-.L59:
+.L59:						@ case '1' : printf("Let's play"); croquet();
 	ldr	r3, .L62+28
 	mov	r0, r3
 	bl	printf
 	bl	croquet
-.L60:
+.L60:						@ case '2' : printf("OFF WITH HER HEAD she exclaims \n");
 	ldr	r0, .L62+32
 	bl	puts
 	ldr	r3, .L62+36
-	mov	r2, #0
+	mov	r2, #0				@ health=0;
 	str	r2, [r3, #0]
 	ldr	r3, .L62+40
 	mov	r0, r3
-	bl	printf
-	bl	check
-.L61:
+	bl	printf				@ printf("You have been beheaded");
+	bl	check				@ check();
+.L61:						@ case '3' : printf("OFF WITH HER HEAD she exclaims \n");
 	ldr	r0, .L62+32
 	bl	puts
 	ldr	r3, .L62+36
-	mov	r2, #0
+	mov	r2, #0				@ health=0;
 	str	r2, [r3, #0]
 	ldr	r3, .L62+40
 	mov	r0, r3
-	bl	printf
-	bl	check
-.L58:
-	ldr	r3, .L62+44
+	bl	printf				@ printf("You have been beheaded");
+	bl	check				@ check()
+.L58:						@ default  : printf("You should have accepted the invitation.");
+	ldr	r3, .L62+44	
 	mov	r0, r3
 	bl	printf
 	ldr	r3, .L62+36
-	mov	r2, #0
-	str	r2, [r3, #0]
-	bl	check
+	mov	r2, #0				@ health=0;
+	str	r2, [r3, #0]	
+	bl	check				@ check();
 	ldmfd	sp!, {fp, pc}
 .L63:
 	.align	2
-.L62:
+.L62:						@ print statements
 	.word	.LC37
 	.word	.LC38
 	.word	.LC39
@@ -827,9 +827,9 @@ croquet:
 	ldr	r0, .L71+8
 	bl	puts
 	mov	r0, #10
-	bl	putchar
+	bl	putchar				@end print statements
 .L65:
-	bl	flush
+	bl	flush				@ flush();
 	ldr	r0, .L71+12
 	bl	puts
 	ldr	r0, .L71+16
@@ -841,45 +841,45 @@ croquet:
 	ldr	r3, .L71+24
 	mov	r0, r3
 	ldr	r1, .L71+28
-	bl	__isoc99_scanf
+	bl	__isoc99_scanf		@ fflush(stdout);
 	ldr	r3, .L71+28
-	ldrb	r3, [r3, #0]	@ zero_extendqisi2
-	cmp	r3, #50
+	ldrb	r3, [r3, #0]	@ fflush(stdin);
+	cmp	r3, #50				@switch 1
 	beq	.L68
-	cmp	r3, #51
+	cmp	r3, #51				@switch 2
 	beq	.L69
-	cmp	r3, #49
+	cmp	r3, #49				@switch 3
 	bne	.L70
-.L67:
+.L67:				@case '1' : printf("The judge believes you, but the Queen demands you die! \n");
 	ldr	r0, .L71+32
 	bl	puts
 	ldr	r3, .L71+36
 	mov	r0, r3
 	bl	printf
 	ldr	r3, .L71+40
-	mov	r2, #0
+	mov	r2, #0			@health=0
 	str	r2, [r3, #0]
-	bl	check
-.L68:
+	bl	check			@check();
+.L68:					@ case '2' : printf("Suit yourself \n");
 	ldr	r0, .L71+44
 	bl	puts
 	ldr	r3, .L71+48
 	mov	r0, r3
 	bl	printf
 	ldr	r3, .L71+40
-	mov	r2, #0
+	mov	r2, #0			@health=0
 	str	r2, [r3, #0]
-	bl	check
-.L69:
+	bl	check			@check()
+.L69:					@case '3' 
 	ldr	r3, .L71+52
-	mov	r2, #1
+	mov	r2, #1			@SWORD=1
 	str	r2, [r3, #0]
 	ldr	r0, .L71+56
 	bl	puts
 	ldr	r0, .L71+60
 	bl	puts
 	mov	r0, #0
-	bl	exit
+	bl	exit			@exit(0)
 .L70:
 	b	.L65
 .L72:
@@ -904,7 +904,7 @@ croquet:
 	.size	croquet, .-croquet
 	.section	.rodata
 	.align	2
-.LC58:
+.LC58:	@END OF DILLON'S COMMENTING
 	.ascii	"What will you do next?\012\0111. Look around for ma"
 	.ascii	"terials to build a  \011fire from\012\0112. Try to "
 	.ascii	"call for help on your cellphone\012\0113. Climb a t"
