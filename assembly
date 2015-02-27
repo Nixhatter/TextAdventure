@@ -1317,7 +1317,7 @@ climbTree:
 	.section	.rodata
 	.align	2 @(End of Laura’s commenting)
 .LC74:
-	.ascii	"You come across a Path, you don't know where it lea"
+	.ascii	"You come across a Path, you don't know where it lea" 
 	.ascii	"ds but you can also see what looks to be an opening"
 	.ascii	" a bit deeper into the woods.\000"
 	.align	2
@@ -1350,61 +1350,61 @@ comeToPath:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #8
-	ldr	r0, .L108
+	add	fp, sp, #4		@ make frame pointer
+	sub	sp, sp, #8		@ make stack space for variables
+	ldr	r0, .L108		@(loads and prints the area description and choices contained in L108 - L108+20
 	bl	puts
-	ldr	r0, .L108+4
+	ldr	r0, .L108+4		
 	bl	puts
 	ldr	r0, .L108+8
 	bl	puts
 	ldr	r0, .L108+12
 	bl	puts
 	ldr	r0, .L108+16
-	bl	puts
-	bl	flush
-	ldr	r2, .L108+20
-	sub	r3, fp, #8
+	bl	puts			@)
+	bl	flush			@(calls flush)
+	ldr	r2, .L108+20	@(%d for scanf)
+	sub	r3, fp, #8		@(choice variable)
 	mov	r0, r2
 	mov	r1, r3
-	bl	__isoc99_scanf
-	ldr	r3, [fp, #-8]
-	cmp	r3, #1
-	bne	.L104
-	ldr	r0, .L108+24
-	bl	puts
-	bl	outsideHouse
+	bl	__isoc99_scanf  @(gets user input)
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #1			@(check if its equal to 1)	
+	bne	.L104			@( if its not 1 branch to check for 2)
+	ldr	r0, .L108+24	@(loads  and prints the print statement)
+	bl	puts			
+	bl	outsideHouse	@(branches to outsideHouse)
 	b	.L103
-.L104:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
-	bne	.L106
-	ldr	r0, .L108+28
-	bl	puts
-	bl	woodsClearing
+.L104: 				@(if choice is equal to 2)
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #2			@(check if its equal to 2)
+	bne	.L106			@( if its not 2 branch to check for 3)
+	ldr	r0, .L108+28 	@(loads the print statement)
+	bl	puts			
+	bl	woodsClearing	@(branches to WoodsClearing)
 	b	.L103
-.L106:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
-	bne	.L107
-	ldr	r0, .L108+32
+.L106:				@(if choice is equal to 3)
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #3			@(check if its equal to 3)
+	bne	.L107			@( if its not 3 branch to else)
+	ldr	r0, .L108+32	@(loads  and prints the print statement)
 	bl	puts
-	bl	startFunc
+	bl	startFunc		@(branches to startFunc)
 	b	.L103
-.L107:
-	bl	comeToPath
+.L107:				@(else)
+	bl	comeToPath		@(branches to comeToPath)
 .L103:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
 .L109:
 	.align	2
 .L108:
-	.word	.LC74
+	.word	.LC74		@(all the different strings)
 	.word	.LC75
 	.word	.LC76
 	.word	.LC77
 	.word	.LC78
-	.word	.LC4
+	.word	.LC4		@(the %d character)
 	.word	.LC79
 	.word	.LC80
 	.word	.LC81
@@ -1451,9 +1451,9 @@ outsideHouse:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #8
-	ldr	r0, .L116
+	add	fp, sp, #4		@ make frame pointer
+	sub	sp, sp, #8		@ make stack space for variables
+	ldr	r0, .L116		@(loads and prints the area description and choices contained in L116 - L116+20
 	bl	puts
 	ldr	r0, .L116+4
 	bl	puts
@@ -1464,50 +1464,49 @@ outsideHouse:
 	ldr	r0, .L116+16
 	bl	puts
 	ldr	r0, .L116+20
-	bl	puts
-	bl	flush
-	ldr	r2, .L116+24
+	bl	puts			@)
+	bl	flush			@(calls flush)
+	ldr	r2, .L116+24	@(%d for scan f)
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r3, [fp, #-8]
-	cmp	r3, #1
-	bne	.L111
-	ldr	r0, .L116+28
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #1			@(check if its equal to 1)
+	bne	.L111			@( if its not 1 branch to check for 2)
+	ldr	r0, .L116+28	@(loads  and prints the print statement)
 	bl	puts
-	ldr	r3, .L116+32
+	ldr	r3, .L116+32	@(loads and sets health to zero)
 	mov	r2, #0
 	str	r2, [r3, #0]
-	bl	check
+	bl	check			@(runs check function)
 	b	.L110
 .L111:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
-	bne	.L113
-	ldr	r0, .L116+36
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #2			@(check if its equal to 2)
+	bne	.L113			@( if its not 2 branch to check for 3)
+	ldr	r0, .L116+36	@(loads  and prints the print statement)
 	bl	puts
-	bl	house
+	bl	house			@(branches to house)
 	b	.L110
 .L113:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
-	bne	.L114
-	ldr	r0, .L116+40
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #3			@(check if its equal to 3)
+	bne	.L114			@( if its not 3 branch to check for 4)
+	ldr	r0, .L116+40	@(loads  and prints the print statement)
 	bl	puts
-	bl	shed
+	bl	shed			@(branches to shed)
 	b	.L110
 .L114:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #4
-	bne	.L115
-	ldr	r0, .L116+44
-	bl	puts
-	bl	comeToPath
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #4			@(check if its equal to 4)
+	bne	.L115			@( if its not 4 branch to else)
+	ldr	r0, .L116+44	@(loads  and prints the print statement)
+	bl	puts	
+	bl	comeToPath		@(branches to comeToPath)
 	b	.L110
 .L115:
-	bl	outsideHouse
-.L110:
+	bl	outsideHouse	@(branches to outsideHouse)
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
 .L117:
@@ -1573,9 +1572,9 @@ house:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #8
-	ldr	r0, .L125
+	add	fp, sp, #4		@ make frame pointer
+	sub	sp, sp, #8		@ make stack space for variables
+	ldr	r0, .L125		@(loads and prints the area description and choices contained in L125 - L125+20
 	bl	puts
 	ldr	r0, .L125+4
 	bl	puts
@@ -1588,63 +1587,63 @@ house:
 	ldr	r0, .L125+20
 	bl	puts
 	ldr	r0, .L125+24
-	bl	puts
-	bl	flush
-	ldr	r2, .L125+28
+	bl	puts			@)
+	bl	flush			@(calls flush)
+	ldr	r2, .L125+28	@(%d for scan f)
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r3, [fp, #-8]
-	cmp	r3, #1
-	bne	.L119
-	ldr	r0, .L125+32
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #1			@(check if its equal to 1)
+	bne	.L119			@( if its not 1 branch to check for 2)
+	ldr	r0, .L125+32	@(loads  and prints the print statement)
 	bl	puts
-	ldr	r3, .L125+36
+	ldr	r3, .L125+36	@(loads and sets health to zero)
 	mov	r2, #0
 	str	r2, [r3, #0]
-	bl	check
+	bl	check			@(calls check)
 	b	.L118
 .L119:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
-	bne	.L121
-	ldr	r0, .L125+40
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #2			@(check if its equal to 2)
+	bne	.L121			@( if its not 2 branch to check for 3)
+	ldr	r0, .L125+40	@(loads  and prints the print statement)
 	bl	puts
-	ldr	r3, .L125+44
+	ldr	r3, .L125+44	@(set ammo to 1)
 	mov	r2, #1
 	str	r2, [r3, #0]
-	bl	house
+	bl	house			@(branches to house)
 	b	.L118
 .L121:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
-	bne	.L122
-	ldr	r0, .L125+48
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #3			@(check if its equal to 3)
+	bne	.L122			@( if its not 3 branch to check for 4)
+	ldr	r0, .L125+48	@(loads  and prints the print statement)
 	bl	puts
-	bl	house
+	bl	house			@(branches to house)
 	b	.L118
 .L122:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #4
-	bne	.L123
-	ldr	r0, .L125+52
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #4			@(check if its equal to 4)
+	bne	.L123			@( if its not 4 branch to check for 5)
+	ldr	r0, .L125+52	@(loads  and prints the print statement)
 	bl	puts
-	ldr	r3, .L125+56
+	ldr	r3, .L125+56	@(sets shotgun to 1)
 	mov	r2, #1
 	str	r2, [r3, #0]
-	bl	house
+	bl	house			@(branches to house)
 	b	.L118
 .L123:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #5
-	bne	.L124
-	ldr	r0, .L125+60
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #5			@(check if its equal to 5)
+	bne	.L124			@( if its not 5 branch to else)
+	ldr	r0, .L125+60	@(loads  and prints the print statement)
 	bl	puts
-	bl	outsideHouse
+	bl	outsideHouse	@(branches to outsideHouse)
 	b	.L118
 .L124:
-	bl	house
+	bl	house			@(branches to house)
 .L118:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
@@ -1701,9 +1700,9 @@ shed:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #8
-	ldr	r0, .L132
+	add	fp, sp, #4		@ make frame pointer
+	sub	sp, sp, #8		@ make stack space for variables
+	ldr	r0, .L132		@(loads and prints the area description and choices contained in L132 - L132+20
 	bl	puts
 	ldr	r0, .L132+4
 	bl	puts
@@ -1712,38 +1711,38 @@ shed:
 	ldr	r0, .L132+12
 	bl	puts
 	ldr	r0, .L132+16
-	bl	puts
-	bl	flush
-	ldr	r2, .L132+20
+	bl	puts			@)
+	bl	flush			@(calls flush)
+	ldr	r2, .L132+20	@(%d for scan f)
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r3, [fp, #-8]
-	cmp	r3, #1
-	bne	.L128
-	ldr	r0, .L132+24
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #1			@(check if its equal to 1)
+	bne	.L128			@( if its not 1 branch to check for 2)
+	ldr	r0, .L132+24	@(loads  and prints the print statement)
 	bl	puts
-	bl	shed
+	bl	shed			@(branches to shed)
 	b	.L127
 .L128:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
-	bne	.L130
-	ldr	r0, .L132+28
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #2			@(check if its equal to 2)
+	bne	.L130			@( if its not 2 branch to check for 3)
+	ldr	r0, .L132+28	@(loads  and prints the print statement)
 	bl	puts
-	bl	teaParty
+	bl	teaParty		@(branches to teaParty)
 	b	.L127
 .L130:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
-	bne	.L131
-	ldr	r0, .L132+32
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #3			@(check if its equal to 3)
+	bne	.L131			@( if its not 3 branch to else)
+	ldr	r0, .L132+32	@(loads  and prints the print statement)
 	bl	puts
-	bl	outsideHouse
+	bl	outsideHouse	@(branches to outsideHouse)
 	b	.L127
-.L131:
-	bl	shed
+.L131:		
+	bl	shed			@(branches to shed)
 .L127:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
@@ -1798,9 +1797,9 @@ woodsClearing:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #8
-	ldr	r0, .L140
+	add	fp, sp, #4		@ make frame pointer
+	sub	sp, sp, #8		@ make stack space for variables
+	ldr	r0, .L140		@(loads and prints the area description and choices contained in L140 - L140+20
 	bl	puts
 	ldr	r0, .L140+4
 	bl	puts
@@ -1811,51 +1810,51 @@ woodsClearing:
 	ldr	r0, .L140+16
 	bl	puts
 	ldr	r0, .L140+20
-	bl	puts
-	bl	flush
-	ldr	r2, .L140+24
+	bl	puts			@)	
+	bl	flush			@(calls flush)
+	ldr	r2, .L140+24	@(%d for scan f)
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r3, [fp, #-8]
-	cmp	r3, #1
-	bne	.L135
-	ldr	r0, .L140+28
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #1			@(check if its equal to 1)
+	bne	.L135			@( if its not 1 branch to check for 2)
+	ldr	r0, .L140+28	@(loads  and prints the print statements)
 	bl	puts
 	ldr	r0, .L140+32
 	bl	puts
-	ldr	r3, .L140+36
+	ldr	r3, .L140+36	@(load and set health to 0)
 	mov	r2, #0
 	str	r2, [r3, #0]
-	bl	check
+	bl	check			@(run check)
 	b	.L134
 .L135:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
-	bne	.L137
-	ldr	r0, .L140+40
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #2			@(check if its equal to 2)
+	bne	.L137			@( if its not 2 branch to check for 3)
+	ldr	r0, .L140+40	@(loads  and prints the print statement)
 	bl	puts
-	bl	tree
+	bl	tree			@(branches to tree)
 	b	.L134
 .L137:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
-	bne	.L138
-	ldr	r0, .L140+44
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #3			@(check if its equal to 3)
+	bne	.L138			@( if its not 3 branch to check for 4)
+	ldr	r0, .L140+44	@(loads  and prints the print statement)
 	bl	puts
-	bl	markingsExit
+	bl	markingsExit	@(branches to markingsExit)
 	b	.L134
 .L138:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #4
-	bne	.L139
-	ldr	r0, .L140+48
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #4			@(check if its equal to 4)
+	bne	.L139			@( if its not 4 branch to else)
+	ldr	r0, .L140+48	@(loads  and prints the print statement)
 	bl	puts
-	bl	comeToPath
+	bl	comeToPath		@(branches to comeToPath)
 	b	.L134
 .L139:
-	bl	woodsClearing
+	bl	woodsClearing	@(branches to woodsClearing)
 .L134:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
@@ -1917,9 +1916,9 @@ tree:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #8
-	ldr	r0, .L147
+	add	fp, sp, #4		@ make frame pointer
+	sub	sp, sp, #8		@ make stack space for variables
+	ldr	r0, .L147		@(loads and prints the area description and choices contained in L147 - L147+20
 	bl	puts
 	ldr	r0, .L147+4
 	bl	puts
@@ -1928,44 +1927,44 @@ tree:
 	ldr	r0, .L147+12
 	bl	puts
 	ldr	r0, .L147+16
-	bl	puts
-	bl	flush
-	ldr	r2, .L147+20
+	bl	puts			@)
+	bl	flush			@(calls flush)
+	ldr	r2, .L147+20	@(%d for scan f)
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r3, [fp, #-8]
-	cmp	r3, #1
-	bne	.L143
-	ldr	r0, .L147+24
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #1			@(check if its equal to 1)
+	bne	.L143			@( if its not 1 branch to check for 2)
+	ldr	r0, .L147+24	@(loads  and prints the print statement)
 	bl	puts
-	ldr	r3, .L147+28
+	ldr	r3, .L147+28	@(load and set health to zero)
 	mov	r2, #0
 	str	r2, [r3, #0]
-	bl	check
+	bl	check			@(call check)
 	b	.L142
 .L143:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
-	bne	.L145
-	ldr	r0, .L147+32
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #2			@(check if its equal to 2)
+	bne	.L145			@( if its not 2 branch to check for 3)
+	ldr	r0, .L147+32	@(loads  and prints the print statement)
 	bl	puts
-	ldr	r3, .L147+28
+	ldr	r3, .L147+28	@(load and set health to zero)
 	mov	r2, #0
 	str	r2, [r3, #0]
-	bl	check
+	bl	check			@(call check)
 	b	.L142
 .L145:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #3
-	bne	.L146
-	ldr	r0, .L147+36
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #3			@(check if its equal to 3)
+	bne	.L146			@( if its not 3 branch to else)
+	ldr	r0, .L147+36	@(loads  and prints the print statement)
 	bl	puts
-	bl	woodsClearing
+	bl	woodsClearing	@(branches to woodsClearing)
 	b	.L142
 .L146:
-	bl	tree
+	bl	tree			@(branches to tree)
 .L142:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
@@ -2009,9 +2008,9 @@ markingsExit:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	stmfd	sp!, {fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #8
-	ldr	r0, .L153
+	add	fp, sp, #4		@ make frame pointer
+	sub	sp, sp, #8		@ make stack space for variables
+	ldr	r0, .L153		@(loads and prints the area description and choices contained in L153 - L153+20)
 	bl	puts
 	ldr	r0, .L153+4
 	bl	puts
@@ -2019,31 +2018,31 @@ markingsExit:
 	bl	puts
 	ldr	r0, .L153+12
 	bl	puts
-	bl	flush
-	ldr	r2, .L153+16
+	bl	flush			@(calls flush)
+	ldr	r2, .L153+16	@(%d for scan f)
 	sub	r3, fp, #8
 	mov	r0, r2
 	mov	r1, r3
 	bl	__isoc99_scanf
-	ldr	r3, [fp, #-8]
-	cmp	r3, #1
-	bne	.L150
-	ldr	r0, .L153+20
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #1			@(check if its equal to 1)
+	bne	.L150			@( if its not 1 branch to check for 2)
+	ldr	r0, .L153+20	@(loads  and prints the print statements)
 	bl	puts
 	ldr	r0, .L153+24
 	bl	puts
-	bl	markingsExit
+	bl	markingsExit	@(branches to markingsExit)
 	b	.L149
 .L150:
-	ldr	r3, [fp, #-8]
-	cmp	r3, #2
-	bne	.L152
-	ldr	r0, .L153+28
+	ldr	r3, [fp, #-8]	@(loads the choice variable)
+	cmp	r3, #2			@(check if its equal to 2)
+	bne	.L152			@( if its not 2 branch to else)
+	ldr	r0, .L153+28	@(loads  and prints the print statement)
 	bl	puts
-	bl	woodsClearing
+	bl	woodsClearing	@(branches to woodsClearing)
 	b	.L149
 .L152:
-	bl	markingsExit
+	bl	markingsExit	@(branches to markingsExit)
 .L149:
 	sub	sp, fp, #4
 	ldmfd	sp!, {fp, pc}
